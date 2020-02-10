@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Tue Feb 04 12:47:04 2020
+AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Mon Feb 10 12:02:32 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -611,24 +611,42 @@ EQU  Channel_P2_Y 00000003
 EQU  Forward      00000003
 EQU  Backward     00000001
 EQU  Neutral      00000000
-CSEG Joystick_Init 00000000
-CSEG Input        00000005
-CSEG Wait         00000008
-CSEG Input_P1     0000000c
-CSEG Input_P2     00000011
-CSEG Check_X      00000016
-CSEG X_INC        0000001b
-CSEG X_DEC        00000023
-CSEG X_DONE       0000002b
+CSEG Joystick_Init 00000060
+CSEG Input        00000065
+CSEG Wait         00000068
+CSEG Input_P1     0000006c
+CSEG Check_X1     0000007e
+CSEG Check_Y1     000000aa
+CSEG Input_P2     00000075
+CSEG Check_X2     00000094
+CSEG Check_Y2     000000c0
+CSEG X1_INC       00000083
+CSEG X1_DEC       0000008b
+CSEG X1_DONE      00000093
 DSEG P1X          00000060
-CSEG Check_Y      0000002c
-CSEG Done         0000002c
-EQU  VMEM_SIZE    00000040
-DSEG P1Y          00000061
+CSEG X2_INC       00000099
+CSEG X2_DEC       000000a1
+CSEG X2_DONE      000000a9
 DSEG P2X          00000062
+CSEG Y1_INC       000000af
+CSEG Y1_DEC       000000b7
+CSEG Y1_DONE      000000bf
+DSEG P1Y          00000061
+CSEG Y2_INC       000000c5
+CSEG Y2_DEC       000000cd
+CSEG Y2_DONE      000000d5
 DSEG P2Y          00000063
+EQU  VMEM_SIZE    00000040
+EQU  DELAY_HIGH   00000001
+EQU  DELAY_LOW    0000001e
 DSEG VMEM         00000064
-CSEG Setup        0000002d
-CSEG Hardware_Init 0000002d
-CSEG Main         0000002d
-CSEG Player_Input 0000002f
+CSEG Setup        00000005
+CSEG Interrupt0   0000001c
+CSEG Interrupt1   0000001d
+CSEG Hardware_Init 00000009
+CSEG Main         0000000b
+CSEG Player_Input 0000000e
+CSEG Delay        00000013
+CSEG Player2      00000011
+CSEG Input_done   00000012
+CSEG DELAY2       00000017
