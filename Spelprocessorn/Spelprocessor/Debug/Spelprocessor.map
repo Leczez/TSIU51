@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Mon Feb 10 12:02:32 2020
+AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Fri Feb 14 10:09:22 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -641,12 +641,17 @@ EQU  DELAY_HIGH   00000001
 EQU  DELAY_LOW    0000001e
 DSEG VMEM         00000064
 CSEG Setup        00000005
-CSEG Interrupt0   0000001c
-CSEG Interrupt1   0000001d
+CSEG Interrupt0   00000020
+CSEG Interrupt1   00000024
 CSEG Hardware_Init 00000009
-CSEG Main         0000000b
-CSEG Player_Input 0000000e
-CSEG Delay        00000013
-CSEG Player2      00000011
-CSEG Input_done   00000012
-CSEG DELAY2       00000017
+CSEG Main         0000000f
+CSEG Player_Input 00000012
+CSEG Delay        00000017
+CSEG Player2      00000015
+CSEG Input_done   00000016
+CSEG DELAY2       0000001b
+CSEG P1_DONE      00000023
+CSEG Check_for_valid_choice_P1 00000029
+CSEG Check_for_end_of_game 00000028
+CSEG P2_DONE      00000027
+CSEG Check_for_valid_choice_P2 0000002a

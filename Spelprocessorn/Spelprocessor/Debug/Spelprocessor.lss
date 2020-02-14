@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Mon Feb 10 12:02:32 2020
+AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Fri Feb 14 10:09:22 2020
 
 [builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include\m16Adef.inc'
 \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm(10): Including file '\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm'
@@ -1125,9 +1125,9 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  .org $0000
 000000 c004      	rjmp Setup
                  .org INT0addr
-000002 c019      	rjmp Interrupt0
+000002 c01d      	rjmp Interrupt0
                  .org INT1addr
-000004 c018      	rjmp Interrupt1
+000004 c01f      	rjmp Interrupt1
                  Setup:
                  
 000005 e004      ldi r16,HIGH(RAMEND)
@@ -1140,55 +1140,83 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  Hardware_Init:
                  
 000009 d056      	rcall Joystick_Init
+00000a e00f      	ldi r16,(1<<ISC11)|(1<<ISC10)|(1<<ISC01)|(1<<ISC00)
+00000b bf05      	out MCUCR,r16
+00000c ec00      	ldi r16,(1<<INT0)|(1<<INT1)
+00000d bf0b      	out GICR,r16
                  
-                 
-                 
-00000a 9478      	sei
+00000e 9478      	sei
                  Main:
                  	
-00000b d002      	rcall Player_Input;
-00000c d006      	rcall Delay
-00000d cffd      	rjmp Main
+00000f d002      	rcall Player_Input;
+000010 d006      	rcall Delay
+000011 cffd      	rjmp Main
                  
-                 
+                 //Player 1 = t 0, Player 2 = t 1
                  Player_Input:
-                 
-00000e f016      	brts Player2	
-00000f d05c      	rcall Input_P1
-000010 c001      	rjmp Input_done
+000012 f016      	brts Player2	
+000013 d058      	rcall Input_P1
+000014 c001      	rjmp Input_done
                  Player2:
-000011 d063      	rcall Input_P2
+000015 d05f      	rcall Input_P2
                  Input_done:
-000012 9508      	ret
+000016 9508      	ret
                  
                  
                  
                  
                  DELAY:
-000013 938f      	push r24
-000014 939f      	push r25
-000015 e091      	ldi r25,DELAY_HIGH
-000016 e18e      	ldi r24,DELAY_LOW
+000017 938f      	push r24
+000018 939f      	push r25
+000019 e091      	ldi r25,DELAY_HIGH
+00001a e18e      	ldi r24,DELAY_LOW
                  
                  DELAY2:
-000017 9701      	sbiw r24,1
-000018 f7f1      	brne DELAY2
-000019 919f      	pop	r25
-00001a 918f      	pop	r24
-00001b 9508      	ret
+00001b 9701      	sbiw r24,1
+00001c f7f1      	brne DELAY2
+00001d 919f      	pop	r25
+00001e 918f      	pop	r24
+00001f 9508      	ret
                  
                  
-                 
+                 //Player 1
                  Interrupt0:
+000020 f016      	brts P1_DONE
+000021 d007      	rcall Check_for_valid_choice_P1
+000022 d005      	rcall Check_for_end_of_game
+                 P1_DONE:
                  
+000023 9518      	reti
                  
-                 
-                 
-                 
-00001c 9518      	reti
-                 
-                 
+                 //Player 2
                  Interrupt1:
+000024 f416      	brtc P2_DONE
+000025 d004      	rcall Check_for_valid_choice_P2
+000026 d001      	rcall Check_for_end_of_game
+                 P2_DONE:
+                 
+                 
+000027 9518      	reti
+                 
+                 
+                 
+                 
+                 Check_for_end_of_game:
+                 
+                 
+                 
+                 
+                 
+000028 9508      	ret
+                 
+                 
+                 Check_for_valid_choice_P1:
+                 
+                 
+                 
+000029 9508      	ret
+                 
+                 Check_for_valid_choice_P2:
                  
                  
 
@@ -1210,7 +1238,7 @@ counted separately from r26..r31 here.
 "ATmega16A" register use summary:
 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 r5 :   0 r6 :   0 r7 :   0 
 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 r13:   0 r14:   0 r15:   0 
-r16:  60 r17:   0 r18:   0 r19:   0 r20:   0 r21:   0 r22:   0 r23:   0 
+r16:  64 r17:   0 r18:   0 r19:   0 r20:   0 r21:   0 r22:   0 r23:   0 
 r24:   4 r25:   3 r26:   0 r27:   0 r28:   0 r29:   0 r30:   0 r31:   0 
 x  :   0 y  :   0 z  :   0 
 Registers used: 3 out of 35 (8.6%)
@@ -1220,27 +1248,27 @@ Registers used: 3 out of 35 (8.6%)
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
 brcc  :   0 brcs  :   0 break :   0 breq  :  16 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :   1 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   1 brvc  :   0 
+brne  :   1 brpl  :   0 brsh  :   0 brtc  :   1 brts  :   2 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   0 cbr   :   0 
 clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
 cpi   :  16 cpse  :   0 dec   :   4 eor   :   0 fmul  :   0 fmuls :   0 
 fmulsu:   0 icall :   0 ijmp  :   0 in    :   1 inc   :   4 jmp   :   0 
-ld    :   0 ldd   :   0 ldi   :  11 lds   :   8 lpm   :   0 lsl   :   0 
+ld    :   0 ldd   :   0 ldi   :  13 lds   :   8 lpm   :   0 lsl   :   0 
 lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :   6 pop   :   4 
-push  :   4 rcall :  13 ret   :  10 reti  :   2 rjmp  :  18 rol   :   0 
+neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :   8 pop   :   4 
+push  :   4 rcall :  17 ret   :  13 reti  :   2 rjmp  :  18 rol   :   0 
 ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   1 sbis  :   0 
 sbiw  :   1 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   1 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   8 
 sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 20 out of 113 (17.7%)
+Instructions used: 21 out of 113 (18.6%)
 
 "ATmega16A" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x0001ac    292      0    292   16384   1.8%
+[.cseg] 0x000000 0x0001ac    318      0    318   16384   1.9%
 [.dseg] 0x000060 0x0000a4      0     68     68    1024   6.6%
 [.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 
