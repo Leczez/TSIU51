@@ -41,10 +41,13 @@ out SPL,r16
 Hardware_Init:
 
 	rcall Joystick_Init
-	ldi r16,(1<<ISC11)|(1<<ISC10)|(1<<ISC01)|(1<<ISC00)
+	ldi r16,(1<<ISC11)|(0<<ISC10)|(1<<ISC01)|(0<<ISC00)
 	out MCUCR,r16
 	ldi r16,(1<<INT0)|(1<<INT1)
 	out GICR,r16
+
+	ldi r16,$FF
+	out PORTD,r16
 
 	sei
 Main:

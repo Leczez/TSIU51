@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Fri Feb 14 10:09:22 2020
+AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Thu Feb 20 11:26:44 2020
 
 [builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include\m16Adef.inc'
 \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm(10): Including file '\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm'
@@ -890,8 +890,8 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  
                  
                  .equ Forward = 3
-                 .equ Backward = 1
-                 .equ Neutral = 0
+                 .equ Backward = 0
+                 .equ Neutral = 2
                  
                  	.macro INCSRAM	; inc byte in SRAM
                  		lds	r16,@0
@@ -909,130 +909,131 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  .org $60
                  
                  Joystick_Init:
-000060 e800      	ldi r16,(1<<ADEN)
-000061 b906      	out ADCSRA,r16
-                 
-000062 e000      	ldi r16,$00
-000063 bb0a      	out DDRA,r16
+000060 e000      	ldi r16,$00
+000061 bb0a      	out DDRA,r16
                  	
-000064 9508      	ret
+000062 9508      	ret
                  
                  
                  
                  Input:
                  
-000065 b907      	out ADMUX,r16
+000063 b907      	out ADMUX,r16
                  
-000066 e400      	ldi r16,(1<<ADSC)
-000067 b906      	out ADCSRA,r16
+000064 ec00      	ldi r16,(1<<ADSC)|(1<<ADEN)
+000065 b906      	out ADCSRA,r16
                  
                  Wait:
-000068 9936      	sbic ADCSRA,ADSC
-000069 cffe      	rjmp Wait
+000066 9936      	sbic ADCSRA,ADSC
+000067 cffe      	rjmp Wait
                  
-00006a b105      	in r16, ADCH
+000068 b105      	in r16, ADCH
                  
-00006b 9508      	ret
+000069 9508      	ret
                  
                  Input_P1:
-00006c 930f      	push r16
+00006a 930f      	push r16
                  
-00006d e000      	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P1_X)
-00006e dff6      	rcall Input
-00006f d00e      	rcall Check_X1
+00006b e000      	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P1_X)
+00006c dff6      	rcall Input
+00006d d00e      	rcall Check_X1
                  
-000070 e001      	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P1_Y)
-000071 dff3      	rcall Input
-000072 d037      	rcall Check_Y1
+00006e e001      	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P1_Y)
+00006f dff3      	rcall Input
+000070 d03f      	rcall Check_Y1
                  
-000073 910f      	pop r16
+000071 910f      	pop r16
                  
-000074 9508      	ret
+000072 9508      	ret
                  
                  Input_P2:
-000075 930f      	push r16
+000073 930f      	push r16
                  
-000076 e002      	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P2_X)
-000077 dfed      	rcall Input
-000078 d01b      	rcall Check_X2
+000074 e002      	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P2_X)
+000075 dfed      	rcall Input
+000076 d01f      	rcall Check_X2
                  
-000079 e003      	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P2_Y)
-00007a dfea      	rcall Input
-00007b d044      	rcall Check_Y2
+000077 e003      	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P2_Y)
+000078 dfea      	rcall Input
+000079 d050      	rcall Check_Y2
                  	
-00007c 910f      	pop r16
+00007a 910f      	pop r16
                  
-00007d 9508      	ret
+00007b 9508      	ret
                  
                  Check_X1:
                  	
                  	//Forward X
-00007e 3003      	cpi r16,Forward
-00007f f019      	breq X1_INC
-000080 3001      	cpi r16,Backward
-000081 f049      	breq X1_DEC
+00007c 3003      	cpi r16,Forward
+00007d f019      	breq X1_INC
+00007e 3000      	cpi r16,Backward
+00007f f059      	breq X1_DEC
                  
-000082 c010      	rjmp X1_DONE
+000080 c014      	rjmp X1_DONE
                  
                  X1_INC:	
-000083 9100 0060
-000085 9503
-000086 9300 0060 	INCSRAM P1X
+000081 9100 0060
+000083 9503
+000084 9300 0060 	INCSRAM P1X
                  	// se till att X är mindre än 8 här
+000086 9100 0060 	lds r16,P1X
 000088 3008      	cpi r16,8
 000089 f009      	breq X1_DEC//minska P1X
                  
-00008a c008      	rjmp X1_DONE
+00008a c00a      	rjmp X1_DONE
                  
                  X1_DEC:
 00008b 9100 0060
 00008d 950a
 00008e 9300 0060 	DECSRAM P1X
                  	// se till att X är större än -1 här
-000090 3f0f      	cpi r16, 255
-000091 f389      	breq X1_INC//öka P1X
+000090 9100 0060 	lds r16,P1X
+000092 3f0f      	cpi r16, 255
+000093 f369      	breq X1_INC//öka P1X
                  
                  
-000092 c000      	rjmp X1_DONE
+000094 c000      	rjmp X1_DONE
                  
                  X1_DONE:	
                  
-000093 9508      	ret
+000095 9508      	ret
                  
                  Check_X2:
                  	
                  	//Forward X
-000094 3003      	cpi r16,Forward
-000095 f019      	breq X2_INC
-000096 3001      	cpi r16,Backward
-000097 f049      	breq X2_DEC
+000096 3003      	cpi r16,Forward
+000097 f019      	breq X2_INC
+000098 3000      	cpi r16,Backward
+000099 f059      	breq X2_DEC
                  
-000098 c010      	rjmp X2_DONE
+00009a c014      	rjmp X2_DONE
                  
                  X2_INC:	
-000099 9100 0062
-00009b 9503
-00009c 9300 0062 	INCSRAM P2X
+00009b 9100 0062
+00009d 9503
+00009e 9300 0062 	INCSRAM P2X
                  	// se till att X är mindre än 8 här
-00009e 3008      	cpi r16,8
-00009f f009      	breq X2_DEC//minska P1X
+0000a0 9100 0062 	lds r16,P2X
+0000a2 3008      	cpi r16,8
+0000a3 f009      	breq X2_DEC//minska P1X
                  
-0000a0 c008      	rjmp X2_DONE
+0000a4 c00a      	rjmp X2_DONE
                  
                  X2_DEC:
-0000a1 9100 0062
-0000a3 950a
-0000a4 9300 0062 	DECSRAM P2X
+0000a5 9100 0062
+0000a7 950a
+0000a8 9300 0062 	DECSRAM P2X
                  	// se till att X är större än -1 här
-0000a6 3f0f      	cpi r16, 255
-0000a7 f389      	breq X2_INC//öka P1X
+0000aa 9100 0062 	lds r16,P2X
+0000ac 3f0f      	cpi r16, 255
+0000ad f369      	breq X2_INC//öka P1X
                  
                  
-0000a8 c000      	rjmp X2_DONE
+0000ae c000      	rjmp X2_DONE
                  
                  X2_DONE:	
                  
-0000a9 9508      	ret
+0000af 9508      	ret
                  
                  
                  
@@ -1041,73 +1042,77 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  
                  Check_Y1:
                  
-0000aa 3003      	cpi r16,Forward
-0000ab f019      	breq Y1_INC
-0000ac 3001      	cpi r16,Backward
-0000ad f049      	breq Y1_DEC
+0000b0 3003      	cpi r16,Forward
+0000b1 f019      	breq Y1_INC
+0000b2 3000      	cpi r16,Backward
+0000b3 f059      	breq Y1_DEC
                  
-0000ae c010      	rjmp Y1_DONE
+0000b4 c014      	rjmp Y1_DONE
                  
                  Y1_INC:	
-0000af 9100 0061
-0000b1 9503
-0000b2 9300 0061 	INCSRAM P1Y
+0000b5 9100 0061
+0000b7 9503
+0000b8 9300 0061 	INCSRAM P1Y
                  	// se till att X är mindre än 8 här
-0000b4 3008      	cpi r16,8
-0000b5 f009      	breq Y1_DEC//minska P1X
+0000ba 9100 0061 	lds r16,P1Y
+0000bc 3008      	cpi r16,8
+0000bd f009      	breq Y1_DEC//minska P1X
                  
-0000b6 c008      	rjmp Y1_DONE
+0000be c00a      	rjmp Y1_DONE
                  
                  Y1_DEC:
-0000b7 9100 0061
-0000b9 950a
-0000ba 9300 0061 	DECSRAM P1Y
+0000bf 9100 0061
+0000c1 950a
+0000c2 9300 0061 	DECSRAM P1Y
                  	// se till att X är större än -1 här
-0000bc 3f0f      	cpi r16, 255
-0000bd f389      	breq Y1_INC//öka P1X
+0000c4 9100 0061 	lds r16,P1Y
+0000c6 3f0f      	cpi r16, 255
+0000c7 f369      	breq Y1_INC//öka P1X
                  
                  
-0000be c000      	rjmp Y1_DONE
+0000c8 c000      	rjmp Y1_DONE
                  
                  Y1_DONE:	
                  
-0000bf 9508      	ret
+0000c9 9508      	ret
                  
                  
                  Check_Y2:
                  
-0000c0 3003      	cpi r16,Forward
-0000c1 f019      	breq Y2_INC
-0000c2 3001      	cpi r16,Backward
-0000c3 f049      	breq Y2_DEC
+0000ca 3003      	cpi r16,Forward
+0000cb f019      	breq Y2_INC
+0000cc 3000      	cpi r16,Backward
+0000cd f059      	breq Y2_DEC
                  
-0000c4 c010      	rjmp Y2_DONE
+0000ce c014      	rjmp Y2_DONE
                  
                  Y2_INC:	
-0000c5 9100 0063
-0000c7 9503
-0000c8 9300 0063 	INCSRAM P2Y
+0000cf 9100 0063
+0000d1 9503
+0000d2 9300 0063 	INCSRAM P2Y
                  	// se till att X är mindre än 8 här
-0000ca 3008      	cpi r16,8
-0000cb f009      	breq Y2_DEC//minska P1X
+0000d4 9100 0063 	lds r16,P2Y
+0000d6 3008      	cpi r16,8
+0000d7 f009      	breq Y2_DEC//minska P1X
                  
-0000cc c008      	rjmp Y2_DONE
+0000d8 c00a      	rjmp Y2_DONE
                  
                  Y2_DEC:
-0000cd 9100 0063
-0000cf 950a
-0000d0 9300 0063 	DECSRAM P2Y
+0000d9 9100 0063
+0000db 950a
+0000dc 9300 0063 	DECSRAM P2Y
                  	// se till att X är större än -1 här
-0000d2 3f0f      	cpi r16, 255
-0000d3 f389      	breq Y2_INC//öka P1X
+0000de 9100 0063 	lds r16,P2Y
+0000e0 3f0f      	cpi r16, 255
+0000e1 f369      	breq Y2_INC//öka P1X
                  
                  
-0000d4 c000      	rjmp Y2_DONE
+0000e2 c000      	rjmp Y2_DONE
                  
                  Y2_DONE:	
                  	
                  
-0000d5 9508      .equ VMEM_SIZE = 64
+0000e3 9508      .equ VMEM_SIZE = 64
                  .equ DELAY_HIGH = 1
                  .equ DELAY_LOW = 30
                  
@@ -1125,9 +1130,9 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  .org $0000
 000000 c004      	rjmp Setup
                  .org INT0addr
-000002 c01d      	rjmp Interrupt0
+000002 c01f      	rjmp Interrupt0
                  .org INT1addr
-000004 c01f      	rjmp Interrupt1
+000004 c021      	rjmp Interrupt1
                  Setup:
                  
 000005 e004      ldi r16,HIGH(RAMEND)
@@ -1140,63 +1145,66 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  Hardware_Init:
                  
 000009 d056      	rcall Joystick_Init
-00000a e00f      	ldi r16,(1<<ISC11)|(1<<ISC10)|(1<<ISC01)|(1<<ISC00)
+00000a e00a      	ldi r16,(1<<ISC11)|(0<<ISC10)|(1<<ISC01)|(0<<ISC00)
 00000b bf05      	out MCUCR,r16
 00000c ec00      	ldi r16,(1<<INT0)|(1<<INT1)
 00000d bf0b      	out GICR,r16
                  
-00000e 9478      	sei
+00000e ef0f      	ldi r16,$FF
+00000f bb02      	out PORTD,r16
+                 
+000010 9478      	sei
                  Main:
                  	
-00000f d002      	rcall Player_Input;
-000010 d006      	rcall Delay
-000011 cffd      	rjmp Main
+000011 d002      	rcall Player_Input;
+000012 d006      	rcall Delay
+000013 cffd      	rjmp Main
                  
                  //Player 1 = t 0, Player 2 = t 1
                  Player_Input:
-000012 f016      	brts Player2	
-000013 d058      	rcall Input_P1
-000014 c001      	rjmp Input_done
+000014 f016      	brts Player2	
+000015 d054      	rcall Input_P1
+000016 c001      	rjmp Input_done
                  Player2:
-000015 d05f      	rcall Input_P2
+000017 d05b      	rcall Input_P2
                  Input_done:
-000016 9508      	ret
+000018 9508      	ret
                  
                  
                  
                  
                  DELAY:
-000017 938f      	push r24
-000018 939f      	push r25
-000019 e091      	ldi r25,DELAY_HIGH
-00001a e18e      	ldi r24,DELAY_LOW
+000019 938f      	push r24
+00001a 939f      	push r25
+00001b e091      	ldi r25,DELAY_HIGH
+00001c e18e      	ldi r24,DELAY_LOW
                  
                  DELAY2:
-00001b 9701      	sbiw r24,1
-00001c f7f1      	brne DELAY2
-00001d 919f      	pop	r25
-00001e 918f      	pop	r24
-00001f 9508      	ret
+00001d 9701      	sbiw r24,1
+00001e f7f1      	brne DELAY2
+00001f 919f      	pop	r25
+000020 918f      	pop	r24
+000021 9508      	ret
                  
                  
                  //Player 1
                  Interrupt0:
-000020 f016      	brts P1_DONE
-000021 d007      	rcall Check_for_valid_choice_P1
-000022 d005      	rcall Check_for_end_of_game
+000022 f016      	brts P1_DONE
+000023 d007      	rcall Check_for_valid_choice_P1
+000024 d005      	rcall Check_for_end_of_game
                  P1_DONE:
                  
-000023 9518      	reti
+000025 9518      	reti
                  
                  //Player 2
                  Interrupt1:
-000024 f416      	brtc P2_DONE
-000025 d004      	rcall Check_for_valid_choice_P2
-000026 d001      	rcall Check_for_end_of_game
+000026 f416      	brtc P2_DONE
+000027 d004      	rcall Check_for_valid_choice_P2
+000028 d001      	rcall Check_for_end_of_game
                  P2_DONE:
                  
                  
-000027 9518      	reti
+000029 9518      	reti
                  
                  
                  
@@ -1207,14 +1215,14 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  
                  
                  
-000028 9508      	ret
+00002a 9508      	ret
                  
                  
                  Check_for_valid_choice_P1:
                  
                  
                  
-000029 9508      	ret
+00002b 9508      	ret
                  
                  Check_for_valid_choice_P2:
                  
@@ -1238,7 +1246,7 @@ counted separately from r26..r31 here.
 "ATmega16A" register use summary:
 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 r5 :   0 r6 :   0 r7 :   0 
 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 r13:   0 r14:   0 r15:   0 
-r16:  64 r17:   0 r18:   0 r19:   0 r20:   0 r21:   0 r22:   0 r23:   0 
+r16:  72 r17:   0 r18:   0 r19:   0 r20:   0 r21:   0 r22:   0 r23:   0 
 r24:   4 r25:   3 r26:   0 r27:   0 r28:   0 r29:   0 r30:   0 r31:   0 
 x  :   0 y  :   0 z  :   0 
 Registers used: 3 out of 35 (8.6%)
@@ -1254,7 +1262,7 @@ clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
 cpi   :  16 cpse  :   0 dec   :   4 eor   :   0 fmul  :   0 fmuls :   0 
 fmulsu:   0 icall :   0 ijmp  :   0 in    :   1 inc   :   4 jmp   :   0 
-ld    :   0 ldd   :   0 ldi   :  13 lds   :   8 lpm   :   0 lsl   :   0 
+ld    :   0 ldd   :   0 ldi   :  13 lds   :  16 lpm   :   0 lsl   :   0 
 lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
 neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :   8 pop   :   4 
 push  :   4 rcall :  17 ret   :  13 reti  :   2 rjmp  :  18 rol   :   0 
@@ -1268,7 +1276,7 @@ Instructions used: 21 out of 113 (18.6%)
 "ATmega16A" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x0001ac    318      0    318   16384   1.9%
+[.cseg] 0x000000 0x0001c8    350      0    350   16384   2.1%
 [.dseg] 0x000060 0x0000a4      0     68     68    1024   6.6%
 [.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 

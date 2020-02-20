@@ -9,8 +9,8 @@
 
 
 .equ Forward = 3
-.equ Backward = 1
-.equ Neutral = 0
+.equ Backward = 0
+.equ Neutral = 2
 
 	.macro INCSRAM	; inc byte in SRAM
 		lds	r16,@0
@@ -28,9 +28,6 @@
 .org $60
 
 Joystick_Init:
-	ldi r16,(1<<ADEN)
-	out ADCSRA,r16
-
 	ldi r16,$00
 	out DDRA,r16
 	
@@ -42,7 +39,7 @@ Input:
 
 	out ADMUX,r16
 
-	ldi r16,(1<<ADSC)
+	ldi r16,(1<<ADSC)|(1<<ADEN)
 	out ADCSRA,r16
 
 Wait:
@@ -96,6 +93,7 @@ Check_X1:
 X1_INC:	
 	INCSRAM P1X
 	// se till att X är mindre än 8 här
+	lds r16,P1X
 	cpi r16,8
 	breq X1_DEC//minska P1X
 
@@ -104,6 +102,7 @@ X1_INC:
 X1_DEC:
 	DECSRAM P1X
 	// se till att X är större än -1 här
+	lds r16,P1X
 	cpi r16, 255
 	breq X1_INC//öka P1X
 
@@ -127,6 +126,7 @@ Check_X2:
 X2_INC:	
 	INCSRAM P2X
 	// se till att X är mindre än 8 här
+	lds r16,P2X
 	cpi r16,8
 	breq X2_DEC//minska P1X
 
@@ -135,6 +135,7 @@ X2_INC:
 X2_DEC:
 	DECSRAM P2X
 	// se till att X är större än -1 här
+	lds r16,P2X
 	cpi r16, 255
 	breq X2_INC//öka P1X
 
@@ -162,6 +163,7 @@ Check_Y1:
 Y1_INC:	
 	INCSRAM P1Y
 	// se till att X är mindre än 8 här
+	lds r16,P1Y
 	cpi r16,8
 	breq Y1_DEC//minska P1X
 
@@ -170,6 +172,7 @@ Y1_INC:
 Y1_DEC:
 	DECSRAM P1Y
 	// se till att X är större än -1 här
+	lds r16,P1Y
 	cpi r16, 255
 	breq Y1_INC//öka P1X
 
@@ -193,6 +196,7 @@ Check_Y2:
 Y2_INC:	
 	INCSRAM P2Y
 	// se till att X är mindre än 8 här
+	lds r16,P2Y
 	cpi r16,8
 	breq Y2_DEC//minska P1X
 
@@ -201,6 +205,7 @@ Y2_INC:
 Y2_DEC:
 	DECSRAM P2Y
 	// se till att X är större än -1 här
+	lds r16,P2Y
 	cpi r16, 255
 	breq Y2_INC//öka P1X
 
