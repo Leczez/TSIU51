@@ -36,12 +36,27 @@ INIT_MEM:
 	sts MEM_POS, r16
 	sts SEND_BUFF, r16
 
-MAIN:
+;//Test
+	ldi r16, 0x01
+
+	ldi XH, high(VIDEO_MEM)
+	ldi XL, low(VIDEO_MEM)
+
+	st X++, r16
+	clr r16
 	
+	st X++, r16
+	st X++, r16	
+	st X++, r16
+	
+
+MAIN:
+	clt
 	lds r16,SEND_BUFF
 	out SPDR, r16
-
-WAIT:
+	
+	WAIT:
+	brts MAIN
 	jmp WAIT
 
 
@@ -53,8 +68,15 @@ INIT:
 	ldi r16, 0xB0
 	out DDRB, r16
 
-	ldi r16,(1<<SPE | 1<<MSTR | 1<<SPIE | 1<<SPR0 | 1<<SPR1)
+	ldi r16,(1<<SPE | 1<<MSTR | 1<<SPIE | 1<<SPR1 | 1<<SPR0)
 	out SPCR, r16
+	;ldi r16,(1<<SPI2X)
+	;out SPSR, r16
+
+	ldi r16,0xff
+	out DDRA, r16
+	ldi r16, 0x01
+	out PORTA, r16
 
 	sei
 	ret
@@ -71,6 +93,12 @@ GET_BYTE:
 
 	lds r16, MEM_POS
 	add ZL, r16
+	inc r16
+	cpi r16, 0x05
+	brne NO_RESET
+	clr r16
+	NO_RESET:
+	sts MEM_POS, r16
 
 	ld r16, Z
 	sts SEND_BUFF, r16
@@ -78,6 +106,7 @@ GET_BYTE:
 	pop r16
 	out SREG, r16
 	pop r16
+	set
 	reti
 	
 

@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51 Grafik\TSIU51 Grafik.asm Tue Feb 18 10:06:17 2020
+AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\Display\Display.asm Fri Feb 21 12:00:35 2020
 
 [builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include\m16Adef.inc'
                  
@@ -869,28 +869,28 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 
                  #endif  /* _M16ADEF_INC_ */
                  
                  
-                  * TSIU51_Grafik.asm
+                  * Display.asm
                   *
-                  *  Created: 2020-02-10 10:32:08
+                  *  Created: 2020-02-21 09:47:27
                   *   Author: linny471
                   */ 
-                  .org 0x00
+                 
+                  .def loop_counter = r17
+                 
+                 .org 0x00
 000000 940c 0016 	jmp START
                  
-                  .org 0x014
-000014 940c 0027 	jmp GET_BYTE
+                 .org 0x014
+000014 940c 0038 	jmp SEND 
+                 
+                 .dseg
+                 	.org 0x300
+000300           	SEND_BYTE: .byte 4
+000304           	SEND_BUFF: .byte 1
+000305           	LOOP: .byte 1
                  
                  
-                  .dseg
-                  .org 0x300
-000300            VIDEO_MEM: .byte 64
-000340            MEM_POS: .byte 1
-000341            SEND_BUFF: .byte 1
-                 
-                 
-                  .cseg
-                 
-                 
+                 .cseg
                  START:
 000016 e004      	ldi r16,high(RAMEND)
 000017 bf0e      	out SPH,r16
@@ -898,66 +898,84 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 
 000018 e50f      	ldi r16,low(RAMEND)
 000019 bf0d      	out SPL,r16	
                  
-00001a 940e 0021 	call INIT
+00001a 940e 0050 	call INIT
+                 
+                 MEMORY_INIT:
+00001c 2700      	clr r16
+00001d 9300 0305 	sts LOOP, r16
+                 	;ldi r16, 0x01
+00001f 9300 0304 	sts SEND_BUFF, r16
+000021 9300 0301 	sts SEND_BYTE + 1, r16
+000023 9300 0302 	sts SEND_BYTE + 2, r16
+000025 9300 0303 	sts SEND_BYTE + 3, r16
+                 
+                 RESET_PTR:
+000027 e0f3      	ldi ZH, high(SEND_BYTE +1)
+000028 e0e1      	ldi ZL, low(SEND_BYTE +1)
+000029 2700      	clr r16
+00002a 9300 0305 	sts LOOP, r16
                  
                  MAIN:
+00002c 94e8      	clt
+00002d 9100 0305 	lds r16, LOOP
+00002f 3003      	cpi r16, 0x03
+000030 f3b1      	breq RESET_PTR
+                 
+000031 e0a4      	ldi XL, low(SEND_BUFF)
+000032 e0b3      	ldi XH, high(SEND_BUFF)
+000033 910c      	ld r16, X
+000034 b90f      	out SPDR, r16
+                 
+                 	WAIT:
+000035 f3b6      		brts MAIN
+000036 940c 0035 		jmp WAIT
+                 
+                 
+                 
+                 SEND:
+000038 930f      	push r16
+000039 b70f      	in r16, SREG
+00003a 930f      	push r16
                  	
-00001c 9100 0341 	lds r16,SEND_BUFF
-00001e b90f      	out SPDR, r16
+00003b 9101      	ld r16, Z++
+00003c 9300 0304 	sts SEND_BUFF, r16
                  
-                 WAIT:
-00001f 940c 001f 	jmp WAIT
+00003e 9100 0305 	lds r16, LOOP
+000040 9503      	inc r16
+000041 9300 0305 	sts LOOP, r16
                  
-                 
-                 
-                 
-                 
-                 INIT:
-                 ;;SPI initalization;;
-000021 eb00      	ldi r16, 0xB0
-000022 bb07      	out DDRB, r16
-                 
-000023 ed03      	ldi r16,(1<<SPE | 1<<MSTR | 1<<SPIE | 1<<SPR0 | 1<<SPR1)
-000024 b90d      	out SPCR, r16
-                 
-000025 9478      	sei
-000026 9508      	ret
-                 
-                 
-                 GET_BYTE:
-                 	
-000027 930f      	push r16
-000028 b70f      	in r16, SREG
-000029 930f      	push r16
-                 
-00002a e0f3      	ldi ZH, high(VIDEO_MEM)
-00002b e0e0      	ldi ZL, low(VIDEO_MEM)
-                 
-00002c 9100 0340 	lds r16, MEM_POS
-00002e 0fe0      	add ZL, r16
-                 
-00002f 8100      	ld r16, Z
-000030 9300 0341 	sts SEND_BUFF, r16
-                 
-000032 910f      	pop r16
-000033 bf0f      	out SREG, r16
-000034 910f      	pop r16
-000035 9518      	reti
-                 	
-                 
+000043 910f      	pop r16
+000044 bf0f      	out SREG, r16
+000045 910f      	pop r16
+000046 9468      	set
+000047 9518      	reti
                  
                  DELAY:
-                 ; Delay 2 000 cycles
-                 ; 2ms at 1.0 MHz
+                 ; Delay 999 cycles
+                 ; 999us 0 0/1 ns
+                 ; at 1.0 MHz
                  
-000036 e023          ldi  r18, 3
-000037 e938          ldi  r19, 152
-000038 953a      L1: dec  r19
-000039 f7f1          brne L1
-00003a 952a          dec  r18
-00003b f7e1          brne L1
-00003c 0000          nop
+000048 e022          ldi  r18, 2
+000049 e43b          ldi  r19, 75
                  
+00004a 953a      L1: dec  r19
+00004b f7f1          brne L1
+00004c 952a          dec  r18
+00004d f7e1          brne L1
+00004e 0000          nop
+00004f 9508      	ret
+                 
+                 INIT:
+                 ;//SPI initalization
+000050 eb00      	ldi r16, 0xB0
+000051 bb07      	out DDRB, r16
+                 
+000052 ed01      	ldi r16,(1<<SPE | 1<<MSTR | 1<<SPIE | 1<<SPR0)
+000053 b90d      	out SPCR, r16
+000054 e001      	ldi r16,(1<<SPI2X)
+                 	;out SPSR, r16
+                 
+000055 9478      	sei
 
 
 RESOURCE USE INFORMATION
@@ -977,38 +995,38 @@ counted separately from r26..r31 here.
 "ATmega16A" register use summary:
 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 r5 :   0 r6 :   0 r7 :   0 
 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 r13:   0 r14:   0 r15:   0 
-r16:  20 r17:   0 r18:   2 r19:   2 r20:   0 r21:   0 r22:   0 r23:   0 
-r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 r29:   0 r30:   2 r31:   1 
-x  :   0 y  :   0 z  :   1 
-Registers used: 6 out of 35 (17.1%)
+r16:  32 r17:   0 r18:   2 r19:   2 r20:   0 r21:   0 r22:   0 r23:   0 
+r24:   0 r25:   0 r26:   1 r27:   1 r28:   0 r29:   0 r30:   1 r31:   1 
+x  :   1 y  :   0 z  :   1 
+Registers used: 9 out of 35 (25.7%)
 
 "ATmega16A" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   0 add   :   1 adiw  :   0 and   :   0 
+.lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :   1 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :   2 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brne  :   2 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   1 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 call  :   1 cbi   :   0 cbr   :   0 
-clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
-clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
-cpi   :   0 cpse  :   0 dec   :   2 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   1 inc   :   0 jmp   :   3 
-ld    :   1 ldd   :   0 ldi   :   8 lds   :   2 lpm   :   0 lsl   :   0 
+clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   2 cls   :   0 
+clt   :   1 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
+cpi   :   1 cpse  :   0 dec   :   2 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   1 inc   :   1 jmp   :   3 
+ld    :   2 ldd   :   0 ldi   :  11 lds   :   2 lpm   :   0 lsl   :   0 
 lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
 neg   :   0 nop   :   1 or    :   0 ori   :   0 out   :   6 pop   :   2 
 push  :   2 rcall :   0 ret   :   2 reti  :   1 rjmp  :   0 rol   :   0 
 ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
-sei   :   1 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
-sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   1 
+sei   :   1 sen   :   0 ser   :   0 ses   :   0 set   :   1 sev   :   0 
+sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   8 
 sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 17 out of 113 (15.0%)
+Instructions used: 23 out of 113 (20.4%)
 
 "ATmega16A" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x00007c     88      0     88   16384   0.5%
-[.dseg] 0x000060 0x000342      0     66     66    1024   6.4%
+[.cseg] 0x000000 0x0000ae    138      0    138   16384   0.8%
+[.dseg] 0x000060 0x000306      0      6      6    1024   0.6%
 [.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 
 Assembly complete, 0 errors, 0 warnings

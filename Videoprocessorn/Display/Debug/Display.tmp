@@ -1,0 +1,37 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.57</VERSION>
+ <DEVICE>"ATmega16A"</DEVICE>
+ <WORKING_DIR>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\Display\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\Display\Display.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include\m16Adef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\Display\Debug/Display.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Display.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Display.map</FILE>
+  <FILE>Display.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <START><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\Display\Display.asm</FILE><LINE>24</LINE></START>
+  <SEND><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\Display\Display.asm</FILE><LINE>65</LINE></SEND>
+  <SEND_BYTE><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\Display\Display.asm</FILE><LINE>18</LINE></SEND_BYTE>
+  <SEND_BUFF><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\Display\Display.asm</FILE><LINE>19</LINE></SEND_BUFF>
+  <LOOP><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\Display\Display.asm</FILE><LINE>20</LINE></LOOP>
+  <INIT><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\Display\Display.asm</FILE><LINE>98</LINE></INIT>
+  <MEMORY_INIT><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\Display\Display.asm</FILE><LINE>33</LINE></MEMORY_INIT>
+  <RESET_PTR><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\Display\Display.asm</FILE><LINE>42</LINE></RESET_PTR>
+  <MAIN><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\Display\Display.asm</FILE><LINE>48</LINE></MAIN>
+  <WAIT><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\Display\Display.asm</FILE><LINE>59</LINE></WAIT>
+  <DELAY><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\Display\Display.asm</FILE><LINE>83</LINE></DELAY>
+  <L1><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\Display\Display.asm</FILE><LINE>91</LINE></L1>
+ </LABELS>
+</ASSEMBLER_INFO>
