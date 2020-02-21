@@ -49,6 +49,10 @@ Hardware_Init:
 	ldi r16,$FF
 	out PORTD,r16
 
+Usart_Init:
+
+	
+
 	sei
 Main:
 	
