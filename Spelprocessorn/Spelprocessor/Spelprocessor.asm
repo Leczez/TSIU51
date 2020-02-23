@@ -50,7 +50,19 @@ Hardware_Init:
 	out PORTD,r16
 
 Usart_Init:
-
+	; Se sida 143 i databladet
+	
+	; Set baud rate
+	out UBRRH, r17
+	out UBRRL, r16
+	
+	; Enable receiver and transmitter
+	ldi r16, (1<<TXEN)
+	out UCSRB,r16
+	
+	; Set frame format: 8data, 1stop bit
+	ldi r16, (1<<URSEL)|(3<<UCSZ0)
+	out UCSRC,r16
 	
 
 	sei
@@ -59,6 +71,23 @@ Main:
 	rcall Player_Input;
 	rcall Delay
 	rjmp Main
+
+
+SendByte:
+	; Se sida 144 i databladet
+	
+	; Wait for empty transmit buffer
+	sbis UCSRA,UDRE
+	rjmp SendByte
+	
+	; Put data (r16) into buffer, sends the data
+	out UDR,r16
+	
+	ret
+
+
+
+
 
 //Player 1 = t 0, Player 2 = t 1
 Player_Input:
