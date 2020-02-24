@@ -1,26 +1,27 @@
-/*
- * TSIU51_Grafik.asm
+
+	/*
+ * Display.asm
  *
- *  Created: 2020-02-10 10:32:08
+ *  Created: 2020-02-21 09:47:27
  *   Author: linny471
  */ 
- .org 0x00
+
+ .def loop_counter = r17
+
+.org 0x00
 	jmp START
 
- .org 0x014
-	jmp GET_BYTE
+.org 0x014
+	jmp SEND 
+
+.dseg
+	.org 0x300
+	SEND_BYTE: .byte 4
+	SEND_BUFF: .byte 1
+	LOOP: .byte 1
 
 
- .dseg
- .org 0x300
- VIDEO_MEM: .byte 64 ;1-64 corresponds to the 64 diods on DAmatrix
- MEM_POS: .byte 1 ;Current position in VIDEO_MEM
- SEND_BUFF: .byte 1 ;SPI send-buffer
-
-
- .cseg
-
-
+.cseg
 START:
 	ldi r16,high(RAMEND)
 	out SPH,r16
@@ -30,68 +31,80 @@ START:
 
 	call INIT
 
-INIT_MEM:
-;//Clear memory pointer and SPI buffer
+MEMORY_INIT:
 	clr r16
-	sts MEM_POS, r16
+	sts LOOP, r16
+	;ldi r16, 0x01
 	sts SEND_BUFF, r16
+	sts SEND_BYTE + 1, r16
+	sts SEND_BYTE + 2, r16
+	sts SEND_BYTE + 3, r16
+
+RESET_PTR:
+	ldi ZH, high(SEND_BYTE +1)
+	ldi ZL, low(SEND_BYTE +1)
+	clr r16
+	sts LOOP, r16
 
 MAIN:
-	
-	lds r16,SEND_BUFF
+	clt
+	lds r16, LOOP
+	cpi r16, 0x03
+	breq RESET_PTR
+
+	ldi XL, low(SEND_BUFF)
+	ldi XH, high(SEND_BUFF)
+	ld r16, X
 	out SPDR, r16
 
-WAIT:
-	jmp WAIT
+	WAIT:
+		brts MAIN
+		jmp WAIT
 
 
 
+SEND:
+	push r16
+	in r16, SREG
+	push r16
+	
+	ld r16, Z++
+	sts SEND_BUFF, r16
 
+	lds r16, LOOP
+	inc r16
+	sts LOOP, r16
+
+	pop r16
+	out SREG, r16
+	pop r16
+	set
+	reti
+
+DELAY:
+; Delay 999 cycles
+; 999us 0 0/1 ns
+; at 1.0 MHz
+
+    ldi  r18, 2
+    ldi  r19, 75
+
+L1: dec  r19
+    brne L1
+    dec  r18
+    brne L1
+    nop
+	ret
 
 INIT:
 ;//SPI initalization
 	ldi r16, 0xB0
 	out DDRB, r16
 
-	ldi r16,(1<<SPE | 1<<MSTR | 1<<SPIE | 1<<SPR0 | 1<<SPR1)
+	ldi r16,(1<<SPE | 1<<MSTR | 1<<SPIE | 1<<SPR0)
 	out SPCR, r16
+	ldi r16,(1<<SPI2X)
+	;out SPSR, r16
 
 	sei
-	ret
-
-
-GET_BYTE:
-;//Reads current video memory position value and stores it in SEND_BUFF
-	push r16
-	in r16, SREG
-	push r16
-
-	ldi ZH, high(VIDEO_MEM)
-	ldi ZL, low(VIDEO_MEM)
-
-	lds r16, MEM_POS
-	add ZL, r16
-
-	ld r16, Z
-	sts SEND_BUFF, r16
-
-	pop r16
-	out SREG, r16
-	pop r16
-	reti
-	
-
-
-DELAY:
-; Delay 2 000 cycles
-; 2ms at 1.0 MHz
-
-    ldi  r18, 3
-    ldi  r19, 152
-L1: dec  r19
-    brne L1
-    dec  r18
-    brne L1
-    nop
-
 	ret
