@@ -22,16 +22,17 @@
   <FILE>TSIU51 Grafik.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <START><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>24</LINE></START>
-  <GET_BYTE><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>63</LINE></GET_BYTE>
-  <VIDEO_MEM><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>16</LINE></VIDEO_MEM>
-  <MEM_POS><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>17</LINE></MEM_POS>
-  <SEND_BUFF><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>18</LINE></SEND_BUFF>
-  <INIT><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>51</LINE></INIT>
-  <INIT_MEM><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>33</LINE></INIT_MEM>
-  <MAIN><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>39</LINE></MAIN>
-  <WAIT><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>44</LINE></WAIT>
-  <DELAY><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>78</LINE></DELAY>
-  <L1><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>84</LINE></L1>
+  <START><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>25</LINE></START>
+  <SEND><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>66</LINE></SEND>
+  <SEND_BYTE><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>19</LINE></SEND_BYTE>
+  <SEND_BUFF><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>20</LINE></SEND_BUFF>
+  <LOOP><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>21</LINE></LOOP>
+  <INIT><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>99</LINE></INIT>
+  <MEMORY_INIT><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>34</LINE></MEMORY_INIT>
+  <RESET_PTR><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>43</LINE></RESET_PTR>
+  <MAIN><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>49</LINE></MAIN>
+  <WAIT><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>60</LINE></WAIT>
+  <DELAY><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>84</LINE></DELAY>
+  <L1><FILE>C:\Users\lnyga\Documents\Atmel Studio\7.0\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>92</LINE></L1>
  </LABELS>
 </ASSEMBLER_INFO>
