@@ -85,17 +85,31 @@ SendByte:
 	
 	ret
 
+Send_Player_Data:
+	
+	ldi r16,$FF
+	rcall SendByte
+	mov r16,r17
+	rcall SendByte
+	mov r16,r18
+	rcall SendByte
 
 
-
+	ret
 
 //Player 1 = t 0, Player 2 = t 1
 Player_Input:
 	brts Player2	
 	rcall Input_P1
+	clr r17
+	ldi r18, P1X + 8*P1Y
+	rcall Send_Player_Data
 	rjmp Input_done
 Player2:
 	rcall Input_P2
+	ldi r17,$01
+	ldi r18, P2X + 8*P2Y
+	rcall Send_Player_Data
 Input_done:
 	ret
 

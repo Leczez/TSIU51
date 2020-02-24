@@ -10,10 +10,10 @@
 
 .org 0x00
 	jmp START
-
+/*
 .org 0x014
-	jmp SEND 
-
+	jmp LOAD_DATA 
+*/
 .dseg
 	.org 0x300
 	SEND_BYTE: .byte 4
@@ -29,41 +29,48 @@ START:
 	ldi r16,low(RAMEND)
 	out SPL,r16	
 
+	ldi r16,$FF
+	out DDRA,r16
+
 	call INIT
 
 MEMORY_INIT:
 	clr r16
 	sts LOOP, r16
-	;ldi r16, 0x01
-	sts SEND_BUFF, r16
-	sts SEND_BYTE + 1, r16
-	sts SEND_BYTE + 2, r16
-	sts SEND_BYTE + 3, r16
+
+	ldi r16, $FF
+	sts SEND_BYTE,r16 ;Blå
+	
+	sts SEND_BYTE + 1, r16 ;Grön
+	
+	sts SEND_BYTE + 2, r16 ;Röd
+	ldi r16, $00
+	sts SEND_BYTE + 3, r16 ;Index
 
 RESET_PTR:
-	ldi ZH, high(SEND_BYTE +1)
-	ldi ZL, low(SEND_BYTE +1)
+	ldi ZH, high(SEND_BYTE)
+	ldi ZL, low(SEND_BYTE)
 	clr r16
 	sts LOOP, r16
 
 MAIN:
+	cbi PORTA,7
 	clt
 	lds r16, LOOP
-	cpi r16, 0x03
+	cpi r16, 0x04
 	breq RESET_PTR
-
-	ldi XL, low(SEND_BUFF)
-	ldi XH, high(SEND_BUFF)
-	ld r16, X
+	rcall LOAD_DATA
+	lds r16, SEND_BUFF
+	sbi PORTA,7
 	out SPDR, r16
 
 	WAIT:
-		brts MAIN
-		jmp WAIT
+		sbis SPSR,SPIF
+		rjmp WAIT
+		rjmp MAIN
 
 
-
-SEND:
+LOAD_DATA:
 	push r16
 	in r16, SREG
 	push r16
@@ -79,7 +86,8 @@ SEND:
 	out SREG, r16
 	pop r16
 	set
-	reti
+	ret
+	;reti
 
 DELAY:
 ; Delay 999 cycles
@@ -101,10 +109,10 @@ INIT:
 	ldi r16, 0xB0
 	out DDRB, r16
 
-	ldi r16,(1<<SPE | 1<<MSTR | 1<<SPIE | 1<<SPR0)
+	ldi r16,(1<<SPE | 1<<MSTR | 0<<SPIE | 0<<SPR0)
 	out SPCR, r16
-	ldi r16,(1<<SPI2X)
+	ldi r16,(0<<SPI2X)
 	;out SPSR, r16
 
-	sei
+	;sei
 	ret
