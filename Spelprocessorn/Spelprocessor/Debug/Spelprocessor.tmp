@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <ASSEMBLER_INFO>
  <VERSION>2.1.57</VERSION>
  <DEVICE>"ATmega16A"</DEVICE>
@@ -65,3 +66,72 @@
   <Check_for_valid_choice_P2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>120</LINE></Check_for_valid_choice_P2>
  </LABELS>
 </ASSEMBLER_INFO>
+=======
+<ASSEMBLER_INFO>
+ <VERSION>2.1.57</VERSION>
+ <DEVICE>"ATmega16A"</DEVICE>
+ <WORKING_DIR>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include\m16Adef.inc</FILE>
+  <FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Debug/Spelprocessor.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Spelprocessor.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Spelprocessor.map</FILE>
+  <FILE>Spelprocessor.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <Joystick_Init><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>30</LINE></Joystick_Init>
+  <Input><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>38</LINE></Input>
+  <Wait><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>45</LINE></Wait>
+  <Input_P1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>53</LINE></Input_P1>
+  <Check_X1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>83</LINE></Check_X1>
+  <Check_Y1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>154</LINE></Check_Y1>
+  <Input_P2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>68</LINE></Input_P2>
+  <Check_X2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>116</LINE></Check_X2>
+  <Check_Y2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>187</LINE></Check_Y2>
+  <X1_INC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>93</LINE></X1_INC>
+  <X1_DEC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>102</LINE></X1_DEC>
+  <X1_DONE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>112</LINE></X1_DONE>
+  <P1X><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>18</LINE></P1X>
+  <X2_INC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>126</LINE></X2_INC>
+  <X2_DEC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>135</LINE></X2_DEC>
+  <X2_DONE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>145</LINE></X2_DONE>
+  <P2X><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>20</LINE></P2X>
+  <Y1_INC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>163</LINE></Y1_INC>
+  <Y1_DEC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>172</LINE></Y1_DEC>
+  <Y1_DONE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>182</LINE></Y1_DONE>
+  <P1Y><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>19</LINE></P1Y>
+  <Y2_INC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>196</LINE></Y2_INC>
+  <Y2_DEC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>205</LINE></Y2_DEC>
+  <Y2_DONE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>215</LINE></Y2_DONE>
+  <P2Y><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>21</LINE></P2Y>
+  <VMEM><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>23</LINE></VMEM>
+  <Setup><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>32</LINE></Setup>
+  <Interrupt0><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>87</LINE></Interrupt0>
+  <Interrupt1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>96</LINE></Interrupt1>
+  <Hardware_Init><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>41</LINE></Hardware_Init>
+  <Main><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>53</LINE></Main>
+  <Player_Input><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>60</LINE></Player_Input>
+  <Delay><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>72</LINE></Delay>
+  <Player2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>64</LINE></Player2>
+  <Input_done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>66</LINE></Input_done>
+  <DELAY2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>78</LINE></DELAY2>
+  <P1_DONE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>91</LINE></P1_DONE>
+  <Check_for_valid_choice_P1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>117</LINE></Check_for_valid_choice_P1>
+  <Check_for_end_of_game><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>108</LINE></Check_for_end_of_game>
+  <P2_DONE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>100</LINE></P2_DONE>
+  <Check_for_valid_choice_P2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>123</LINE></Check_for_valid_choice_P2>
+ </LABELS>
+</ASSEMBLER_INFO>
+>>>>>>> 82ab1e21649c66822169fd5c3de2965e622438a5
