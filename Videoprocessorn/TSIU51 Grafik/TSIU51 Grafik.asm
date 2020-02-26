@@ -32,9 +32,6 @@ START:
 	ldi r16,low(RAMEND)
 	out SPL,r16	
 
-	ldi r16,$FF
-	out DDRA,r16
-
 	call INIT
 
 MEMORY_INIT:
@@ -51,7 +48,7 @@ MEMORY_INIT:
 			st Z+,r16
 			cpi r17, 24
 			brne CLR_LOOP
-		
+			
 
 
 RESET_PTR:
@@ -63,15 +60,17 @@ RESET_PTR:
 	sts LOOP, r16
 
 MAIN:
+;//Sends byte to spi and calls LOAD_DATA 4x, then resets SEND_BYTE pointer
 	lds r16, LOOP
 	cpi r16, 0x04
-	breq RESET_PTR
+	breq RESET_PTR ;gör till subrutin??
 	rcall LOAD_DATA
 	lds r16, SEND_BUFF
-	out SPDR, r16 ; SEND DATA
+	out SPDR, r16 ;SEND DATA
 
 	WAIT:
-		sbis SPSR,SPIF
+	;//Checks if shifting of byte to display is done
+		sbis SPSR,SPIF 
 		rjmp WAIT
 		rjmp MAIN
 
@@ -80,6 +79,7 @@ MAIN:
 
 
 MEMORY_READ:
+;//Reads ROWS and INDEX in sram and stores in right order in SEND_BYTE
 	lds r16, INDEX
 	rol r16
 	sts SEND_BYTE+3, r16
@@ -97,10 +97,12 @@ MEMORY_READ:
 		brne NEXT_POS
 	
 	add XL, r16
-	cpi r16, 24
+	cpi r16, 21	;End of ROWS check
 	brne NOT_END
+	
 	clr r16
-	sts ROW_POS, r16
+	NOT_END:
+		sts ROW_POS, r16
 		
 	ld r16, X++
 	sts SEND_BYTE, r16
@@ -108,12 +110,13 @@ MEMORY_READ:
 	ld r16, X++
 	sts SEND_BYTE +1, r16
 	
-	ld r16, X++
+	ld r16, X
 	sts SEND_BYTE +2, r16 	
 	
 	ret
 
 LOAD_DATA:
+;//Loads next byte in SEND_BYTES into send buffer (SEND_BUFF)
 	ld r16, Z++
 	sts SEND_BUFF, r16
 
@@ -128,6 +131,19 @@ PULL_LATCH:
 	nop
 	cbi PORTB, 4
 	ret
+
+
+MEMORY_WRITE:
+;//Writes to ROWS in sram
+	
+	ldi XH, high(ROWS)
+	ldi XL, low(ROWS)
+
+
+
+
+
+
 
 INIT:
 ;//SPI initalization
