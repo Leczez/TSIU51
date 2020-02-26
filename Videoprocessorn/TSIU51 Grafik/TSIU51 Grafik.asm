@@ -35,8 +35,11 @@ START:
 	call INIT
 
 MEMORY_INIT:
-	ldi r16, 0b11111110
+	ldi r16, 0b00000001
 	sts INDEX, r16
+
+	clr r16
+	sts ROW_POS, r16
 		
 	CLEAR_MEM:
 		clr r16
@@ -53,6 +56,7 @@ MEMORY_INIT:
 
 RESET_PTR:
 	rcall PULL_LATCH
+	rcall MEMORY_WRITE
 	rcall MEMORY_READ
 	ldi ZH, high(SEND_BYTE)
 	ldi ZL, low(SEND_BYTE)
@@ -81,39 +85,60 @@ MAIN:
 MEMORY_READ:
 ;//Reads ROWS and INDEX in sram and stores in right order in SEND_BYTE
 	lds r16, INDEX
-	rol r16
+	cpi r16, 0x80
+	brne INDEX_VALID
+	rcall INDEX_RESET
+
+INDEX_VALID:
+	lsl r16
+	com r16
 	sts SEND_BYTE+3, r16
-	
+	com r16
+	sts INDEX, r16
+
 	ldi XH,high(ROWS)
 	ldi XL,low(ROWS)
 
 	lds r16, ROW_POS 
-	clr r17
+	
+	JMP_POS:
+		add XL, r16
+		cpi r16, 21	;End of ROWS check
+		brne NOT_END
+		clr r16
+		
+		NOT_END:
+			ld r18, X++
+			sts SEND_BYTE, r18
+	
+			ld r18, X++
+			sts SEND_BYTE +1, r18
+	
+			ld r18, X
+			sts SEND_BYTE +2, r18	
+	
 
-	NEXT_POS:
+	rcall NEXT_POS ;increases register by three
+	sts ROW_POS, r16
+
+	ret
+
+
+NEXT_POS:
+	clr r17
+	NEXT_POS_LOOP:
 		inc r16
 		inc r17
 		cpi r17, 0x03
-		brne NEXT_POS
-	
-	add XL, r16
-	cpi r16, 21	;End of ROWS check
-	brne NOT_END
-	
-	clr r16
-	NOT_END:
-		sts ROW_POS, r16
-		
-	ld r16, X++
-	sts SEND_BYTE, r16
-	
-	ld r16, X++
-	sts SEND_BYTE +1, r16
-	
-	ld r16, X
-	sts SEND_BYTE +2, r16 	
-	
+		brne NEXT_POS_LOOP
 	ret
+
+
+INDEX_RESET:
+	ldi r16, 0x01
+	sts INDEX, r16
+	ret
+
 
 LOAD_DATA:
 ;//Loads next byte in SEND_BYTES into send buffer (SEND_BUFF)
@@ -135,13 +160,13 @@ PULL_LATCH:
 
 MEMORY_WRITE:
 ;//Writes to ROWS in sram
-	
 	ldi XH, high(ROWS)
 	ldi XL, low(ROWS)
 
+	ldi r16, 0xFF
+	st X, r16
 
-
-
+	ret
 
 
 
