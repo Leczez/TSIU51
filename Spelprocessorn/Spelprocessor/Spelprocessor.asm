@@ -188,14 +188,12 @@ Usart_Init:
 	ldi r16, (1<<URSEL)|(3<<UCSZ0)
 	out UCSRC, r16
 	
-
 	sei
-Main:
-	
+
+Main:	
 	rcall Player_Input;
 	rcall Delay
 	rjmp Main
-
 
 SendByte:
 	; Se sida 144 i databladet
@@ -212,16 +210,16 @@ SendByte:
 Send_Player_Data:
 	
 	ldi r16, $FF
-	rcall SendByte
+	rcall SendByte		; Start of message
 
 	mov r16, r17
-	rcall SendByte
+	rcall SendByte		; message type: 0 if player selects, 1 if player 1 selects
 
 	mov r16, r18
-	rcall SendByte
+	rcall SendByte		; X-value
 
 	mov r16, r19
-	rcall SendByte
+	rcall SendByte		; Y-value
 
 	ret
 
@@ -246,14 +244,11 @@ Player2:
 	lds r19, P2Y
 	rcall Send_Player_Data
 Input_done:
-
 	pop r19
 	pop r18
 	pop r17
 	pop r16
 	ret
-
-
 
 
 DELAY:
@@ -282,7 +277,7 @@ Calculate_Pos:
 	adc XH,r17
 	ret
 
-//Player 1
+//Player 1 joystick push button interrupt
 Interrupt0:
 	push r16
 	push r17
@@ -310,7 +305,7 @@ P1_DONE:
 	pop r16
 	reti
 
-//Player 2
+//Player 2 joystick push button interrupt
 Interrupt1:
 	push r16
 	push r17
