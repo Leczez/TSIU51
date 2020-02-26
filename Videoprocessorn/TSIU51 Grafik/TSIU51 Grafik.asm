@@ -43,7 +43,6 @@ MEMORY_INIT:
 		
 	CLEAR_MEM:
 		clr r16
-		sts ROW_POS
 		clr r17
 		ldi ZH,high(ROWS)
 		ldi ZL,low(ROWS)
@@ -89,7 +88,6 @@ MEMORY_READ:
 	ldi XL,low(ROWS)
 
 	lds r16, ROW_POS 
-	cpi r16, 24
 	clr r17
 
 	NEXT_POS:
@@ -99,6 +97,10 @@ MEMORY_READ:
 		brne NEXT_POS
 	
 	add XL, r16
+	cpi r16, 24
+	brne NOT_END
+	clr r16
+	sts ROW_POS, r16
 		
 	ld r16, X++
 	sts SEND_BYTE, r16
@@ -123,8 +125,6 @@ LOAD_DATA:
 
 PULL_LATCH:
 	sbi PORTB, 4 
-	lpm
-	lpm
 	nop
 	cbi PORTB, 4
 	ret
