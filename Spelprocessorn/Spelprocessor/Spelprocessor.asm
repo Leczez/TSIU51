@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*
  * Spelprocessor.asm
  *
@@ -9,9 +8,12 @@
  // Main filen
 
 .include "Joystick_driver.asm"
+.include "game_logic.asm"
 .equ VMEM_SIZE = 64
-.equ DELAY_HIGH = 1
-.equ DELAY_LOW = 30
+.equ DELAY_HIGH = 60 ;100 blir bra
+.equ DELAY_LOW = 0
+.equ BEEP_LENGTH_H = $0f
+.equ BEEP_LENGTH_L = $00
 
 
 .dseg
@@ -20,6 +22,16 @@ P1X: .byte	1; Player 1 X position
 P1Y: .byte	1; Player 1 Y position
 P2X: .byte	1; Player 2 X position
 P2Y: .byte	1; Player 2 Y position
+
+Start_Byte: .byte 1
+Command_Byte: .byte 1
+Argument1_byte: .byte 1
+Argument2_byte: .byte 1
+
+Player1_Score: .byte 1
+Player2_Score: .byte 1
+
+Win: .byte 1 ; Player1 =  1, Player2 = 2
 
 VMEM: .byte VMEM_SIZE
 
@@ -32,163 +44,62 @@ VMEM: .byte VMEM_SIZE
 	rjmp Interrupt1
 Setup:
 
-ldi r16,HIGH(RAMEND)
-out SPH,r16
-ldi r16,LOW(RAMEND)
-out SPL,r16
+	ldi r16,HIGH(RAMEND)
+	out SPH,r16
+	ldi r16,LOW(RAMEND)
+	out SPL,r16
 
 	
 
 Hardware_Init:
 
 	rcall Joystick_Init
-	ldi r16,(1<<ISC11)|(1<<ISC10)|(1<<ISC01)|(1<<ISC00)
+	ldi r16,(1<<ISC11)|(0<<ISC10)|(1<<ISC01)|(0<<ISC00)
 	out MCUCR,r16
 	ldi r16,(1<<INT0)|(1<<INT1)
 	out GICR,r16
 
-	sei
-Main:
-	
-	rcall Player_Input;
-	rcall Delay
-	rjmp Main
+	ldi r16,0b11100000
+	out DDRD,r16
+	ldi r16,0b00011111
+	out PORTD,r16
 
-//Player 1 = t 0, Player 2 = t 1
-Player_Input:
-	brts Player2	
-	rcall Input_P1
-	rjmp Input_done
-Player2:
-	rcall Input_P2
-Input_done:
-	ret
-
-
-
-
-DELAY:
-	push r24
-	push r25
-	ldi r25,DELAY_HIGH
-	ldi r24,DELAY_LOW
-
-DELAY2:
-	sbiw r24,1
-	brne DELAY2
-	pop	r25
-	pop	r24
-	ret
-
-
-//Player 1
-Interrupt0:
-	brts P1_DONE
-	rcall Check_for_valid_choice_P1
-	rcall Check_for_end_of_game
-P1_DONE:
-
-	reti
-
-//Player 2
-Interrupt1:
-	brtc P2_DONE
-	rcall Check_for_valid_choice_P2
-	rcall Check_for_end_of_game
-P2_DONE:
-
-
-	reti
-
-
-
-
-Check_for_end_of_game:
-
-
-
-
-
-	ret
-
-
-Check_for_valid_choice_P1:
-
-
-
-	ret
-
-Check_for_valid_choice_P2:
-
-
-=======
-/*
- * Spelprocessor.asm
- *
- *  Created: 2020-02-04 09:29:40
- *   Author: lincl896
- */ 
-
- // Main filen
-
-.include "Joystick_driver.asm"
-.equ VMEM_SIZE = 64
-.equ DELAY_HIGH = 1
-.equ DELAY_LOW = 30
-
-
-.dseg
-.org SRAM_START
-P1X: .byte	1; Player 1 X position
-P1Y: .byte	1; Player 1 Y position
-P2X: .byte	1; Player 2 X position
-P2Y: .byte	1; Player 2 Y position
-
-VMEM: .byte VMEM_SIZE
-
-.cseg
-.org $0000
-	rjmp Setup
-.org INT0addr
-	rjmp Interrupt0
-.org INT1addr
-	rjmp Interrupt1
-Setup:
-
-ldi r16, HIGH(RAMEND)
-out SPH, r16
-ldi r16, LOW(RAMEND)
-out SPL, r16
-
-	
-
-Hardware_Init:
-
-	rcall Joystick_Init
-	ldi r16, (1<<ISC11)|(0<<ISC10)|(1<<ISC01)|(0<<ISC00)
-	out MCUCR, r16
-	ldi r16, (1<<INT0)|(1<<INT1)
-	out GICR, r16
-
-	ldi r16, $FF
-	out PORTD, r16
+	ldi r16,0b00000001
+	out DDRB,r16
 
 Usart_Init:
 	; Se sida 143 i databladet
 	
 	; Set baud rate
-	out UBRRH, r17
-	out UBRRL, r16
+	clr r17
+	ldi r16,$0c
+	out UBRRH,r17
+	out UBRRL,r16
 	
 	; Enable receiver and transmitter
-	ldi r16, (1<<TXEN)
-	out UCSRB, r16
+	ldi r16,(1<<TXEN)
+	out UCSRB,r16
+
+	ldi r16,(1<<U2X)
+	out UCSRA,r16
+
 	
 	; Set frame format: 8data, 1stop bit
-	ldi r16, (1<<URSEL)|(3<<UCSZ0)
-	out UCSRC, r16
+	ldi r16,(1<<URSEL)|(3<<UCSZ0)
+	out UCSRC,r16
 	
 	sei
+
+SRAM_Init:
+	; start byte config
+	ldi r16,$ff
+	sts Start_Byte,r16
+	clr r16
+	sts Player1_Score,r16
+	sts Player2_Score,r16
+	sts Win,r16
+	; Clear board
+	rcall Clear_Board
 
 Main:	
 	rcall Player_Input;
@@ -199,69 +110,68 @@ SendByte:
 	; Se sida 144 i databladet
 	
 	; Wait for empty transmit buffer
-	sbis UCSRA, UDRE
+	sbis UCSRA,UDRE
 	rjmp SendByte
 	
 	; Put data (r16) into buffer, sends the data
-	out UDR, r16
+	out UDR,r16
 	
 	ret
 
-Send_Player_Data:
-	
-	ldi r16, $FF
+Send_Data:
+	push r16
+	lds r16,Start_Byte
 	rcall SendByte		; Start of message
 
-	mov r16, r17
+	lds r16,Command_Byte
 	rcall SendByte		; message type: 0 if player selects, 1 if player 1 selects
 
-	mov r16, r18
+	lds r16,Argument1_Byte
 	rcall SendByte		; X-value
 
-	mov r16, r19
+	lds r16,Argument2_Byte
 	rcall SendByte		; Y-value
-
+	pop r16
 	ret
 
 //Player 1 = t 0, Player 2 = t 1
 Player_Input:
-	push r16
+	cli
 	push r17
-	push r18
-	push r19
+	brts Player2
+Player1:
+	ldi r16,0b11000000
+	out PORTA,r16
+	ldi r16,0b11111111
+	out PORTD,r16	
 
-	brts Player2	
 	rcall Input_P1
-	clr r17
-	lds r18, P1X
-	lds r19, P1Y
-	rcall Send_Player_Data
+	ldi r17,$00
+	rcall Send_Player_Choice
+	rcall Send_Data
 	rjmp Input_done
 Player2:
+	ldi r16,0b01111111
+	out PORTD,r16
+	ldi r16,0b11100000
+	out PORTA,r16	
 	rcall Input_P2
-	ldi r17, $01
-	lds r18, P2X
-	lds r19, P2Y
-	rcall Send_Player_Data
+	ldi r17,$01
+	rcall Send_Player_Choice
+	rcall Send_Data
 Input_done:
-	pop r19
-	pop r18
 	pop r17
-	pop r16
+	sei
 	ret
 
 
 DELAY:
-	push r24
-	push r25
 	ldi r25,DELAY_HIGH
 	ldi r24,DELAY_LOW
 
 DELAY2:
 	sbiw r24,1
 	brne DELAY2
-	pop	r25
-	pop	r24
 	ret
 
 Load_X_Pointer:
@@ -281,26 +191,28 @@ Calculate_Pos:
 Interrupt0:
 	push r16
 	push r17
-	push r18
 
 	brts P1_DONE
-	lds r16, P1X
-	lds r17, P1Y
+	lds r16,P1X
+	lds r17,P1Y
 
 	rcall Load_X_Pointer
 	rcall Calculate_Pos
 
-	ld r18,X
-	cpi r18,1
+	ld r17,X
+	cpi r17,1
 	breq P1_DONE
-	cpi r18,2
+	cpi r17,2
 	breq P1_DONE
+	rcall BEEP
 	ldi r16,1
 	st X,r16
+	ldi r17,2
+	rcall Send_Player_Choice
 	rcall Check_for_end_of_game
+	set
 P1_DONE:
 	
-	pop r18
 	pop r17
 	pop r16
 	reti
@@ -310,49 +222,74 @@ Interrupt1:
 	push r16
 	push r17
 	brtc P2_DONE
-	lds r16, P2X
-	lds r17, P2Y
-
+	lds r16,P2X
+	lds r17,P2Y
+	
 	rcall Load_X_Pointer
 	rcall CALCULATE_POS
 
-	ld r18,X
-	cpi r18,1
+	ld r17,X
+	cpi r17,1
 	breq P2_DONE
-	cpi r18,2
+	cpi r17,2
 	breq P2_DONE
-	ldi r16,2
+	rcall BEEP
+	ldi r17,2
 	st X,r16
+	ldi r17,3
+	rcall Send_Player_Choice
+	rcall Send_Data
 	rcall Check_for_end_of_game
+	clt
 P2_DONE:
-
+	
 	pop r17
 	pop r16
 	reti
 
+Send_Player_Choice:
+	sts Command_Byte,r17
+	brts Send_Player_2
+Send_Player_1:
 
+	lds r17,P1X
+	sts Argument1_Byte,r17
+	lds r17,P1Y
+	sts Argument2_Byte,r17
+	rjmp Send_Done
+Send_Player_2:
+	
+	lds r17,P2X
+	sts Argument1_Byte,r17
+	lds r17,P2Y
+	sts Argument2_Byte,r17
 
-
-Check_for_end_of_game:
-
-
-
-
+Send_Done:
 
 	ret
-<<<<<<< HEAD
-
-
-Check_for_valid_choice_P1:
 
 
 
+
+BEEP:
+	push r16
+	push r17
+	in r17,SREG
+
+	ldi r16,0b00000001
+	out PORTB,r16
+	push r24
+	push r25
+	ldi r24,BEEP_LENGTH_L
+	ldi r25,BEEP_LENGTH_H
+	rcall DELAY2
+	pop r25
+	pop r24
+
+BEEP_DONE:
+	ldi r16,0b00000000
+	out PORTB,r16
+	out SREG,r17
+	pop r17
+	pop r16
 	ret
-
-Check_for_valid_choice_P2:
-
-
->>>>>>> 82ab1e21649c66822169fd5c3de2965e622438a5
-	ret
-=======
->>>>>>> 98461688a73e1aacc14604b5f6f05ae05c0497bf
