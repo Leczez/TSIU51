@@ -35,7 +35,7 @@ START:
 	call INIT
 
 MEMORY_INIT:
-	ldi r16, 0b00000001
+	ldi r16, 0b11111110
 	sts INDEX, r16
 
 	clr r16
@@ -51,23 +51,29 @@ MEMORY_INIT:
 			st Z+,r16
 			cpi r17, 24
 			brne CLR_LOOP
-			
 
+		ldi ZH, high(SEND_BYTE)
+		ldi ZL, low(SEND_BYTE)
 
-RESET_PTR:
-	rcall PULL_LATCH
-	rcall MEMORY_WRITE
-	rcall MEMORY_READ
-	ldi ZH, high(SEND_BYTE)
-	ldi ZL, low(SEND_BYTE)
-	clr r16
-	sts LOOP, r16
+;////////////////////
 
 MAIN:
+	rcall MEMORY_WRITE
+	rcall MEMORY_READ
+	rcall SEND
+
+	rcall INDEX_SHIFT
+
+	rjmp MAIN
+
+;///////////////////////////
+
+
+SEND:
 ;//Sends byte to spi and calls LOAD_DATA 4x, then resets SEND_BYTE pointer
 	lds r16, LOOP
 	cpi r16, 0x04
-	breq RESET_PTR ;gör till subrutin??
+	breq RESET_PTR 
 	rcall LOAD_DATA
 	lds r16, SEND_BUFF
 	out SPDR, r16 ;SEND DATA
@@ -76,36 +82,32 @@ MAIN:
 	;//Checks if shifting of byte to display is done
 		sbis SPSR,SPIF 
 		rjmp WAIT
-		rjmp MAIN
+		rjmp SEND
 
+	RESET_PTR:
+		rcall PULL_LATCH
+		ldi ZH, high(SEND_BYTE)
+		ldi ZL, low(SEND_BYTE)
+		clr r16
+		sts LOOP, r16
+	
+	ret
 
 
 
 
 MEMORY_READ:
-;//Reads ROWS and INDEX in sram and stores in right order in SEND_BYTE
-	lds r16, INDEX
-	cpi r16, 0x80
-	brne INDEX_VALID
-	rcall INDEX_RESET
-
-INDEX_VALID:
-	lsl r16
-	com r16
-	sts SEND_BYTE+3, r16
-	com r16
-	sts INDEX, r16
-
+;//Reads ROWS in sram and stores in right order in SEND_BYTE
 	ldi XH,high(ROWS)
 	ldi XL,low(ROWS)
 
 	lds r16, ROW_POS 
-	
-	JMP_POS:
+	cpi r16, 24
+	brne ADD_POS
+	clr r16
+
+	ADD_POS:
 		add XL, r16
-		cpi r16, 21	;End of ROWS check
-		brne NOT_END
-		clr r16
 		
 		NOT_END:
 			ld r18, X++
@@ -134,9 +136,17 @@ NEXT_POS:
 	ret
 
 
-INDEX_RESET:
-	ldi r16, 0x01
+INDEX_SHIFT:
+	lds r16, INDEX
+	cpi r16, 0x7f
+	breq NO_SET_CARRY
+	sec
+	NO_SET_CARRY:
+	rol r16
 	sts INDEX, r16
+	sts SEND_BYTE + 3, r16
+
+	
 	ret
 
 
@@ -154,6 +164,8 @@ LOAD_DATA:
 PULL_LATCH:
 	sbi PORTB, 4 
 	nop
+	lpm
+	lpm
 	cbi PORTB, 4
 	ret
 
