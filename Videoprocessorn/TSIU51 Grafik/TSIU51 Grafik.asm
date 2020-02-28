@@ -6,7 +6,8 @@
  *  Created: 2020-02-21 09:47:27
  *   Author: linny471
  */ 
-
+.def X_POS = r19
+.def Y_POS = r20
 
 .org 0x00
 	jmp START
@@ -23,6 +24,7 @@
 	ROWS: .byte 24 ;rgb,rgb,rgb...
 	INDEX: .byte 1 ;register with shifting 0
 	ROW_POS: .byte 1 ;ROW_POS*3 = next row of rgb
+	STAGE_AREA: .byte 4 ; POS_x,G,B,R
 
 .cseg
 START:
@@ -54,14 +56,29 @@ MEMORY_INIT:
 
 		ldi ZH, high(SEND_BYTE)
 		ldi ZL, low(SEND_BYTE)
+		rcall MEMORY_WRITE
+
+
+
+			ldi r16,0x03
+	sts  STAGE_AREA,r16
+
+	ldi r16,0x00
+	sts STAGE_AREA+1,r16
+	sts STAGE_AREA+2,r16
+
+	ldi r16,0b0010000
+	sts STAGE_AREA+3,r16
+
+	rcall MEMORY_WRITE
+		
 
 ;////////////////////
 
 MAIN:
-	rcall MEMORY_WRITE
+	MAIN_LOOP:
 	rcall MEMORY_READ
 	rcall SEND
-
 	rcall INDEX_SHIFT
 
 	rjmp MAIN
@@ -101,6 +118,7 @@ MEMORY_READ:
 	ldi XH,high(ROWS)
 	ldi XL,low(ROWS)
 
+
 	lds r16, ROW_POS 
 	cpi r16, 24
 	brne ADD_POS
@@ -108,6 +126,7 @@ MEMORY_READ:
 
 	ADD_POS:
 		add XL, r16
+
 		
 		NOT_END:
 			ld r18, X++
@@ -175,8 +194,51 @@ MEMORY_WRITE:
 	ldi XH, high(ROWS)
 	ldi XL, low(ROWS)
 
-	ldi r16, 0xFF
-	st X, r16
+	ldi YH,high(STAGE_AREA)
+	ldi YL,low(STAGE_AREA)
+
+
+	ld X_POS,Y
+	mov r16,X_POS
+	clr r17
+
+	BYTE_LOOP:
+
+		cp r17,r16
+		breq EXIT_BYTE
+
+		inc X_POS
+		inc X_POS
+		inc r17
+
+		cp r17,r16
+		brne BYTE_LOOP
+		
+
+		EXIT_BYTE:
+
+	add XL,X_POS
+
+
+
+
+
+	clr r21
+	clr r22
+	clr r23
+
+	inc YL
+	ld r21,Y++
+	ld r22,Y++
+	ld r23,Y++
+
+	
+	st X++,r21
+	st X++,r22
+	st X++,r23
+	
+
+
 
 	ret
 
@@ -189,5 +251,15 @@ INIT:
 
 	ldi r16,(1<<SPE | 1<<MSTR | 0<<SPIE | 0<<SPR0)
 	out SPCR, r16
+
+	ldi r16,0x00
+	sts  STAGE_AREA,r16
+
+	ldi r16,0x00
+	sts STAGE_AREA+1,r16
+	sts STAGE_AREA+2,r16
+
+	ldi r16,0b0000001
+	sts STAGE_AREA+3,r16
 
 	ret
