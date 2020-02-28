@@ -1,12 +1,13 @@
 
+.org 0x500
 
 UART_INIT:
 	ldi r17, 0x00
-	ldi r16, 0x06
+	ldi r16, 0x0c
 
 ;Set baud rate
-	out UBRH, r17
-	out UBRL, r16
+	out UBRRH, r17
+	out UBRRL, r16
 
 ;Reciever and reciver-interrupt enable
 	ldi r16, (1<<RXEN | 1<<RXCIE)
@@ -57,13 +58,13 @@ NO_ERROR:
 ;STORE
 	st Z++, r16
 	inc r19
-	cpi r19, 0x02
+	cpi r19, 0x03
 	breq DATA_RECEIVED
 
 
 WAIT_NEXT:
 ;WAIT FOR NEXT BYTE
-	sbrs UCSRA, RXC
+	sbis UCSRA,RXC
 	rjmp WAIT_NEXT
 	rjmp READ
 
@@ -75,4 +76,6 @@ DATA_RECEIVED:
 	pop r17
 	pop r18
 	pop r19
+	pop ZL
+	pop ZH
 	reti
