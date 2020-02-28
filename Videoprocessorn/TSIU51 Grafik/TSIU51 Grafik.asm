@@ -1,4 +1,4 @@
-
+.include "UART.asm"
 
 	/*
  * Display.asm
@@ -10,11 +10,16 @@
 .def Y_POS = r20
 
 .org 0x00
-	jmp START
+	rjmp START
 /*
 .org 0x014
-	jmp LOAD_DATA 
+	rjmp LOAD_DATA 
 */
+
+.org 0x016
+	rjmp RECEIVE
+
+
 .dseg
 	.org 0x300
 	SEND_BYTE: .byte 4
@@ -36,7 +41,8 @@ START:
 	ldi r16,low(RAMEND)
 	out SPL,r16	
 
-	call INIT
+	rcall INIT
+	rcall UART_INIT
 
 MEMORY_INIT:
 	ldi r16, 0b11111110
@@ -89,7 +95,7 @@ MAIN:
 
 
 SEND:
-;//Sends byte to spi and calls LOAD_DATA 4x, then resets SEND_BYTE pointer
+;//Sends byte to spi and rcalls LOAD_DATA 4x, then resets SEND_BYTE pointer
 	lds r16, LOOP
 	cpi r16, 0x04
 	breq RESET_PTR 
@@ -266,4 +272,3 @@ INIT:
 
 	ret
 
-.include "UART.asm"
