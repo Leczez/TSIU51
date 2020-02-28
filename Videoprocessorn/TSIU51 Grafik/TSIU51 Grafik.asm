@@ -26,6 +26,8 @@
 	ROW_POS: .byte 1 ;ROW_POS*3 = next row of rgb
 	STAGE_AREA: .byte 4 ; POS_x,G,B,R
 
+	RECEIVED: .byte 4 ;UART bytes
+
 .cseg
 START:
 	ldi r16,high(RAMEND)
@@ -263,3 +265,5 @@ INIT:
 	sts STAGE_AREA+3,r16
 
 	ret
+
+.include "UART.asm"
