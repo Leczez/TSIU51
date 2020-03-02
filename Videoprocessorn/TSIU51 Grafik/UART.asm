@@ -35,8 +35,8 @@ RECEIVE:
 	in r16, SREG
 	push r16
 
-	ldi ZH, high(RECEIVED)
-	ldi ZL, low(RECEIVED)
+	ldi ZH, high(NEXT_INSTRUCTION)
+	ldi ZL, low(NEXT_INSTRUCTION)
 	clr r19
 
 READ:
@@ -50,23 +50,29 @@ READ:
 	breq NO_ERROR
 	;--insert else--
 
-NO_ERROR:
-;FILTER STOP-BIT
-	lsr r17
-	andi r17, 0x01
+	NO_ERROR:
+	;FILTER STOP-BIT
+		lsr r17
+		andi r17, 0x01
 
-;STORE
-	st Z++, r16
+STORE:
+;CHECK START BYTE AND STORE
+	cpi r16, 0xff
+	brne STORE_INSTRUCT
+
+	ldi ZH, high(NEXT_INSTRUCTION)
+	ldi ZL, low(NEXT_INSTRUCTION)
+	ldi r19, ZL
 	inc r19
-	cpi r19, 0x03
-	breq DATA_RECEIVED
+	sts CURR_INS_BYTE, r19
 
+	STORE_INSTRUCT:
+		lds r19, CURR_INS_BYTE
+		ldi ZL, r19
+		st Z+, r16
+		ldi r19, ZL
+		sts CURR_INS_BYTE, r19
 
-WAIT_NEXT:
-;WAIT FOR NEXT BYTE
-	sbis UCSRA,RXC
-	rjmp WAIT_NEXT
-	rjmp READ
 
 DATA_RECEIVED:
 ;ALL BYTES READ, EXIT

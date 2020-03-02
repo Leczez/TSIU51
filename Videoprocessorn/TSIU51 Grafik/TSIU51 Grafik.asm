@@ -31,7 +31,8 @@
 	ROW_POS: .byte 1 ;ROW_POS*3 = next row of rgb
 	STAGE_AREA: .byte 4 ; POS_x,G,B,R
 
-	RECEIVED: .byte 4 ;UART bytes
+	NEXT_INSTRUCTION: .byte 3 ;UART bytes
+	CURR_INS_BYTE: .byte 1 ;keeps track of bytes in instruction
 
 .cseg
 START:
@@ -68,7 +69,7 @@ MEMORY_INIT:
 
 
 
-			ldi r16,0x03
+	ldi r16,0x03
 	sts  STAGE_AREA,r16
 
 	ldi r16,0x00
@@ -84,10 +85,10 @@ MEMORY_INIT:
 ;////////////////////
 
 MAIN:
-	MAIN_LOOP:
 	rcall MEMORY_READ
 	rcall SEND
 	rcall INDEX_SHIFT
+	rcall CHECK_NEXT_INS
 
 	rjmp MAIN
 
@@ -173,7 +174,13 @@ INDEX_SHIFT:
 	sts INDEX, r16
 	sts SEND_BYTE + 3, r16
 
-	
+	ret
+
+
+
+CHECK_NEXT_INS:
+	lds r16, CURR_INS_BYTE
+
 	ret
 
 
