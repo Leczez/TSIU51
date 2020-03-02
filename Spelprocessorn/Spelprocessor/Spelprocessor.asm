@@ -15,7 +15,6 @@
 .equ BEEP_LENGTH_H = $0f
 .equ BEEP_LENGTH_L = $00
 
-
 .dseg
 .org SRAM_START
 P1X: .byte	1; Player 1 X position
@@ -147,19 +146,18 @@ Player1:
 
 	rcall Input_P1
 	ldi r17,$00
-	rcall Send_Player_Choice
-	rcall Send_Data
 	rjmp Input_done
 Player2:
 	ldi r16,0b01111111
 	out PORTD,r16
 	ldi r16,0b11100000
 	out PORTA,r16	
+
 	rcall Input_P2
 	ldi r17,$01
+Input_done:
 	rcall Send_Player_Choice
 	rcall Send_Data
-Input_done:
 	pop r17
 	sei
 	ret
@@ -209,6 +207,7 @@ Interrupt0:
 	st X,r16
 	ldi r17,2
 	rcall Send_Player_Choice
+	rcall Send_Data
 	rcall Check_for_end_of_game
 	set
 P1_DONE:
@@ -250,13 +249,14 @@ P2_DONE:
 Send_Player_Choice:
 	sts Command_Byte,r17
 	brts Send_Player_2
-Send_Player_1:
 
+Send_Player_1:
 	lds r17,P1X
 	sts Argument1_Byte,r17
 	lds r17,P1Y
 	sts Argument2_Byte,r17
 	rjmp Send_Done
+
 Send_Player_2:
 	
 	lds r17,P2X

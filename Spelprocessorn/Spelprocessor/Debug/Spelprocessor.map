@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Fri Feb 28 15:50:52 2020
+AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Mon Mar 02 11:24:30 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -652,7 +652,7 @@ DSEG Player2_Score 00000069
 DSEG Command_Byte 00000065
 DSEG Argument1_Byte 00000066
 DSEG Argument2_Byte 00000067
-CSEG Load_X_Pointer 0000005c
+CSEG Load_X_Pointer 0000005a
 CSEG Clear_Loop   00000638
 EQU  VMEM_SIZE    00000040
 CSEG Send_Data    00000031
@@ -661,7 +661,7 @@ CSEG Not_full     0000064b
 CSEG Loop_done    0000064c
 CSEG Horizontal_Player_2 0000065e
 CSEG Horizontal_Player_1 00000656
-CSEG CALCULATE_POS 0000005f
+CSEG CALCULATE_POS 0000005d
 CSEG Right        00000666
 CSEG Left         0000067d
 CSEG Horizontal_Check_Done 00000689
@@ -682,6 +682,30 @@ CSEG Vertical_No_Win 000006d1
 CSEG Vertical_Player_2_Wins 000006cf
 CSEG Vertical_Player_1_Wins 000006cd
 CSEG Vertical_Done 000006d2
+CSEG Right_Diagonal_Check 000006d8
+CSEG Right_Diagonal_Player_2 000006e5
+CSEG Right_Diagonal_Player_1 000006dd
+CSEG Up_Right     000006ed
+CSEG Down_Left    00000704
+CSEG Right_Diagonal_Check_Done 00000711
+CSEG Right_Diagonal_Player1_2 000006f9
+CSEG Right_Diagonal_Player_2_2 000006ff
+CSEG Right_Diagonal_No_Win 00000716
+CSEG Right_Diagonal_Player_2_Wins 00000714
+CSEG Right_Diagonal_Player_1_Wins 00000712
+CSEG Right_Diagonal_Done 00000717
+CSEG Left_Diagonal_Check 0000071d
+CSEG Left_Diagonal_Player_2 0000072a
+CSEG Left_Diagonal_Player_1 00000722
+CSEG Up_Left      00000732
+CSEG Down_Right   00000749
+CSEG Left_Diagonal_Check_Done 00000756
+CSEG Left_Diagonal_Player1_2 0000073e
+CSEG Left_Diagonal_Player_2_2 00000744
+CSEG Left_Diagonal_No_Win 0000075b
+CSEG Left_Diagonal_Player_2_Wins 00000759
+CSEG Left_Diagonal_Player_1_Wins 00000757
+CSEG Left_Diagonal_Done 0000075c
 EQU  DELAY_HIGH   0000003c
 EQU  DELAY_LOW    00000000
 EQU  BEEP_LENGTH_H 0000000f
@@ -689,24 +713,24 @@ EQU  BEEP_LENGTH_L 00000000
 DSEG Start_Byte   00000064
 DSEG VMEM         0000006b
 CSEG Setup        00000005
-CSEG Interrupt0   00000065
-CSEG Interrupt1   0000007d
+CSEG Interrupt0   00000063
+CSEG Interrupt1   0000007b
 CSEG Hardware_Init 00000009
 CSEG Usart_Init   00000014
 CSEG SRAM_Init    0000001f
 CSEG Main         0000002a
 CSEG Player_Input 00000040
-CSEG Delay        00000057
+CSEG Delay        00000055
 CSEG SendByte     0000002d
-CSEG Player2      0000004c
+CSEG Player2      0000004a
 CSEG Player1      00000043
-CSEG Send_Player_Choice 00000096
-CSEG Input_done   00000054
-CSEG DELAY2       00000059
-CSEG P1_DONE      0000007a
-CSEG BEEP         000000ab
-CSEG P2_DONE      00000093
-CSEG Send_Player_2 000000a2
-CSEG Send_Player_1 00000099
-CSEG Send_Done    000000aa
-CSEG BEEP_DONE    000000b7
+CSEG Input_done   00000050
+CSEG Send_Player_Choice 00000094
+CSEG DELAY2       00000057
+CSEG P1_DONE      00000078
+CSEG BEEP         000000a9
+CSEG P2_DONE      00000091
+CSEG Send_Player_2 000000a0
+CSEG Send_Player_1 00000097
+CSEG Send_Done    000000a8
+CSEG BEEP_DONE    000000b5
