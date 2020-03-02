@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Fri Feb 28 15:50:52 2020
+AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Mon Mar 02 10:37:37 2020
 
 [builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include\m16Adef.inc'
 \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm(10): Including file '\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm'
@@ -1383,7 +1383,182 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 0006d4 912f      	pop r18
 0006d5 911f      	pop r17
 0006d6 910f      	pop r16	
-0006d7 9508      .equ VMEM_SIZE = 64
+0006d7 9508      	ret
+                 
+                 
+                 
+                 Right_Diagonal_Check:
+0006d8 930f      	push r16
+0006d9 931f      	push r17
+0006da 932f      	push r18
+0006db d980      	rcall Load_X_Pointer
+0006dc f046      	brts Right_Diagonal_Player_2
+                 Right_Diagonal_Player_1:
+0006dd 9100 0060 	lds r16,P1X
+0006df 9110 0061 	lds r17,P1Y
+0006e1 e021      	ldi r18,1
+0006e2 d97c      	rcall CALCULATE_POS
+0006e3 2711      	clr r17
+0006e4 c008      	rjmp Up_Right
+                 Right_Diagonal_Player_2:
+0006e5 9100 0062 	lds r16,P2X
+0006e7 9110 0063 	lds r17,P2Y
+0006e9 e022      	ldi r18,2
+0006ea d974      	rcall CALCULATE_POS
+0006eb 2711      	clr r17
+0006ec c000      	rjmp Up_Right
+                 
+                 Up_Right:
+0006ed 30b0      	cpi XH,0
+0006ee f0a9      	breq Down_Left
+0006ef 95ba      	dec XH
+0006f0 95a3      	inc XL
+0006f1 910c      	ld r16,X
+0006f2 1702      	cp r16,r18
+0006f3 f481      	brne Down_Left
+0006f4 9513      	inc r17
+                 
+0006f5 3013      	cpi r17,$03
+0006f6 f7b1      	brne Up_Right
+0006f7 3013      	cpi r17,$03
+0006f8 f0c1      	breq Right_Diagonal_Check_Done
+                 	
+                 Right_Diagonal_Player1_2:
+0006f9 9100 0060 	lds r16,P1X
+0006fb 9110 0061 	lds r17,P1Y
+0006fd d961      	rcall CALCULATE_POS
+0006fe c005      	rjmp Down_Left
+                 
+                 Right_Diagonal_Player_2_2:
+                 
+0006ff 9100 0062 	lds r16,P2X
+000701 9110 0063 	lds r17,P2Y
+000703 d95b      	rcall CALCULATE_POS
+                 
+                 Down_Left:
+000704 30b7      	cpi XH,7
+000705 f081      	breq Right_Diagonal_No_Win
+000706 95b3      	inc XH
+000707 95aa      	dec XL
+000708 910c      	ld r16,X
+000709 1702      	cp r16,r18
+00070a f459      	brne Right_Diagonal_No_Win
+00070b 9513      	inc r17
+                 
+00070c 3013      	cpi r17,$03
+00070d f7b1      	brne Down_Left
+00070e 3013      	cpi r17,$03
+00070f f009      	breq Right_Diagonal_Check_Done
+000710 c005      	rjmp Right_Diagonal_No_Win
+                 
+                 Right_Diagonal_Check_Done:
+000711 f016      	brts Right_Diagonal_Player_2_Wins
+                 
+                 Right_Diagonal_Player_1_Wins:
+000712 e001      	ldi r16,$01
+000713 c003      	rjmp Right_Diagonal_Done
+                 
+                 Right_Diagonal_Player_2_Wins:
+000714 e002      	ldi r16,$02
+000715 c001      	rjmp Right_Diagonal_Done
+                 
+                 Right_Diagonal_No_Win:
+000716 2700      	clr r16
+                 
+                 Right_Diagonal_Done:
+000717 9300 006a 	sts Win,r16
+000719 912f      	pop r18
+00071a 911f      	pop r17
+00071b 910f      	pop r16	
+00071c 9508      	ret
+                 
+                 
+                 
+                 Left_Diagonal_Check:
+00071d 930f      	push r16
+00071e 931f      	push r17
+00071f 932f      	push r18
+000720 d93b      	rcall Load_X_Pointer
+000721 f046      	brts Left_Diagonal_Player_2
+                 Left_Diagonal_Player_1:
+000722 9100 0060 	lds r16,P1X
+000724 9110 0061 	lds r17,P1Y
+000726 e021      	ldi r18,1
+000727 d937      	rcall CALCULATE_POS
+000728 2711      	clr r17
+000729 cfc3      	rjmp Up_Right
+                 Left_Diagonal_Player_2:
+00072a 9100 0062 	lds r16,P2X
+00072c 9110 0063 	lds r17,P2Y
+00072e e022      	ldi r18,2
+00072f d92f      	rcall CALCULATE_POS
+000730 2711      	clr r17
+000731 cfbb      	rjmp Up_Right
+                 
+                 Up_Left:
+000732 30b0      	cpi XH,0
+000733 f0a9      	breq Down_Right
+000734 95ba      	dec XH
+000735 95a3      	inc XL
+000736 910c      	ld r16,X
+000737 1702      	cp r16,r18
+000738 f481      	brne Down_Right
+000739 9513      	inc r17
+                 
+00073a 3013      	cpi r17,$03
+00073b f7b1      	brne Up_Left
+00073c 3013      	cpi r17,$03
+00073d f0c1      	breq Left_Diagonal_Check_Done
+                 	
+                 Left_Diagonal_Player1_2:
+00073e 9100 0060 	lds r16,P1X
+000740 9110 0061 	lds r17,P1Y
+000742 d91c      	rcall CALCULATE_POS
+000743 c005      	rjmp Down_Right
+                 
+                 Left_Diagonal_Player_2_2:
+000744 9100 0062 	lds r16,P2X
+000746 9110 0063 	lds r17,P2Y
+000748 d916      	rcall CALCULATE_POS
+                 
+                 Down_Right:
+000749 30b7      	cpi XH,7
+00074a f081      	breq Left_Diagonal_No_Win
+00074b 95b3      	inc XH
+00074c 95aa      	dec XL
+00074d 910c      	ld r16,X
+00074e 1702      	cp r16,r18
+00074f f459      	brne Left_Diagonal_No_Win
+000750 9513      	inc r17
+                 
+000751 3013      	cpi r17,$03
+000752 f7b1      	brne Down_Right
+000753 3013      	cpi r17,$03
+000754 f009      	breq Left_Diagonal_Check_Done
+000755 c005      	rjmp Left_Diagonal_No_Win
+                 
+                 Left_Diagonal_Check_Done:
+000756 f016      	brts Left_Diagonal_Player_2_Wins
+                 
+                 Left_Diagonal_Player_1_Wins:
+000757 e001      	ldi r16,$01
+000758 c003      	rjmp Left_Diagonal_Done
+                 
+                 Left_Diagonal_Player_2_Wins:
+000759 e002      	ldi r16,$02
+00075a c001      	rjmp Left_Diagonal_Done
+                 
+                 Left_Diagonal_No_Win:
+00075b 2700      	clr r16
+                 
+                 Left_Diagonal_Done:
+00075c 9300 006a 	sts Win,r16
+00075e 912f      	pop r18
+00075f 911f      	pop r17
+000760 910f      	pop r16	
+000761 9508      	ret
+                 
+                 .equ VMEM_SIZE = 64
                  .equ DELAY_HIGH = 60 ;100 blir bra
                  .equ DELAY_LOW = 0
                  .equ BEEP_LENGTH_H = $0f
@@ -1685,37 +1860,37 @@ counted separately from r26..r31 here.
 "ATmega16A" register use summary:
 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 r5 :   0 r6 :   0 r7 :   0 
 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 r13:   0 r14:   0 r15:   0 
-r16: 178 r17:  75 r18:  16 r19:   0 r20:   0 r21:   0 r22:   0 r23:   0 
-r24:   5 r25:   4 r26:   6 r27:   6 r28:   0 r29:   0 r30:   1 r31:   1 
-x  :  10 y  :   0 z  :   2 
+r16: 206 r17: 103 r18:  28 r19:   0 r20:   0 r21:   0 r22:   0 r23:   0 
+r24:   5 r25:   4 r26:  10 r27:  14 r28:   0 r29:   0 r30:   1 r31:   1 
+x  :  14 y  :   0 z  :   2 
 Registers used: 11 out of 35 (31.4%)
 
 "ATmega16A" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   1 add   :   1 adiw  :   1 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 break :   0 breq  :  33 brge  :   0 brhc  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :  41 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :  11 brpl  :   0 brsh  :   0 brtc  :   1 brts  :   9 brvc  :   0 
+brne  :  19 brpl  :   0 brsh  :   0 brtc  :   1 brts  :  13 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   0 cbr   :   0 
-clc   :   0 clh   :   0 cli   :   1 cln   :   0 clr   :  11 cls   :   0 
-clt   :   1 clv   :   0 clz   :   0 com   :   0 cp    :   4 cpc   :   0 
-cpi   :  39 cpse  :   0 dec   :   6 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   4 inc   :  14 jmp   :   0 
-ld    :   7 ldd   :   0 ldi   :  46 lds   :  51 lpm   :   0 lsl   :   3 
+clc   :   0 clh   :   0 cli   :   1 cln   :   0 clr   :  17 cls   :   0 
+clt   :   1 clv   :   0 clz   :   0 com   :   0 cp    :   8 cpc   :   0 
+cpi   :  51 cpse  :   0 dec   :  10 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   4 inc   :  22 jmp   :   0 
+ld    :  11 ldd   :   0 ldi   :  54 lds   :  67 lpm   :   0 lsl   :   3 
 lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :  23 pop   :  21 
-push  :  21 rcall :  50 ret   :  20 reti  :   2 rjmp  :  35 rol   :   0 
+neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :  23 pop   :  27 
+push  :  27 rcall :  60 ret   :  22 reti  :   2 rjmp  :  47 rol   :   0 
 ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   1 sbis  :   1 
 sbiw  :   1 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   2 sen   :   0 ser   :   0 ses   :   0 set   :   1 sev   :   0 
-sez   :   0 sleep :   0 spm   :   0 st    :   4 std   :   0 sts   :  29 
+sez   :   0 sleep :   0 spm   :   0 st    :   4 std   :   0 sts   :  31 
 sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
 Instructions used: 33 out of 113 (29.2%)
 
 "ATmega16A" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000db0   1070      0   1070   16384   6.5%
+[.cseg] 0x000000 0x000ec4   1346      0   1346   16384   8.2%
 [.dseg] 0x000060 0x0000ab      0     75     75    1024   7.3%
 [.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 

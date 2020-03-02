@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Fri Feb 28 15:50:52 2020
+AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Mon Mar 02 10:37:37 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -682,6 +682,30 @@ CSEG Vertical_No_Win 000006d1
 CSEG Vertical_Player_2_Wins 000006cf
 CSEG Vertical_Player_1_Wins 000006cd
 CSEG Vertical_Done 000006d2
+CSEG Right_Diagonal_Check 000006d8
+CSEG Right_Diagonal_Player_2 000006e5
+CSEG Right_Diagonal_Player_1 000006dd
+CSEG Up_Right     000006ed
+CSEG Down_Left    00000704
+CSEG Right_Diagonal_Check_Done 00000711
+CSEG Right_Diagonal_Player1_2 000006f9
+CSEG Right_Diagonal_Player_2_2 000006ff
+CSEG Right_Diagonal_No_Win 00000716
+CSEG Right_Diagonal_Player_2_Wins 00000714
+CSEG Right_Diagonal_Player_1_Wins 00000712
+CSEG Right_Diagonal_Done 00000717
+CSEG Left_Diagonal_Check 0000071d
+CSEG Left_Diagonal_Player_2 0000072a
+CSEG Left_Diagonal_Player_1 00000722
+CSEG Up_Left      00000732
+CSEG Down_Right   00000749
+CSEG Left_Diagonal_Check_Done 00000756
+CSEG Left_Diagonal_Player1_2 0000073e
+CSEG Left_Diagonal_Player_2_2 00000744
+CSEG Left_Diagonal_No_Win 0000075b
+CSEG Left_Diagonal_Player_2_Wins 00000759
+CSEG Left_Diagonal_Player_1_Wins 00000757
+CSEG Left_Diagonal_Done 0000075c
 EQU  DELAY_HIGH   0000003c
 EQU  DELAY_LOW    00000000
 EQU  BEEP_LENGTH_H 0000000f
