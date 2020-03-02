@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Mon Mar 02 10:37:37 2020
+AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Mon Mar 02 11:24:30 2020
 
 [builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include\m16Adef.inc'
 \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm(10): Including file '\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm'
@@ -1108,8 +1108,9 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  
                  Y2_DONE:	
                  	
+000583 9508      	ret
                  .include "game_logic.asm"
-000583 9508      
+                 
                  
                  
                  
@@ -1157,6 +1158,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  
                  Clear_Board:
 000620 e014      	ldi r17,$04
+                 	
 000621 9310 0065 	sts Command_Byte,r17
 000623 9110 0068 	lds r17,Player1_Score
 000625 9310 0066 	sts Argument1_Byte,r17
@@ -1172,7 +1174,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 000634 9300 006a 	sts Win,r16
                  
 000636 2711      	clr r17
-000637 da24      	rcall Load_X_Pointer
+000637 da22      	rcall Load_X_Pointer
                  Clear_Loop:
 000638 930d      	st X+,r16
 000639 9513      	inc r17
@@ -1192,7 +1194,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 00063f 932f      	push r18 ;loop count
 000640 b7fe      	in ZH,SPH
 000641 b7ed      	in ZL,SPL
-000642 da19      	rcall Load_X_Pointer
+000642 da17      	rcall Load_X_Pointer
                  	; 1 if the map is full, 0 if there is still space.
                  Loop:
 000643 910d      	ld r16,X+
@@ -1220,20 +1222,20 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 000651 930f      	push r16
 000652 931f      	push r17
 000653 932f      	push r18
-000654 da07      	rcall Load_X_Pointer
+000654 da05      	rcall Load_X_Pointer
 000655 f046      	brts Horizontal_Player_2
                  Horizontal_Player_1:
 000656 9100 0060 	lds r16,P1X
 000658 9110 0061 	lds r17,P1Y
 00065a e021      	ldi r18,1
-00065b da03      	rcall CALCULATE_POS
+00065b da01      	rcall CALCULATE_POS
 00065c 2711      	clr r17
 00065d c008      	rjmp Right
                  Horizontal_Player_2:
 00065e 9100 0062 	lds r16,P2X
 000660 9110 0063 	lds r17,P2Y
 000662 e022      	ldi r18,2
-000663 d9fb      	rcall CALCULATE_POS
+000663 d9f9      	rcall CALCULATE_POS
 000664 2711      	clr r17
 000665 c000      	rjmp Right
                  
@@ -1254,14 +1256,14 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  Horizontal_Player1_2:
 000672 9100 0060 	lds r16,P1X
 000674 9110 0061 	lds r17,P1Y
-000676 d9e8      	rcall CALCULATE_POS
+000676 d9e6      	rcall CALCULATE_POS
 000677 c005      	rjmp Left
                  
                  Horizontal_Player_2_2:
                  
 000678 9100 0062 	lds r16,P2X
 00067a 9110 0063 	lds r17,P2Y
-00067c d9e2      	rcall CALCULATE_POS
+00067c d9e0      	rcall CALCULATE_POS
                  Left:
 00067d 30a0      	cpi XL,0
 00067e f079      	breq Horizontal_No_Win
@@ -1306,20 +1308,20 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 000695 930f      	push r16
 000696 931f      	push r17
 000697 932f      	push r18
-000698 d9c3      	rcall Load_X_Pointer
+000698 d9c1      	rcall Load_X_Pointer
 000699 f046      	brts Vertical_Player_2
                  Vertical_Player_1:
 00069a 9100 0060 	lds r16,P1X
 00069c 9110 0061 	lds r17,P1Y
 00069e e021      	ldi r18,1
-00069f d9bf      	rcall CALCULATE_POS
+00069f d9bd      	rcall CALCULATE_POS
 0006a0 2711      	clr r17
 0006a1 c008      	rjmp Up
                  Vertical_Player_2:
 0006a2 9100 0062 	lds r16,P2X
 0006a4 9110 0063 	lds r17,P2Y
 0006a6 e022      	ldi r18,2
-0006a7 d9b7      	rcall CALCULATE_POS
+0006a7 d9b5      	rcall CALCULATE_POS
 0006a8 2711      	clr r17
 0006a9 c000      	rjmp Up
                  
@@ -1340,14 +1342,14 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  Vertical_Player1_2:
 0006b5 9100 0060 	lds r16,P1X
 0006b7 9110 0061 	lds r17,P1Y
-0006b9 d9a5      	rcall CALCULATE_POS
+0006b9 d9a3      	rcall CALCULATE_POS
 0006ba c005      	rjmp Down
                  
                  Vertical_Player_2_2:
                  
 0006bb 9100 0062 	lds r16,P2X
 0006bd 9110 0063 	lds r17,P2Y
-0006bf d99f      	rcall CALCULATE_POS
+0006bf d99d      	rcall CALCULATE_POS
                  
                  Down:
 0006c0 30b7      	cpi XH,7
@@ -1391,20 +1393,20 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 0006d8 930f      	push r16
 0006d9 931f      	push r17
 0006da 932f      	push r18
-0006db d980      	rcall Load_X_Pointer
+0006db d97e      	rcall Load_X_Pointer
 0006dc f046      	brts Right_Diagonal_Player_2
                  Right_Diagonal_Player_1:
 0006dd 9100 0060 	lds r16,P1X
 0006df 9110 0061 	lds r17,P1Y
 0006e1 e021      	ldi r18,1
-0006e2 d97c      	rcall CALCULATE_POS
+0006e2 d97a      	rcall CALCULATE_POS
 0006e3 2711      	clr r17
 0006e4 c008      	rjmp Up_Right
                  Right_Diagonal_Player_2:
 0006e5 9100 0062 	lds r16,P2X
 0006e7 9110 0063 	lds r17,P2Y
 0006e9 e022      	ldi r18,2
-0006ea d974      	rcall CALCULATE_POS
+0006ea d972      	rcall CALCULATE_POS
 0006eb 2711      	clr r17
 0006ec c000      	rjmp Up_Right
                  
@@ -1426,14 +1428,14 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  Right_Diagonal_Player1_2:
 0006f9 9100 0060 	lds r16,P1X
 0006fb 9110 0061 	lds r17,P1Y
-0006fd d961      	rcall CALCULATE_POS
+0006fd d95f      	rcall CALCULATE_POS
 0006fe c005      	rjmp Down_Left
                  
                  Right_Diagonal_Player_2_2:
                  
 0006ff 9100 0062 	lds r16,P2X
 000701 9110 0063 	lds r17,P2Y
-000703 d95b      	rcall CALCULATE_POS
+000703 d959      	rcall CALCULATE_POS
                  
                  Down_Left:
 000704 30b7      	cpi XH,7
@@ -1478,20 +1480,20 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 00071d 930f      	push r16
 00071e 931f      	push r17
 00071f 932f      	push r18
-000720 d93b      	rcall Load_X_Pointer
+000720 d939      	rcall Load_X_Pointer
 000721 f046      	brts Left_Diagonal_Player_2
                  Left_Diagonal_Player_1:
 000722 9100 0060 	lds r16,P1X
 000724 9110 0061 	lds r17,P1Y
 000726 e021      	ldi r18,1
-000727 d937      	rcall CALCULATE_POS
+000727 d935      	rcall CALCULATE_POS
 000728 2711      	clr r17
 000729 cfc3      	rjmp Up_Right
                  Left_Diagonal_Player_2:
 00072a 9100 0062 	lds r16,P2X
 00072c 9110 0063 	lds r17,P2Y
 00072e e022      	ldi r18,2
-00072f d92f      	rcall CALCULATE_POS
+00072f d92d      	rcall CALCULATE_POS
 000730 2711      	clr r17
 000731 cfbb      	rjmp Up_Right
                  
@@ -1513,13 +1515,13 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  Left_Diagonal_Player1_2:
 00073e 9100 0060 	lds r16,P1X
 000740 9110 0061 	lds r17,P1Y
-000742 d91c      	rcall CALCULATE_POS
+000742 d91a      	rcall CALCULATE_POS
 000743 c005      	rjmp Down_Right
                  
                  Left_Diagonal_Player_2_2:
 000744 9100 0062 	lds r16,P2X
 000746 9110 0063 	lds r17,P2Y
-000748 d916      	rcall CALCULATE_POS
+000748 d914      	rcall CALCULATE_POS
                  
                  Down_Right:
 000749 30b7      	cpi XH,7
@@ -1564,7 +1566,6 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  .equ BEEP_LENGTH_H = $0f
                  .equ BEEP_LENGTH_L = $00
                  
-                 
                  .dseg
                  .org SRAM_START
 000060           P1X: .byte	1; Player 1 X position
@@ -1588,9 +1589,9 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  .org $0000
 000000 c004      	rjmp Setup
                  .org INT0addr
-000002 c062      	rjmp Interrupt0
+000002 c060      	rjmp Interrupt0
                  .org INT1addr
-000004 c078      	rjmp Interrupt1
+000004 c076      	rjmp Interrupt1
                  Setup:
                  
 000005 e004      	ldi r16,HIGH(RAMEND)
@@ -1652,7 +1653,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  
                  Main:	
 00002a d015      	rcall Player_Input;
-00002b d02b      	rcall Delay
+00002b d029      	rcall Delay
 00002c cffd      	rjmp Main
                  
                  SendByte:
@@ -1687,7 +1688,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  Player_Input:
 000040 94f8      	cli
 000041 931f      	push r17
-000042 f04e      	brts Player2
+000042 f03e      	brts Player2
                  Player1:
 000043 ec00      	ldi r16,0b11000000
 000044 bb0b      	out PORTA,r16
@@ -1696,151 +1697,149 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  
 000047 d4c2      	rcall Input_P1
 000048 e010      	ldi r17,$00
-000049 d04c      	rcall Send_Player_Choice
-00004a dfe6      	rcall Send_Data
-00004b c008      	rjmp Input_done
+000049 c006      	rjmp Input_done
                  Player2:
-00004c e70f      	ldi r16,0b01111111
-00004d bb02      	out PORTD,r16
-00004e ee00      	ldi r16,0b11100000
-00004f bb0b      	out PORTA,r16	
-000050 d4c2      	rcall Input_P2
-000051 e011      	ldi r17,$01
-000052 d043      	rcall Send_Player_Choice
-000053 dfdd      	rcall Send_Data
+00004a e70f      	ldi r16,0b01111111
+00004b bb02      	out PORTD,r16
+00004c ee00      	ldi r16,0b11100000
+00004d bb0b      	out PORTA,r16	
+00004e d4c4      	rcall Input_P2
+00004f e011      	ldi r17,$01
                  Input_done:
-000054 911f      	pop r17
-000055 9478      	sei
-000056 9508      	ret
+000050 d043      	rcall Send_Player_Choice
+000051 dfdf      	rcall Send_Data
+000052 911f      	pop r17
+000053 9478      	sei
+000054 9508      	ret
                  
                  
                  DELAY:
-000057 e39c      	ldi r25,DELAY_HIGH
-000058 e080      	ldi r24,DELAY_LOW
+000055 e39c      	ldi r25,DELAY_HIGH
+000056 e080      	ldi r24,DELAY_LOW
                  
                  DELAY2:
-000059 9701      	sbiw r24,1
-00005a f7f1      	brne DELAY2
-00005b 9508      	ret
+000057 9701      	sbiw r24,1
+000058 f7f1      	brne DELAY2
+000059 9508      	ret
                  
                  Load_X_Pointer:
-00005c e0b0      	ldi XH,HIGH(VMEM)
-00005d e6ab      	ldi XL,LOW(VMEM)
-00005e 9508      	ret
+00005a e0b0      	ldi XH,HIGH(VMEM)
+00005b e6ab      	ldi XL,LOW(VMEM)
+00005c 9508      	ret
                  
                  Calculate_Pos:
-00005f 0fa0      	add XL,r16
+00005d 0fa0      	add XL,r16
+00005e 0f11      	lsl r17
+00005f 0f11      	lsl r17
 000060 0f11      	lsl r17
-000061 0f11      	lsl r17
-000062 0f11      	lsl r17
-000063 1fb1      	adc XH,r17
-000064 9508      	ret
+000061 1fb1      	adc XH,r17
+000062 9508      	ret
                  
                  //Player 1 joystick push button interrupt
                  Interrupt0:
-000065 930f      	push r16
-000066 931f      	push r17
+000063 930f      	push r16
+000064 931f      	push r17
                  
-000067 f096      	brts P1_DONE
-000068 9100 0060 	lds r16,P1X
-00006a 9110 0061 	lds r17,P1Y
+000065 f096      	brts P1_DONE
+000066 9100 0060 	lds r16,P1X
+000068 9110 0061 	lds r17,P1Y
                  
-00006c dfef      	rcall Load_X_Pointer
-00006d dff1      	rcall Calculate_Pos
+00006a dfef      	rcall Load_X_Pointer
+00006b dff1      	rcall Calculate_Pos
                  
-00006e 911c      	ld r17,X
-00006f 3011      	cpi r17,1
-000070 f049      	breq P1_DONE
-000071 3012      	cpi r17,2
-000072 f039      	breq P1_DONE
-000073 d037      	rcall BEEP
-000074 e001      	ldi r16,1
-000075 930c      	st X,r16
-000076 e012      	ldi r17,2
-000077 d01e      	rcall Send_Player_Choice
-000078 d587      	rcall Check_for_end_of_game
-000079 9468      	set
+00006c 911c      	ld r17,X
+00006d 3011      	cpi r17,1
+00006e f049      	breq P1_DONE
+00006f 3012      	cpi r17,2
+000070 f039      	breq P1_DONE
+000071 d037      	rcall BEEP
+000072 e001      	ldi r16,1
+000073 930c      	st X,r16
+000074 e012      	ldi r17,2
+000075 d01e      	rcall Send_Player_Choice
+000076 d589      	rcall Check_for_end_of_game
+000077 9468      	set
                  P1_DONE:
                  	
-00007a 911f      	pop r17
-00007b 910f      	pop r16
-00007c 9518      	reti
+000078 911f      	pop r17
+000079 910f      	pop r16
+00007a 9518      	reti
                  
                  //Player 2 joystick push button interrupt
                  Interrupt1:
-00007d 930f      	push r16
-00007e 931f      	push r17
-00007f f49e      	brtc P2_DONE
-000080 9100 0062 	lds r16,P2X
-000082 9110 0063 	lds r17,P2Y
+00007b 930f      	push r16
+00007c 931f      	push r17
+00007d f49e      	brtc P2_DONE
+00007e 9100 0062 	lds r16,P2X
+000080 9110 0063 	lds r17,P2Y
                  	
-000084 dfd7      	rcall Load_X_Pointer
-000085 dfd9      	rcall CALCULATE_POS
+000082 dfd7      	rcall Load_X_Pointer
+000083 dfd9      	rcall CALCULATE_POS
                  
-000086 911c      	ld r17,X
-000087 3011      	cpi r17,1
-000088 f051      	breq P2_DONE
-000089 3012      	cpi r17,2
-00008a f041      	breq P2_DONE
-00008b d01f      	rcall BEEP
-00008c e012      	ldi r17,2
-00008d 930c      	st X,r16
-00008e e013      	ldi r17,3
-00008f d006      	rcall Send_Player_Choice
-000090 dfa0      	rcall Send_Data
-000091 d56e      	rcall Check_for_end_of_game
-000092 94e8      	clt
+000084 911c      	ld r17,X
+000085 3011      	cpi r17,1
+000086 f051      	breq P2_DONE
+000087 3012      	cpi r17,2
+000088 f041      	breq P2_DONE
+000089 d01f      	rcall BEEP
+00008a e012      	ldi r17,2
+00008b 930c      	st X,r16
+00008c e013      	ldi r17,3
+00008d d006      	rcall Send_Player_Choice
+00008e dfa2      	rcall Send_Data
+00008f d570      	rcall Check_for_end_of_game
+000090 94e8      	clt
                  P2_DONE:
                  	
-000093 911f      	pop r17
-000094 910f      	pop r16
-000095 9518      	reti
+000091 911f      	pop r17
+000092 910f      	pop r16
+000093 9518      	reti
                  
                  Send_Player_Choice:
-000096 9310 0065 	sts Command_Byte,r17
-000098 f04e      	brts Send_Player_2
+000094 9310 0065 	sts Command_Byte,r17
+000096 f04e      	brts Send_Player_2
                  Send_Player_1:
                  
-000099 9110 0060 	lds r17,P1X
-00009b 9310 0066 	sts Argument1_Byte,r17
-00009d 9110 0061 	lds r17,P1Y
-00009f 9310 0067 	sts Argument2_Byte,r17
-0000a1 c008      	rjmp Send_Done
+000097 9110 0060 	lds r17,P1X
+000099 9310 0066 	sts Argument1_Byte,r17
+00009b 9110 0061 	lds r17,P1Y
+00009d 9310 0067 	sts Argument2_Byte,r17
+00009f c008      	rjmp Send_Done
                  Send_Player_2:
                  	
-0000a2 9110 0062 	lds r17,P2X
-0000a4 9310 0066 	sts Argument1_Byte,r17
-0000a6 9110 0063 	lds r17,P2Y
-0000a8 9310 0067 	sts Argument2_Byte,r17
+0000a0 9110 0062 	lds r17,P2X
+0000a2 9310 0066 	sts Argument1_Byte,r17
+0000a4 9110 0063 	lds r17,P2Y
+0000a6 9310 0067 	sts Argument2_Byte,r17
                  
                  Send_Done:
                  
-0000aa 9508      	ret
+0000a8 9508      	ret
                  
                  
                  
                  
                  BEEP:
-0000ab 930f      	push r16
-0000ac 931f      	push r17
-0000ad b71f      	in r17,SREG
+0000a9 930f      	push r16
+0000aa 931f      	push r17
+0000ab b71f      	in r17,SREG
                  
-0000ae e001      	ldi r16,0b00000001
-0000af bb08      	out PORTB,r16
-0000b0 938f      	push r24
-0000b1 939f      	push r25
-0000b2 e080      	ldi r24,BEEP_LENGTH_L
-0000b3 e09f      	ldi r25,BEEP_LENGTH_H
-0000b4 dfa4      	rcall DELAY2
-0000b5 919f      	pop r25
-0000b6 918f      	pop r24
+0000ac e001      	ldi r16,0b00000001
+0000ad bb08      	out PORTB,r16
+0000ae 938f      	push r24
+0000af 939f      	push r25
+0000b0 e080      	ldi r24,BEEP_LENGTH_L
+0000b1 e09f      	ldi r25,BEEP_LENGTH_H
+0000b2 dfa4      	rcall DELAY2
+0000b3 919f      	pop r25
+0000b4 918f      	pop r24
                  
                  BEEP_DONE:
-0000b7 e000      	ldi r16,0b00000000
-0000b8 bb08      	out PORTB,r16
-0000b9 bf1f      	out SREG,r17
-0000ba 911f      	pop r17
-0000bb 910f      	pop r16
+0000b5 e000      	ldi r16,0b00000000
+0000b6 bb08      	out PORTB,r16
+0000b7 bf1f      	out SREG,r17
+0000b8 911f      	pop r17
+0000b9 910f      	pop r16
 
 
 RESOURCE USE INFORMATION
@@ -1879,7 +1878,7 @@ fmulsu:   0 icall :   0 ijmp  :   0 in    :   4 inc   :  22 jmp   :   0
 ld    :  11 ldd   :   0 ldi   :  54 lds   :  67 lpm   :   0 lsl   :   3 
 lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
 neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :  23 pop   :  27 
-push  :  27 rcall :  60 ret   :  22 reti  :   2 rjmp  :  47 rol   :   0 
+push  :  27 rcall :  58 ret   :  22 reti  :   2 rjmp  :  47 rol   :   0 
 ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   1 sbis  :   1 
 sbiw  :   1 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   2 sen   :   0 ser   :   0 ses   :   0 set   :   1 sev   :   0 
@@ -1890,7 +1889,7 @@ Instructions used: 33 out of 113 (29.2%)
 "ATmega16A" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000ec4   1346      0   1346   16384   8.2%
+[.cseg] 0x000000 0x000ec4   1342      0   1342   16384   8.2%
 [.dseg] 0x000060 0x0000ab      0     75     75    1024   7.3%
 [.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 

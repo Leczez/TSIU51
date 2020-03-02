@@ -46,6 +46,7 @@ Player2_Wins:
 
 Clear_Board:
 	ldi r17,$04
+	
 	sts Command_Byte,r17
 	lds r17,Player1_Score
 	sts Argument1_Byte,r17

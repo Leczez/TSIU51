@@ -35,111 +35,111 @@
   <X1_INC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>89</LINE></X1_INC>
   <X1_DEC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>98</LINE></X1_DEC>
   <X1_DONE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>108</LINE></X1_DONE>
-  <P1X><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>21</LINE></P1X>
+  <P1X><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>20</LINE></P1X>
   <X2_INC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>122</LINE></X2_INC>
   <X2_DEC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>131</LINE></X2_DEC>
   <X2_DONE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>141</LINE></X2_DONE>
-  <P2X><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>23</LINE></P2X>
+  <P2X><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>22</LINE></P2X>
   <Y1_INC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>159</LINE></Y1_INC>
   <Y1_DEC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>168</LINE></Y1_DEC>
   <Y1_DONE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>178</LINE></Y1_DONE>
-  <P1Y><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>22</LINE></P1Y>
+  <P1Y><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>21</LINE></P1Y>
   <Y2_INC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>192</LINE></Y2_INC>
   <Y2_DEC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>201</LINE></Y2_DEC>
   <Y2_DONE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm</FILE><LINE>211</LINE></Y2_DONE>
-  <P2Y><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>24</LINE></P2Y>
+  <P2Y><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>23</LINE></P2Y>
   <Check_for_end_of_game><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>10</LINE></Check_for_end_of_game>
-  <Check_for_full_map><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>79</LINE></Check_for_full_map>
+  <Check_for_full_map><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>80</LINE></Check_for_full_map>
   <Clear_Board><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>47</LINE></Clear_Board>
   <Check_Win><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>17</LINE></Check_Win>
-  <Check_Horizontal><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>108</LINE></Check_Horizontal>
-  <Win><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>34</LINE></Win>
+  <Check_Horizontal><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>109</LINE></Check_Horizontal>
+  <Win><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>33</LINE></Win>
   <Check_Winner><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>33</LINE></Check_Winner>
-  <Check_Vertical><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>194</LINE></Check_Vertical>
-  <Check_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>73</LINE></Check_Done>
+  <Check_Vertical><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>195</LINE></Check_Vertical>
+  <Check_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>74</LINE></Check_Done>
   <Player2_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>42</LINE></Player2_Wins>
   <Player1_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>36</LINE></Player1_Wins>
-  <Player1_Score><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>31</LINE></Player1_Score>
-  <Player2_Score><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>32</LINE></Player2_Score>
-  <Command_Byte><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>27</LINE></Command_Byte>
-  <Argument1_Byte><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>28</LINE></Argument1_Byte>
-  <Argument2_Byte><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>29</LINE></Argument2_Byte>
-  <Load_X_Pointer><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>177</LINE></Load_X_Pointer>
-  <Clear_Loop><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>65</LINE></Clear_Loop>
-  <Send_Data><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>121</LINE></Send_Data>
-  <Loop><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>86</LINE></Loop>
-  <Not_full><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>95</LINE></Not_full>
-  <Loop_done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>97</LINE></Loop_done>
-  <Horizontal_Player_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>121</LINE></Horizontal_Player_2>
-  <Horizontal_Player_1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>114</LINE></Horizontal_Player_1>
-  <CALCULATE_POS><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>182</LINE></CALCULATE_POS>
-  <Right><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>129</LINE></Right>
-  <Left><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>154</LINE></Left>
-  <Horizontal_Check_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>169</LINE></Horizontal_Check_Done>
-  <Horizontal_Player_2_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>149</LINE></Horizontal_Player_2_2>
-  <Horizontal_Player1_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>143</LINE></Horizontal_Player1_2>
-  <Horizontal_No_Win><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>180</LINE></Horizontal_No_Win>
-  <Horizontal_Player_2_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>176</LINE></Horizontal_Player_2_Wins>
-  <Horizontal_Player_1_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>172</LINE></Horizontal_Player_1_Wins>
-  <Horizontal_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>183</LINE></Horizontal_Done>
-  <Vertical_Player_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>207</LINE></Vertical_Player_2>
-  <Vertical_Player_1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>200</LINE></Vertical_Player_1>
-  <Up><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>215</LINE></Up>
-  <Down><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>241</LINE></Down>
-  <Vertical_Check_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>256</LINE></Vertical_Check_Done>
-  <Vertical_Player1_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>229</LINE></Vertical_Player1_2>
-  <Vertical_Player_2_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>235</LINE></Vertical_Player_2_2>
-  <Vertical_No_Win><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>267</LINE></Vertical_No_Win>
-  <Vertical_Player_2_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>263</LINE></Vertical_Player_2_Wins>
-  <Vertical_Player_1_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>259</LINE></Vertical_Player_1_Wins>
-  <Vertical_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>270</LINE></Vertical_Done>
-  <Right_Diagonal_Check><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>279</LINE></Right_Diagonal_Check>
-  <Right_Diagonal_Player_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>292</LINE></Right_Diagonal_Player_2>
-  <Right_Diagonal_Player_1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>285</LINE></Right_Diagonal_Player_1>
-  <Up_Right><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>300</LINE></Up_Right>
-  <Down_Left><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>327</LINE></Down_Left>
-  <Right_Diagonal_Check_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>343</LINE></Right_Diagonal_Check_Done>
-  <Right_Diagonal_Player1_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>315</LINE></Right_Diagonal_Player1_2>
-  <Right_Diagonal_Player_2_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>321</LINE></Right_Diagonal_Player_2_2>
-  <Right_Diagonal_No_Win><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>354</LINE></Right_Diagonal_No_Win>
-  <Right_Diagonal_Player_2_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>350</LINE></Right_Diagonal_Player_2_Wins>
-  <Right_Diagonal_Player_1_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>346</LINE></Right_Diagonal_Player_1_Wins>
-  <Right_Diagonal_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>357</LINE></Right_Diagonal_Done>
-  <Left_Diagonal_Check><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>366</LINE></Left_Diagonal_Check>
-  <Left_Diagonal_Player_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>379</LINE></Left_Diagonal_Player_2>
-  <Left_Diagonal_Player_1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>372</LINE></Left_Diagonal_Player_1>
-  <Up_Left><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>387</LINE></Up_Left>
-  <Down_Right><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>413</LINE></Down_Right>
-  <Left_Diagonal_Check_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>429</LINE></Left_Diagonal_Check_Done>
-  <Left_Diagonal_Player1_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>402</LINE></Left_Diagonal_Player1_2>
-  <Left_Diagonal_Player_2_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>408</LINE></Left_Diagonal_Player_2_2>
-  <Left_Diagonal_No_Win><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>440</LINE></Left_Diagonal_No_Win>
-  <Left_Diagonal_Player_2_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>436</LINE></Left_Diagonal_Player_2_Wins>
-  <Left_Diagonal_Player_1_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>432</LINE></Left_Diagonal_Player_1_Wins>
-  <Left_Diagonal_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>443</LINE></Left_Diagonal_Done>
-  <Start_Byte><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>26</LINE></Start_Byte>
-  <VMEM><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>36</LINE></VMEM>
-  <Setup><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>45</LINE></Setup>
-  <Interrupt0><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>191</LINE></Interrupt0>
-  <Interrupt1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>221</LINE></Interrupt1>
-  <Hardware_Init><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>54</LINE></Hardware_Init>
-  <Usart_Init><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>70</LINE></Usart_Init>
-  <SRAM_Init><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>93</LINE></SRAM_Init>
-  <Main><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>104</LINE></Main>
-  <Player_Input><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>138</LINE></Player_Input>
-  <Delay><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>168</LINE></Delay>
-  <SendByte><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>109</LINE></SendByte>
-  <Player2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>153</LINE></Player2>
-  <Player1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>142</LINE></Player1>
-  <Send_Player_Choice><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>250</LINE></Send_Player_Choice>
-  <Input_done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>162</LINE></Input_done>
-  <DELAY2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>172</LINE></DELAY2>
-  <P1_DONE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>214</LINE></P1_DONE>
-  <BEEP><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>274</LINE></BEEP>
-  <P2_DONE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>244</LINE></P2_DONE>
-  <Send_Player_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>260</LINE></Send_Player_2>
-  <Send_Player_1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>253</LINE></Send_Player_1>
-  <Send_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>267</LINE></Send_Done>
-  <BEEP_DONE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>289</LINE></BEEP_DONE>
+  <Player1_Score><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>30</LINE></Player1_Score>
+  <Player2_Score><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>31</LINE></Player2_Score>
+  <Command_Byte><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>26</LINE></Command_Byte>
+  <Argument1_Byte><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>27</LINE></Argument1_Byte>
+  <Argument2_Byte><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>28</LINE></Argument2_Byte>
+  <Load_X_Pointer><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>174</LINE></Load_X_Pointer>
+  <Clear_Loop><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>66</LINE></Clear_Loop>
+  <Send_Data><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>120</LINE></Send_Data>
+  <Loop><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>87</LINE></Loop>
+  <Not_full><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>96</LINE></Not_full>
+  <Loop_done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>98</LINE></Loop_done>
+  <Horizontal_Player_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>122</LINE></Horizontal_Player_2>
+  <Horizontal_Player_1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>115</LINE></Horizontal_Player_1>
+  <CALCULATE_POS><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>179</LINE></CALCULATE_POS>
+  <Right><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>130</LINE></Right>
+  <Left><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>155</LINE></Left>
+  <Horizontal_Check_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>170</LINE></Horizontal_Check_Done>
+  <Horizontal_Player_2_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>150</LINE></Horizontal_Player_2_2>
+  <Horizontal_Player1_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>144</LINE></Horizontal_Player1_2>
+  <Horizontal_No_Win><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>181</LINE></Horizontal_No_Win>
+  <Horizontal_Player_2_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>177</LINE></Horizontal_Player_2_Wins>
+  <Horizontal_Player_1_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>173</LINE></Horizontal_Player_1_Wins>
+  <Horizontal_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>184</LINE></Horizontal_Done>
+  <Vertical_Player_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>208</LINE></Vertical_Player_2>
+  <Vertical_Player_1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>201</LINE></Vertical_Player_1>
+  <Up><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>216</LINE></Up>
+  <Down><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>242</LINE></Down>
+  <Vertical_Check_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>257</LINE></Vertical_Check_Done>
+  <Vertical_Player1_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>230</LINE></Vertical_Player1_2>
+  <Vertical_Player_2_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>236</LINE></Vertical_Player_2_2>
+  <Vertical_No_Win><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>268</LINE></Vertical_No_Win>
+  <Vertical_Player_2_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>264</LINE></Vertical_Player_2_Wins>
+  <Vertical_Player_1_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>260</LINE></Vertical_Player_1_Wins>
+  <Vertical_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>271</LINE></Vertical_Done>
+  <Right_Diagonal_Check><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>280</LINE></Right_Diagonal_Check>
+  <Right_Diagonal_Player_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>293</LINE></Right_Diagonal_Player_2>
+  <Right_Diagonal_Player_1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>286</LINE></Right_Diagonal_Player_1>
+  <Up_Right><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>301</LINE></Up_Right>
+  <Down_Left><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>328</LINE></Down_Left>
+  <Right_Diagonal_Check_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>344</LINE></Right_Diagonal_Check_Done>
+  <Right_Diagonal_Player1_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>316</LINE></Right_Diagonal_Player1_2>
+  <Right_Diagonal_Player_2_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>322</LINE></Right_Diagonal_Player_2_2>
+  <Right_Diagonal_No_Win><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>355</LINE></Right_Diagonal_No_Win>
+  <Right_Diagonal_Player_2_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>351</LINE></Right_Diagonal_Player_2_Wins>
+  <Right_Diagonal_Player_1_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>347</LINE></Right_Diagonal_Player_1_Wins>
+  <Right_Diagonal_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>358</LINE></Right_Diagonal_Done>
+  <Left_Diagonal_Check><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>367</LINE></Left_Diagonal_Check>
+  <Left_Diagonal_Player_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>380</LINE></Left_Diagonal_Player_2>
+  <Left_Diagonal_Player_1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>373</LINE></Left_Diagonal_Player_1>
+  <Up_Left><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>388</LINE></Up_Left>
+  <Down_Right><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>414</LINE></Down_Right>
+  <Left_Diagonal_Check_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>430</LINE></Left_Diagonal_Check_Done>
+  <Left_Diagonal_Player1_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>403</LINE></Left_Diagonal_Player1_2>
+  <Left_Diagonal_Player_2_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>409</LINE></Left_Diagonal_Player_2_2>
+  <Left_Diagonal_No_Win><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>441</LINE></Left_Diagonal_No_Win>
+  <Left_Diagonal_Player_2_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>437</LINE></Left_Diagonal_Player_2_Wins>
+  <Left_Diagonal_Player_1_Wins><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>433</LINE></Left_Diagonal_Player_1_Wins>
+  <Left_Diagonal_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm</FILE><LINE>444</LINE></Left_Diagonal_Done>
+  <Start_Byte><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>25</LINE></Start_Byte>
+  <VMEM><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>35</LINE></VMEM>
+  <Setup><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>44</LINE></Setup>
+  <Interrupt0><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>188</LINE></Interrupt0>
+  <Interrupt1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>218</LINE></Interrupt1>
+  <Hardware_Init><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>53</LINE></Hardware_Init>
+  <Usart_Init><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>69</LINE></Usart_Init>
+  <SRAM_Init><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>92</LINE></SRAM_Init>
+  <Main><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>103</LINE></Main>
+  <Player_Input><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>137</LINE></Player_Input>
+  <Delay><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>165</LINE></Delay>
+  <SendByte><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>108</LINE></SendByte>
+  <Player2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>150</LINE></Player2>
+  <Player1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>141</LINE></Player1>
+  <Input_done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>157</LINE></Input_done>
+  <Send_Player_Choice><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>247</LINE></Send_Player_Choice>
+  <DELAY2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>169</LINE></DELAY2>
+  <P1_DONE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>211</LINE></P1_DONE>
+  <BEEP><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>271</LINE></BEEP>
+  <P2_DONE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>241</LINE></P2_DONE>
+  <Send_Player_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>257</LINE></Send_Player_2>
+  <Send_Player_1><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>250</LINE></Send_Player_1>
+  <Send_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>264</LINE></Send_Done>
+  <BEEP_DONE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm</FILE><LINE>286</LINE></BEEP_DONE>
  </LABELS>
 </ASSEMBLER_INFO>
