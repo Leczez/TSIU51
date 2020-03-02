@@ -62,15 +62,14 @@ STORE:
 
 	ldi ZH, high(NEXT_INSTRUCTION)
 	ldi ZL, low(NEXT_INSTRUCTION)
-	ldi r19, ZL
-	inc r19
+	clr r19
 	sts CURR_INS_BYTE, r19
 
 	STORE_INSTRUCT:
 		lds r19, CURR_INS_BYTE
-		ldi ZL, r19
+		add ZL, r19
 		st Z+, r16
-		ldi r19, ZL
+		inc r19
 		sts CURR_INS_BYTE, r19
 
 

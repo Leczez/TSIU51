@@ -180,8 +180,14 @@ INDEX_SHIFT:
 
 CHECK_NEXT_INS:
 	lds r16, CURR_INS_BYTE
+	cpi r16, 0x03
+	brne EXIT
+	rcall MEMORY_WRITE
 
-	ret
+
+
+	EXIT:
+		ret
 
 
 LOAD_DATA:
