@@ -5,6 +5,8 @@ UART_INIT:
 	ldi r17, 0x00
 	ldi r16, 0x0c
 
+
+
 ;Set baud rate
 	out UBRRH, r17
 	out UBRRL, r16
@@ -21,6 +23,10 @@ UART_INIT:
 	ldi r16, (1<<U2X)
 	out UCSRA, r16
 
+
+	clr r16
+	sts CURR_INS_BYTE,r16
+
 	sei
 	ret
 
@@ -35,9 +41,10 @@ RECEIVE:
 	in r16, SREG
 	push r16
 
-	ldi ZH, high(NEXT_INSTRUCTION)
-	ldi ZL, low(NEXT_INSTRUCTION)
-	clr r19
+
+	ldi r16,0b10000000
+	out PORTA,r16
+
 
 READ:
 ;READ UART BUFFERS
@@ -46,7 +53,7 @@ READ:
 	in r18, UDR
 
 ;ERROR CHECK
-	andi r18,(1<<FE | 1<<DOR | 1<<PE)
+	andi r16,(1<<FE | 1<<DOR | 1<<PE)
 	breq NO_ERROR
 	;--insert else--
 
@@ -57,23 +64,32 @@ READ:
 
 STORE:
 ;CHECK START BYTE AND STORE
-	cpi r16, 0xff
-	brne STORE_INSTRUCT
 
-	ldi ZH, high(NEXT_INSTRUCTION)
-	ldi ZL, low(NEXT_INSTRUCTION)
+	lds r19,CURR_INS_BYTE
+	cpi r19,0x03
+	brne NO_RESET
 	clr r19
-	sts CURR_INS_BYTE, r19
+	sts CURR_INS_BYTE,r19
 
+
+	NO_RESET:
+	cpi r18, 0xff
+	breq DATA_RECEIVED
+	;hacking noises
 	STORE_INSTRUCT:
+		ldi ZH, high(NEXT_INSTRUCTION)
+		ldi ZL, low(NEXT_INSTRUCTION)
 		lds r19, CURR_INS_BYTE
 		add ZL, r19
-		st Z+, r16
+		st Z, r18
 		inc r19
 		sts CURR_INS_BYTE, r19
 
 
 DATA_RECEIVED:
+
+clr r16
+out PORTA,r16
 ;ALL BYTES READ, EXIT
 	pop r16
 	out SREG, r16

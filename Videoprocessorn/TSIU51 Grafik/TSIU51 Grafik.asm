@@ -9,6 +9,7 @@
 .def X_POS = r19
 .def Y_POS = r20
 
+
 .org 0x00
 	rjmp START
 /*
@@ -33,8 +34,13 @@
 
 	NEXT_INSTRUCTION: .byte 3 ;UART bytes
 	CURR_INS_BYTE: .byte 1 ;keeps track of bytes in instruction
+	OLD_X_CORD: .byte 1
+	OLD_Y_CORD: .byte 1
 
 .cseg
+LOOKUP: .db 0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x00
+
+
 START:
 	ldi r16,high(RAMEND)
 	out SPH,r16
@@ -63,29 +69,30 @@ MEMORY_INIT:
 			cpi r17, 24
 			brne CLR_LOOP
 
-		ldi ZH, high(SEND_BYTE)
-		ldi ZL, low(SEND_BYTE)
+
+
+
+		clr r16
+		sts STAGE_AREA,r16
+		sts STAGE_AREA+1,r16
+		sts STAGE_AREA+2,r16
+		sts STAGE_AREA+3,r16
+
 		rcall MEMORY_WRITE
 
+	
 
 
-	ldi r16,0x03
-	sts  STAGE_AREA,r16
-
-	ldi r16,0x00
-	sts STAGE_AREA+1,r16
-	sts STAGE_AREA+2,r16
-
-	ldi r16,0b0010000
-	sts STAGE_AREA+3,r16
-
-	rcall MEMORY_WRITE
 		
 
 ;////////////////////
 
 MAIN:
 	rcall MEMORY_READ
+
+	ldi ZH, high(SEND_BYTE)
+	ldi ZL, low(SEND_BYTE)
+
 	rcall SEND
 	rcall INDEX_SHIFT
 	rcall CHECK_NEXT_INS
@@ -181,14 +188,83 @@ INDEX_SHIFT:
 CHECK_NEXT_INS:
 	lds r16, CURR_INS_BYTE
 	cpi r16, 0x03
-	brne EXIT
-	rcall MEMORY_WRITE
+	brne NO_VALID_INSTRUCT
+	
+	lds r16,OLD_X_CORD
+	lds r17,NEXT_INSTRUCTION+1
+	cp r16,r17
+	brne EXECUTE_INSTRUCTION
+
+	lds r16,OLD_Y_CORD
+	lds r17,NEXT_INSTRUCTION+2
+	cp r16,r16
+	brne EXECUTE_INSTRUCTION
+	rjmp NO_VALID_INSTRUCT
+
+
+	EXECUTE_INSTRUCTION:
+	rcall EXEC_INS
 
 
 
-	EXIT:
+	NO_VALID_INSTRUCT:
 		ret
 
+
+EXEC_INS:
+	ZERO_CHECK:
+	lds r16, NEXT_INSTRUCTION
+	
+	cpi r16, 0x00
+	breq P1_MOVE
+
+	cpi r16, 0x01
+	breq P2_MOVE
+
+
+
+
+	P1_MOVE:
+
+
+
+	lds r16,NEXT_INSTRUCTION+1
+	sts STAGE_AREA,r16
+
+	clr r16
+	sts STAGE_AREA+1,r16
+	sts STAGE_AREA+2,r16
+
+	lds r16,NEXT_INSTRUCTION+2
+	sts STAGE_AREA+3,r16
+
+
+	rjmp EXIT
+
+
+	
+
+
+	P2_MOVE:
+		clr r16
+	sts STAGE_AREA,r16
+	sts STAGE_AREA+2,r16
+	sts STAGE_AREA+3,r16
+
+	ldi r16,0x05
+	sts STAGE_AREA+1,r16
+	rjmp EXIT
+
+EXIT:
+
+	lds r16,NEXT_INSTRUCTION+1
+	sts OLD_X_CORD,r16 
+
+	lds r16,NEXT_INSTRUCTION+2
+	sts OLD_Y_CORD,r16 
+
+	rcall MEMORY_WRITE
+	ret
 
 LOAD_DATA:
 ;//Loads next byte in SEND_BYTES into send buffer (SEND_BUFF)
@@ -237,31 +313,62 @@ MEMORY_WRITE:
 		
 
 		EXIT_BYTE:
+	
+	ldi ZH, high(LOOKUP*2)
+	ldi ZL, low(LOOKUP*2)
+
+
+
 
 	add XL,X_POS
-
-
-
-
 
 	clr r21
 	clr r22
 	clr r23
 
-	inc YL
-	ld r21,Y++
-	ld r22,Y++
-	ld r23,Y++
+	push XL
+	push XH
 
-	
+	ld r16,X++
+	lds r21,STAGE_AREA+1
+	add ZL,r21
+
+	lpm r21,Z
+	EOR r21,r16
+
+
+	ldi ZH, high(LOOKUP*2)
+	ldi ZL, low(LOOKUP*2)
+
+	ld r16,X++
+	lds r22,STAGE_AREA+2
+	add ZL,r22
+
+	lpm r22,Z
+	EOR r22,r16
+
+	ldi ZH, high(LOOKUP*2)
+	ldi ZL, low(LOOKUP*2)
+
+	ld r16,X
+	lds r23,STAGE_AREA+3
+	add ZL,r23
+
+	lpm r23,Z
+	EOR r23,r16
+
+
+
+
+	pop XH
+	pop XL
+
 	st X++,r21
 	st X++,r22
-	st X++,r23
+	st X,r23
 	
-
-
-
 	ret
+
 
 
 
@@ -273,15 +380,7 @@ INIT:
 	ldi r16,(1<<SPE | 1<<MSTR | 0<<SPIE | 0<<SPR0)
 	out SPCR, r16
 
-	ldi r16,0x00
-	sts  STAGE_AREA,r16
 
-	ldi r16,0x00
-	sts STAGE_AREA+1,r16
-	sts STAGE_AREA+2,r16
-
-	ldi r16,0b0000001
-	sts STAGE_AREA+3,r16
 
 	ret
 
