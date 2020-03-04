@@ -197,7 +197,7 @@ CHECK_NEXT_INS:
 
 	lds r16,OLD_Y_CORD
 	lds r17,NEXT_INSTRUCTION+2
-	cp r16,r16
+	cp r16,r17
 	brne EXECUTE_INSTRUCTION
 	rjmp NO_VALID_INSTRUCT
 
@@ -225,9 +225,6 @@ EXEC_INS:
 
 
 	P1_MOVE:
-
-
-
 	lds r16,NEXT_INSTRUCTION+1
 	sts STAGE_AREA,r16
 
@@ -246,12 +243,14 @@ EXEC_INS:
 
 
 	P2_MOVE:
-		clr r16
+	lds r16, NEXT_INSTRUCTION+1
 	sts STAGE_AREA,r16
+	
+	clr r16
 	sts STAGE_AREA+2,r16
 	sts STAGE_AREA+3,r16
 
-	ldi r16,0x05
+	lds r16, NEXT_INSTRUCTION+2
 	sts STAGE_AREA+1,r16
 	rjmp EXIT
 
@@ -317,9 +316,6 @@ MEMORY_WRITE:
 	ldi ZH, high(LOOKUP*2)
 	ldi ZL, low(LOOKUP*2)
 
-
-
-
 	add XL,X_POS
 
 	clr r21
@@ -369,6 +365,36 @@ MEMORY_WRITE:
 	
 	ret
 
+
+
+	CHECK_IF_EMPTY:
+	ldi XH, high(ROWS)
+	ldi XL, low(ROWS)
+
+	clr r17
+	CHECK_LOOP:
+
+		cp r17,r16
+		breq EXIT_CHECK_LOOP
+
+		inc X_POS
+		inc X_POS
+		inc r17
+
+		cp r17,r16
+		brne BYTE_LOOP
+		
+
+		EXIT_CHECK_LOOP:
+
+		add XL,X_POS
+
+
+
+
+
+
+	ret
 
 
 
