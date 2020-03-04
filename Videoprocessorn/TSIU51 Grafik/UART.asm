@@ -55,7 +55,7 @@ READ:
 ;ERROR CHECK
 	andi r16,(1<<FE | 1<<DOR | 1<<PE)
 	breq NO_ERROR
-	;--insert else--
+	rjmp DATA_RECEIVED
 
 	NO_ERROR:
 	;FILTER STOP-BIT

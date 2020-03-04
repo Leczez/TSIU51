@@ -23,22 +23,35 @@
 
 .dseg
 	.org 0x300
+
 	SEND_BYTE: .byte 4
 	SEND_BUFF: .byte 1
 	LOOP: .byte 1
 
-	ROWS: .byte 24 ;rgb,rgb,rgb...
+	ROWS: .byte 24 ;rgb, rgb, rgb...
 	INDEX: .byte 1 ;register with shifting 0
 	ROW_POS: .byte 1 ;ROW_POS*3 = next row of rgb
 	STAGE_AREA: .byte 4 ; POS_x,G,B,R
 
 	NEXT_INSTRUCTION: .byte 3 ;UART bytes
 	CURR_INS_BYTE: .byte 1 ;keeps track of bytes in instruction
+
+
+	NEW_X_CORD: .byte 1
+	NEW_Y_CORD: .byte 1
+	ON_OFF: .byte 1 ;1=ON, 0=OFF
+	COLOR: .byte 1 ; 2=red..0=blue
+
+
 	OLD_X_CORD: .byte 1
 	OLD_Y_CORD: .byte 1
 
+
+
+
 .cseg
-LOOKUP: .db 0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x00
+LOOKUP: .db 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x00
+
 
 
 START:
@@ -70,33 +83,31 @@ MEMORY_INIT:
 			brne CLR_LOOP
 
 
-
-
 		clr r16
-		sts STAGE_AREA,r16
-		sts STAGE_AREA+1,r16
-		sts STAGE_AREA+2,r16
-		sts STAGE_AREA+3,r16
+		sts ON_OFF, r16
 
+/*
+		ldi r16, 0x00
+		sts NEW_X_CORD, r16
+
+		ldi r16, 0x00
+		sts NEW_Y_CORD, r16
+
+		ldi r16, 0x00
+		sts COLOR, r16
+		ldi r16, 0x01
+		sts ON_OFF,r16
 		rcall MEMORY_WRITE
+	*/
 
-	
-
-
-		
 
 ;////////////////////
 
 MAIN:
 	rcall MEMORY_READ
-
-	ldi ZH, high(SEND_BYTE)
-	ldi ZL, low(SEND_BYTE)
-
 	rcall SEND
 	rcall INDEX_SHIFT
 	rcall CHECK_NEXT_INS
-
 	rjmp MAIN
 
 ;///////////////////////////
@@ -104,6 +115,10 @@ MAIN:
 
 SEND:
 ;//Sends byte to spi and rcalls LOAD_DATA 4x, then resets SEND_BYTE pointer
+	ldi ZH, high(SEND_BYTE)
+	ldi ZL, low(SEND_BYTE)
+
+SEND_LOOP:
 	lds r16, LOOP
 	cpi r16, 0x04
 	breq RESET_PTR 
@@ -115,7 +130,7 @@ SEND:
 	;//Checks if shifting of byte to display is done
 		sbis SPSR,SPIF 
 		rjmp WAIT
-		rjmp SEND
+		rjmp SEND_LOOP
 
 	RESET_PTR:
 		rcall PULL_LATCH
@@ -131,9 +146,7 @@ SEND:
 
 MEMORY_READ:
 ;//Reads ROWS in sram and stores in right order in SEND_BYTE
-	ldi XH,high(ROWS)
-	ldi XL,low(ROWS)
-
+	rcall Load_Rows
 
 	lds r16, ROW_POS 
 	cpi r16, 24
@@ -149,13 +162,15 @@ MEMORY_READ:
 			sts SEND_BYTE, r18
 	
 			ld r18, X++
-			sts SEND_BYTE +1, r18
+			sts SEND_BYTE+1, r18
 	
 			ld r18, X
-			sts SEND_BYTE +2, r18	
+			sts SEND_BYTE+2, r18	
 	
 
-	rcall NEXT_POS ;increases register by three
+	;rcall NEXT_POS ;increases register by three
+	ldi r17,0x03
+	add r16,r17
 	sts ROW_POS, r16
 
 	ret
@@ -190,18 +205,6 @@ CHECK_NEXT_INS:
 	cpi r16, 0x03
 	brne NO_VALID_INSTRUCT
 	
-	lds r16,OLD_X_CORD
-	lds r17,NEXT_INSTRUCTION+1
-	cp r16,r17
-	brne EXECUTE_INSTRUCTION
-
-	lds r16,OLD_Y_CORD
-	lds r17,NEXT_INSTRUCTION+2
-	cp r16,r17
-	brne EXECUTE_INSTRUCTION
-	rjmp NO_VALID_INSTRUCT
-
-
 	EXECUTE_INSTRUCTION:
 	rcall EXEC_INS
 
@@ -212,7 +215,7 @@ CHECK_NEXT_INS:
 
 
 EXEC_INS:
-	ZERO_CHECK:
+	INS_TYPE_CHECK:
 	lds r16, NEXT_INSTRUCTION
 	
 	cpi r16, 0x00
@@ -221,19 +224,42 @@ EXEC_INS:
 	cpi r16, 0x01
 	breq P2_MOVE
 
-
+	rjmp EXIT
 
 
 	P1_MOVE:
-	lds r16,NEXT_INSTRUCTION+1
-	sts STAGE_AREA,r16
+	
+		OLD_P1_OFF:
+			lds r16, OLD_X_CORD
+			lds r17, OLD_Y_CORD
 
-	clr r16
-	sts STAGE_AREA+1,r16
-	sts STAGE_AREA+2,r16
+			sts NEW_X_CORD, r16
+			sts NEW_Y_CORD, r17
 
-	lds r16,NEXT_INSTRUCTION+2
-	sts STAGE_AREA+3,r16
+			ldi r16, 0x03
+			sts COLOR, r16
+			clr r16
+			sts ON_OFF, r16
+
+			rcall MEMORY_WRITE
+	
+
+
+		NEW_P1_ON:
+			lds r16, NEXT_INSTRUCTION+1
+			sts NEW_X_CORD, r16
+			sts OLD_X_CORD, r16
+
+			lds r16, NEXT_INSTRUCTION+2
+			sts NEW_Y_CORD, r16
+			sts OLD_Y_CORD, r16
+
+			ldi r16, 0x03
+			sts COLOR, r16
+			ldi r16, 0x01
+			sts ON_OFF, r16
+
+			rcall MEMORY_WRITE
 
 
 	rjmp EXIT
@@ -243,27 +269,42 @@ EXEC_INS:
 
 
 	P2_MOVE:
-	lds r16, NEXT_INSTRUCTION+1
-	sts STAGE_AREA,r16
-	
-	clr r16
-	sts STAGE_AREA+2,r16
-	sts STAGE_AREA+3,r16
+		/*OLD_P2_OFF:
+			lds r16, OLD_X_CORD
+			lds r17, OLD_Y_CORD
 
-	lds r16, NEXT_INSTRUCTION+2
-	sts STAGE_AREA+1,r16
-	rjmp EXIT
+			sts NEW_X_CORD, r16
+			sts NEW_Y_CORD, r17
 
+			ldi r16, 0x03
+			sts COLOR, r16
+			clr r16
+			sts ON_OFF, r16
+
+			rcall MEMORY_WRITE
+			
+
+		NEW_P2_ON:
+			lds r16, NEXT_INSTRUCTION+1
+			sts NEW_X_CORD, r16
+			sts OLD_X_CORD, r16
+
+			lds r16, NEXT_INSTRUCTION+2
+			sts NEW_Y_CORD, r16
+			sts OLD_Y_CORD, r16
+
+			ldi r16, 0x00
+			sts COLOR, r16
+			ldi r16, 0x01
+			sts ON_OFF, r16
+
+			rcall MEMORY_WRITE
+
+*/
 EXIT:
-
-	lds r16,NEXT_INSTRUCTION+1
-	sts OLD_X_CORD,r16 
-
-	lds r16,NEXT_INSTRUCTION+2
-	sts OLD_Y_CORD,r16 
-
-	rcall MEMORY_WRITE
 	ret
+
+
 
 LOAD_DATA:
 ;//Loads next byte in SEND_BYTES into send buffer (SEND_BUFF)
@@ -284,117 +325,99 @@ PULL_LATCH:
 	cbi PORTB, 4
 	ret
 
+Calculate_Position:
+	push r18
+	push r17
+	push r16
+	clr r16
+	lds r18, NEW_X_CORD
+	ldi r17,0x03
+Calc_Loop:
+	inc r16
+	add XL,r17
+	cp r16,r18
+	brne Calc_Loop
+
+Calc_Done:
+	pop r16
+	pop r17
+	pop r18
+	ret
+
 
 MEMORY_WRITE:
 ;//Writes to ROWS in sram
-	ldi XH, high(ROWS)
-	ldi XL, low(ROWS)
+	rcall CONVERT_CORDS
 
-	ldi YH,high(STAGE_AREA)
-	ldi YL,low(STAGE_AREA)
+	rcall Load_Rows
+	rcall Calculate_Position
 
 
-	ld X_POS,Y
-	mov r16,X_POS
-	clr r17
 
-	BYTE_LOOP:
-
-		cp r17,r16
-		breq EXIT_BYTE
-
-		inc X_POS
-		inc X_POS
-		inc r17
-
-		cp r17,r16
-		brne BYTE_LOOP
 		
+	ON_OFF_CHECK:
+		lds r16, ON_OFF
+		cpi r16, 0x00
+		breq TURN_OFF
 
-		EXIT_BYTE:
-	
-	ldi ZH, high(LOOKUP*2)
-	ldi ZL, low(LOOKUP*2)
+	TURN_ON:
+		lds r17, COLOR
+		add XL, r17
 
-	add XL,X_POS
+		ld r16, X
+		lds r17, NEW_Y_CORD
 
-	clr r21
-	clr r22
-	clr r23
+		or r16, r17
+		st X, r16
+		rjmp Memory_Write_Done
 
-	push XL
-	push XH
+	TURN_OFF:
+		lds r17, COLOR
+		add XL, r17
 
-	ld r16,X++
-	lds r21,STAGE_AREA+1
-	add ZL,r21
+		ld r16, X
+		lds r17, NEW_Y_CORD
 
-	lpm r21,Z
-	EOR r21,r16
+		eor r16, r17
+		st X, r16
 
-
-	ldi ZH, high(LOOKUP*2)
-	ldi ZL, low(LOOKUP*2)
-
-	ld r16,X++
-	lds r22,STAGE_AREA+2
-	add ZL,r22
-
-	lpm r22,Z
-	EOR r22,r16
-
-	ldi ZH, high(LOOKUP*2)
-	ldi ZL, low(LOOKUP*2)
-
-	ld r16,X
-	lds r23,STAGE_AREA+3
-	add ZL,r23
-
-	lpm r23,Z
-	EOR r23,r16
-
-
-
-
-	pop XH
-	pop XL
-
-	st X++,r21
-	st X++,r22
-	st X,r23
-	
-	ret
-
-
-
-	CHECK_IF_EMPTY:
-	ldi XH, high(ROWS)
-	ldi XL, low(ROWS)
-
-	clr r17
-	CHECK_LOOP:
-
-		cp r17,r16
-		breq EXIT_CHECK_LOOP
-
-		inc X_POS
-		inc X_POS
-		inc r17
-
-		cp r17,r16
-		brne BYTE_LOOP
-		
-
-		EXIT_CHECK_LOOP:
-
-		add XL,X_POS
-
-
-
+Memory_Write_Done:
 
 
 
 	ret
+
+	NEXT_X_POS:
+	clr r17
+	clr r16
+	NEXT_X_POS_LOOP:
+		inc r16
+		inc r17
+		cpi r17, 0x03
+		brne NEXT_X_POS_LOOP
+	ret
+
+	
+
+CONVERT_CORDS:
+	lds r16, NEW_Y_CORD
+	
+	ldi ZH, high(LOOKUP*2)
+	ldi ZL, low(LOOKUP*2)
+
+	add ZL, r16
+	lpm r16, Z
+
+	sts NEW_Y_CORD, r16
+
+	ret
+
+	
+Load_Rows:
+	ldi XH,HIGH(ROWS)
+	ldi XL,LOW(ROWS)
+	ret
+	
 
 
 
