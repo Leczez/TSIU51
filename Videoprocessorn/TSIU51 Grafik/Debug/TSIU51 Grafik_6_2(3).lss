@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm Thu Mar 05 11:10:00 2020
+AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm Thu Mar 05 12:41:25 2020
 
 [builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include\m16Adef.inc'
 \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm(1): Including file '\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm'
@@ -976,7 +976,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 
                  .equ GREEN = 0x01
                  .equ BLUE = 0x00
                  
-                 .equ GAMEDELAY_H = 100
+                 .equ GAMEDELAY_H = 50
                  .equ GAMEDELAY_L = 0
                  
                  .org 0x00
@@ -1018,7 +1018,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 
 00032b           	OLD_X_CORD_P2: .byte 1
 00032c           	OLD_Y_CORD_P2: .byte 1
                  
-00032d           	ROWS_PROTECT: .byte 24 ;
+00032d           	ROWS_PROTECT: .byte 24 ;rgb, rgb, rgb...
                  
                  
                  .cseg
@@ -1038,9 +1038,9 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 
 00001e e50f      	ldi r16,low(RAMEND)
 00001f bf0d      	out SPL,r16	
                  
-000020 d0e8      	rcall INIT
+000020 d143      	rcall INIT
 000021 d4de      	rcall UART_INIT
-000022 d0eb      	rcall MEMORY_INIT
+000022 d146      	rcall MEMORY_INIT
                  
                  
                  /*
@@ -1065,7 +1065,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 
 000024 d004      	rcall SEND
 000025 d032      	rcall INDEX_SHIFT
 000026 d03c      	rcall CHECK_NEXT_INS
-000027 d0dc      	rcall DELAY
+000027 d111      	rcall DELAY
 000028 cffa      	rjmp MAIN
                  
                  ;///////////////////////////
@@ -1080,7 +1080,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 
 00002b 9100 0305 	lds r16, LOOP
 00002d 3004      	cpi r16, 0x04
 00002e f039      	breq RESET_PTR 
-00002f d08a      	rcall LOAD_DATA
+00002f d0a9      	rcall LOAD_DATA
 000030 9100 0304 	lds r16, SEND_BUFF
 000032 b90f      	out SPDR, r16 ;SEND DATA
                  
@@ -1091,7 +1091,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 
 000035 cff5      		rjmp SEND_LOOP
                  
                  	RESET_PTR:
-000036 d08c      		rcall PULL_LATCH
+000036 d0ab      		rcall PULL_LATCH
 000037 e0f3      		ldi ZH, high(SEND_BYTE)
 000038 e0e0      		ldi ZL, low(SEND_BYTE)
 000039 2700      		clr r16
@@ -1104,7 +1104,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 
                  
                  MEMORY_READ:
                  ;//Reads ROWS in sram and stores in right order in SEND_BYTE
-00003d d0c3      	rcall Load_Rows
+00003d d0f5      	rcall Load_Rows
                  
 00003e 9100 031f 	lds r16, ROW_POS 
 000040 3108      	cpi r16, 24
@@ -1177,261 +1177,430 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 
 000069 9100 0320 	lds r16, NEXT_INSTRUCTION
                  	
 00006b 3000      	cpi r16, 0x00
-00006c f021      	breq P1_MOVE
+00006c f049      	breq P1_MOVE
                  
 00006d 3001      	cpi r16, 0x01
-00006e f129      	breq P2_MOVE
+00006e f049      	breq P2_MOVE
                  
-00006f 3004      	cpi r16, 0x04
-                 	;breq CLEAR_BOARD
+00006f 3002      	cpi r16, 0x02
+000070 f059      	breq P1_PLACE
                  
-000070 c048      	rjmp EXIT
+000071 3003      	cpi r16, 0x03
+000072 f039      	breq P2_PLACE
+                 
+000073 3004      	cpi r16, 0x04
+000074 f049      	breq CLEAR_BOARD
+                 
+000075 c00a      	rjmp EXIT
                  
                  
                  	P1_MOVE:
-                 		OLD_P1_OFF:
-000071 9100 0329 			lds r16, OLD_X_CORD_P1
-000073 9110 032a 			lds r17, OLD_Y_CORD_P1
-                 
-000075 9300 0324 			sts NEW_X_CORD, r16
-000077 9310 0325 			sts NEW_Y_CORD, r17
-                 
-000079 e002      			ldi r16, RED
-00007a 9300 0327 			sts COLOR, r16
-00007c 2700      			clr r16
-00007d 9300 0326 			sts ON_OFF, r16
-                 
-00007f d058      			rcall MEMORY_WRITE
-                 	
-                 
-                 
-                 		NEW_P1_ON:
-000080 9100 0321 			lds r16, NEXT_INSTRUCTION+1
-000082 9300 0324 			sts NEW_X_CORD, r16
-000084 9300 0329 			sts OLD_X_CORD_P1, r16
-                 
-000086 9100 0322 			lds r16, NEXT_INSTRUCTION+2
-000088 9300 0325 			sts NEW_Y_CORD, r16
-00008a 9300 032a 			sts OLD_Y_CORD_P1, r16
-                 
-00008c e002      			ldi r16, RED
-00008d 9300 0327 			sts COLOR, r16
-00008f e001      			ldi r16, 0x01
-000090 9300 0326 			sts ON_OFF, r16
-                 
-000092 d045      			rcall MEMORY_WRITE
-                 
-                 
-000093 c025      	rjmp EXIT
-                 
-                 
+000076 d00a      		rcall P1_MOVE_FUNC
+000077 c008      		rjmp EXIT
                  
                  	P2_MOVE:
-                 		OLD_P2_OFF:
-000094 9100 032b 			lds r16, OLD_X_CORD_P2
-000096 9110 032c 			lds r17, OLD_Y_CORD_P2
+000078 d01f      		rcall P2_MOVE_FUNC
+000079 c006      		rjmp EXIT
                  
-000098 9300 0324 			sts NEW_X_CORD, r16
-00009a 9310 0325 			sts NEW_Y_CORD, r17
+                 	P2_PLACE:
+00007a d034      		rcall P2_PLACE_FUNC
+00007b c004      		rjmp EXIT
                  
-00009c e000      			ldi r16, BLUE
-00009d 9300 0327 			sts COLOR, r16
-00009f 2700      			clr r16
-0000a0 9300 0326 			sts ON_OFF, r16
-                 
-0000a2 d035      			rcall MEMORY_WRITE
-                 			
-                 
-                 		NEW_P2_ON:
-0000a3 9100 0321 			lds r16, NEXT_INSTRUCTION+1
-0000a5 9300 0324 			sts NEW_X_CORD, r16
-0000a7 9300 032b 			sts OLD_X_CORD_P2, r16
-                 
-0000a9 9100 0322 			lds r16, NEXT_INSTRUCTION+2
-0000ab 9300 0325 			sts NEW_Y_CORD, r16
-0000ad 9300 032c 			sts OLD_Y_CORD_P2, r16
-                 
-0000af e000      			ldi r16, BLUE
-0000b0 9300 0327 			sts COLOR, r16
-0000b2 e001      			ldi r16, 0x01
-0000b3 9300 0326 			sts ON_OFF, r16
-                 
-0000b5 d022      			rcall MEMORY_WRITE
-                 
-0000b6 c002      		rjmp EXIT
-                 
+                 	P1_PLACE:
+00007c d047      		rcall P1_PLACE_FUNC
+00007d c002      		rjmp EXIT
                  
                  	CLEAR_BOARD:
-0000b7 d056      		rcall MEMORY_INIT
-0000b8 c000      		rjmp EXIT
+00007e d0ea      		rcall MEMORY_INIT
+00007f c000      		rjmp EXIT
+                 
+                 
+                 
                  
                  
                  EXIT:
-0000b9 9508      	ret
+000080 9508      	ret
+                 
+                 P1_MOVE_FUNC:
+                 	OLD_P1_OFF:
+                 	/*
+                 		lds r16, OLD_X_CORD_P1
+                 		lds r17, OLD_Y_CORD_P1
+                 
+                 		sts NEW_X_CORD, r16
+                 		sts NEW_Y_CORD, r17
+                 
+                 		ldi r16, RED
+                 		sts COLOR, r16
+                 		clr r16
+                 		sts ON_OFF, r16
+                 		*/
+                 
+000081 d088      		rcall MEMORY_WRITE
+000082 d0bb      		rcall RESTORE_ROW
+                 			
+                 
+                 
+                 	NEW_P1_ON:
+000083 d0cd      		rcall STORE_ROW
+000084 9100 0321 		lds r16, NEXT_INSTRUCTION+1
+000086 9300 0324 		sts NEW_X_CORD, r16
+000088 9300 0329 		sts OLD_X_CORD_P1, r16
+                 
+00008a 9100 0322 		lds r16, NEXT_INSTRUCTION+2
+00008c 9300 0325 		sts NEW_Y_CORD, r16
+00008e 9300 032a 		sts OLD_Y_CORD_P1, r16
+                 
+000090 e002      		ldi r16, RED
+000091 9300 0327 		sts COLOR, r16
+000093 e001      		ldi r16, 0x01
+000094 9300 0326 		sts ON_OFF, r16
+                 
+000096 d073      		rcall MEMORY_WRITE
+                 
+                 
+000097 9508      ret
+                 
+                 
+                 
+                 P2_MOVE_FUNC:
+                 	OLD_P2_OFF:
+                 	/*
+                 		lds r16, OLD_X_CORD_P2
+                 		lds r17, OLD_Y_CORD_P2
+                 
+                 		sts NEW_X_CORD, r16
+                 		sts NEW_Y_CORD, r17
+                 
+                 		ldi r16, BLUE
+                 		sts COLOR, r16
+                 		clr r16
+                 		sts ON_OFF, r16
+                 	*/
+                 
+000098 d071      		rcall MEMORY_WRITE
+000099 d0a4      		rcall RESTORE_ROW	
+                 			
+                 		
+                 	NEW_P2_ON:
+00009a d0b6      		rcall STORE_ROW
+00009b 9100 0321 		lds r16, NEXT_INSTRUCTION+1
+00009d 9300 0324 		sts NEW_X_CORD, r16
+00009f 9300 032b 		sts OLD_X_CORD_P2, r16
+                 
+0000a1 9100 0322 		lds r16, NEXT_INSTRUCTION+2
+0000a3 9300 0325 		sts NEW_Y_CORD, r16
+0000a5 9300 032c 		sts OLD_Y_CORD_P2, r16
+                 
+0000a7 e000      		ldi r16, BLUE
+0000a8 9300 0327 		sts COLOR, r16
+0000aa e001      		ldi r16, 0x01
+0000ab 9300 0326 		sts ON_OFF, r16
+                 
+                 	
+0000ad d05c      		rcall MEMORY_WRITE
+                 
+0000ae 9508      	ret
+                 
+                 			
+                 P2_PLACE_FUNC:
+0000af 9100 0321 		lds r16, NEXT_INSTRUCTION+1
+0000b1 9300 0324 		sts NEW_X_CORD, r16
+0000b3 9300 0329 		sts OLD_X_CORD_P1, r16
+                 
+0000b5 9100 0322 		lds r16, NEXT_INSTRUCTION+2
+0000b7 9300 0325 		sts NEW_Y_CORD, r16
+0000b9 9300 032a 		sts OLD_Y_CORD_P1, r16
+                 
+0000bb e000      		ldi r16, BLUE
+0000bc 9300 0327 		sts COLOR, r16
+0000be e001      		ldi r16, 0x01
+0000bf 9300 0326 		sts ON_OFF, r16
+                 
+0000c1 d048      		rcall MEMORY_WRITE
+                 
+0000c2 d08e      		rcall STORE_ROW
+                 
+0000c3 9508      	ret
+                 		
+                 	
+                 P1_PLACE_FUNC:
+0000c4 9100 0321 		lds r16, NEXT_INSTRUCTION+1
+0000c6 9300 0324 		sts NEW_X_CORD, r16
+0000c8 9300 0329 		sts OLD_X_CORD_P1, r16
+                 
+0000ca 9100 0322 		lds r16, NEXT_INSTRUCTION+2
+0000cc 9300 0325 		sts NEW_Y_CORD, r16
+0000ce 9300 032a 		sts OLD_Y_CORD_P1, r16
+                 
+0000d0 e002      		ldi r16, RED
+0000d1 9300 0327 		sts COLOR, r16
+0000d3 e001      		ldi r16, 0x01
+0000d4 9300 0326 		sts ON_OFF, r16
+                 
+0000d6 d033      		rcall MEMORY_WRITE
+                 
+0000d7 d079      		rcall STORE_ROW
+                 
+0000d8 9508      	ret
+                 		
+                 
+                 
                  
                  
                  
                  LOAD_DATA:
                  ;//Loads next byte in SEND_BYTES into send buffer (SEND_BUFF)
-0000ba 9101      	ld r16, Z++
-0000bb 9300 0304 	sts SEND_BUFF, r16
+0000d9 9101      	ld r16, Z++
+0000da 9300 0304 	sts SEND_BUFF, r16
                  
-0000bd 9100 0305 	lds r16, LOOP
-0000bf 9503      	inc r16
-0000c0 9300 0305 	sts LOOP, r16
+0000dc 9100 0305 	lds r16, LOOP
+0000de 9503      	inc r16
+0000df 9300 0305 	sts LOOP, r16
                  
-0000c2 9508      	ret
+0000e1 9508      	ret
                  
                  PULL_LATCH:
-0000c3 9ac4      	sbi PORTB, 4 
-0000c4 0000      	nop
-0000c5 95c8      	lpm
-0000c6 95c8      	lpm
-0000c7 98c4      	cbi PORTB, 4
-0000c8 9508      	ret
+0000e2 9ac4      	sbi PORTB, 4 
+0000e3 0000      	nop
+0000e4 95c8      	lpm
+0000e5 95c8      	lpm
+0000e6 98c4      	cbi PORTB, 4
+0000e7 9508      	ret
                  
                  Calculate_Position:
-0000c9 932f      	push r18
-0000ca 931f      	push r17
-0000cb 930f      	push r16
-0000cc 2700      	clr r16
-0000cd 9120 0324 	lds r18, NEW_X_CORD
-0000cf e013      	ldi r17,0x03
+0000e8 932f      	push r18
+0000e9 931f      	push r17
+0000ea 930f      	push r16
+0000eb 2700      	clr r16
+0000ec 9120 0324 	lds r18, NEW_X_CORD
+0000ee e013      	ldi r17,0x03
+0000ef 3020      	cpi r18, 0x00
+0000f0 f021      	breq Calc_Done
                  Calc_Loop:
-0000d0 9503      	inc r16
-0000d1 0fa1      	add XL,r17
-0000d2 1702      	cp r16,r18
-0000d3 f7e1      	brne Calc_Loop
+0000f1 9503      	inc r16
+0000f2 0fa1      	add XL,r17
+0000f3 1702      	cp r16,r18
+0000f4 f7e1      	brne Calc_Loop
                  
                  Calc_Done:
-0000d4 910f      	pop r16
-0000d5 911f      	pop r17
-0000d6 912f      	pop r18
-0000d7 9508      	ret
+0000f5 910f      	pop r16
+0000f6 911f      	pop r17
+0000f7 912f      	pop r18
+0000f8 9508      	ret
+                 
+                 
+                 
+                 Calculate_Backup_Position:
+0000f9 932f      	push r18
+0000fa 931f      	push r17
+0000fb 930f      	push r16
+0000fc 2700      	clr r16
+0000fd 9120 0324 	lds r18, NEW_X_CORD
+0000ff e013      	ldi r17,0x03
+000100 3020      	cpi r18, 0x00
+000101 f399      	breq Calc_Done
+                 Calc_Backup_Loop:
+000102 9503      	inc r16
+000103 0fc1      	add YL,r17
+000104 1702      	cp r16,r18
+000105 f7e1      	brne Calc_Backup_Loop
+                 
+                 Calc_Backup_Done:
+000106 910f      	pop r16
+000107 911f      	pop r17
+000108 912f      	pop r18
+000109 9508      	ret
+                 
+                 
+                 
+                 
                  
                  
                  MEMORY_WRITE:
                  ;//Writes to ROWS in sram
-0000d8 d01f      	rcall CONVERT_CORDS
+00010a d01f      	rcall CONVERT_CORDS
                  
-0000d9 d027      	rcall Load_Rows
-0000da dfee      	rcall Calculate_Position
-                 
-                 
+00010b d027      	rcall Load_Rows
+00010c dfdb      	rcall Calculate_Position
                  
                  		
                  	ON_OFF_CHECK:
-0000db 9100 0326 		lds r16, ON_OFF
-0000dd 3000      		cpi r16, 0x00
-0000de f049      		breq TURN_OFF
+00010d 9100 0326 		lds r16, ON_OFF
+00010f 3000      		cpi r16, 0x00
+000110 f049      		breq TURN_OFF
                  
                  	TURN_ON:
-0000df 9110 0327 		lds r17, COLOR
-0000e1 0fa1      		add XL, r17
+000111 9110 0327 		lds r17, COLOR
+000113 0fa1      		add XL, r17
                  
-0000e2 910c      		ld r16, X
-0000e3 9110 0328 		lds r17, NEW_Y_CORD_CONV
+000114 910c      		ld r16, X
+000115 9110 0328 		lds r17, NEW_Y_CORD_CONV
                  
-0000e5 2b01      		or r16, r17
-0000e6 930c      		st X, r16
-0000e7 c008      		rjmp Memory_Write_Done
+000117 2b01      		or r16, r17
+000118 930c      		st X, r16
+000119 c008      		rjmp Memory_Write_Done
                  
                  	TURN_OFF:
-0000e8 9110 0327 		lds r17, COLOR
-0000ea 0fa1      		add XL, r17
+00011a 9110 0327 		lds r17, COLOR
+00011c 0fa1      		add XL, r17
                  
-0000eb 910c      		ld r16, X
-0000ec 9110 0328 		lds r17, NEW_Y_CORD_CONV
+00011d 910c      		ld r16, X
+00011e 9110 0328 		lds r17, NEW_Y_CORD_CONV
                  
-0000ee 2701      		eor r16, r17
-0000ef 930c      		st X, r16
+000120 2701      		eor r16, r17
+000121 930c      		st X, r16
                  
                  Memory_Write_Done:
                  
                  
                  
-0000f0 9508      	ret
+000122 9508      	ret
                  
                  	NEXT_X_POS:
-0000f1 2711      	clr r17
-0000f2 2700      	clr r16
+000123 2711      	clr r17
+000124 2700      	clr r16
                  	NEXT_X_POS_LOOP:
-0000f3 9503      		inc r16
-0000f4 9513      		inc r17
-0000f5 3013      		cpi r17, 0x03
-0000f6 f7e1      		brne NEXT_X_POS_LOOP
-0000f7 9508      	ret
+000125 9503      		inc r16
+000126 9513      		inc r17
+000127 3013      		cpi r17, 0x03
+000128 f7e1      		brne NEXT_X_POS_LOOP
+000129 9508      	ret
                  
                  	
                  
                  CONVERT_CORDS:
-0000f8 9100 0325 	lds r16, NEW_Y_CORD
+00012a 9100 0325 	lds r16, NEW_Y_CORD
                  	
-0000fa e0f0      	ldi ZH, high(LOOKUP*2)
-0000fb e2ee      	ldi ZL, low(LOOKUP*2)
+00012c e0f0      	ldi ZH, high(LOOKUP*2)
+00012d e2ee      	ldi ZL, low(LOOKUP*2)
                  
-0000fc 0fe0      	add ZL, r16
-0000fd 9104      	lpm r16, Z
+00012e 0fe0      	add ZL, r16
+00012f 9104      	lpm r16, Z
                  
-0000fe 9300 0328 	sts NEW_Y_CORD_CONV, r16
+000130 9300 0328 	sts NEW_Y_CORD_CONV, r16
                  
-000100 9508      	ret
+000132 9508      	ret
                  
                  	
                  Load_Rows:
-000101 e0b3      	ldi XH,HIGH(ROWS)
-000102 e0a6      	ldi XL,LOW(ROWS)
-000103 9508      	ret
+000133 e0b3      	ldi XH,HIGH(ROWS)
+000134 e0a6      	ldi XL,LOW(ROWS)
+000135 9508      	ret
                  	
-                 
+                 Load_Rows_Protect:
+000136 e0d3      	ldi YH, high(ROWS_PROTECT)
+000137 e2cd      	ldi YL, low(ROWS_PROTECT)
+000138 9508      	ret
                  
                  
                  DELAY:
-000104 e070      	ldi r23, GAMEDELAY_L
-000105 e684      	ldi r24, GAMEDELAY_H
+000139 e070      	ldi r23, GAMEDELAY_L
+00013a e382      	ldi r24, GAMEDELAY_H
                  
                  	DELAY_2:
-000106 9701      		sbiw r24, 0x01
-000107 f7f1      		brne DELAY_2
-000108 9508      		ret
+00013b 9701      		sbiw r24, 0x01
+00013c f7f1      		brne DELAY_2
+00013d 9508      		ret
                  
                  
+                 RESTORE_ROW:
+                 ;//WRITES TO ROWS
+00013e 93bf      	push XH
+00013f 93af      	push XL
+000140 93df      	push YH
+000141 93cf      	push YL
+                 
+000142 dff0      	rcall Load_Rows
+000143 dff2      	rcall Load_Rows_Protect
+000144 dfa3      	rcall Calculate_Position 
+000145 dfb3      	rcall Calculate_Backup_Position
+                 
+000146 9109      	ld r16, Y+
+000147 930d      	st X+, r16
+000148 9109      	ld r16, Y+
+000149 930d      	st X+, r16
+00014a 8108      	ld r16, Y
+00014b 930c      	st X, r16
+                 
+00014c 91cf      	pop YL
+00014d 91df      	pop YH
+00014e 91af      	pop XL
+00014f 91bf      	pop XH
+000150 9508      	ret
+                 
+                 
+                 STORE_ROW:
+                 ;//WRITES TO ROWS_PROTECT
+000151 93bf      	push XH
+000152 93af      	push XL
+000153 93df      	push YH
+000154 93cf      	push YL
+                 
+000155 dfdd      	rcall Load_Rows
+000156 dfdf      	rcall Load_Rows_Protect
+000157 df90      	rcall Calculate_Position 
+000158 dfa0      	rcall Calculate_Backup_Position
+                 
+000159 910d      	ld r16, X+
+00015a 9309      	st Y+, r16
+00015b 910d      	ld r16, X+
+00015c 9309      	st Y+, r16
+00015d 910c      	ld r16, X
+00015e 8308      	st Y, r16
+                 
+00015f 91cf      	pop YL
+000160 91df      	pop YH
+000161 91af      	pop XL
+000162 91bf      	pop XH
+000163 9508      	ret
                  
                  
                  INIT:
                  ;//SPI initalization
-000109 eb00      	ldi r16, 0xB0
-00010a bb07      	out DDRB, r16
+000164 eb00      	ldi r16, 0xB0
+000165 bb07      	out DDRB, r16
                  
-00010b e500      	ldi r16,(1<<SPE | 1<<MSTR | 0<<SPIE | 0<<SPR0)
-00010c b90d      	out SPCR, r16
+000166 e500      	ldi r16,(1<<SPE | 1<<MSTR | 0<<SPIE | 0<<SPR0)
+000167 b90d      	out SPCR, r16
                  
                  
                  
-00010d 9508      	ret
+000168 9508      	ret
                  
                  
                  	MEMORY_INIT:
-00010e ef0e      	ldi r16, 0b11111110
-00010f 9300 031e 	sts INDEX, r16
+000169 ef0e      	ldi r16, 0b11111110
+00016a 9300 031e 	sts INDEX, r16
                  
-000111 2700      	clr r16
-000112 9300 031f 	sts ROW_POS, r16
+00016c 2700      	clr r16
+00016d 9300 031f 	sts ROW_POS, r16
                  		
                  	CLEAR_MEM:
-000114 2700      		clr r16
-000115 2711      		clr r17
-000116 e0f3      		ldi ZH,high(ROWS)
-000117 e0e6      		ldi ZL,low(ROWS)
+00016f 2700      		clr r16
+000170 2711      		clr r17
+000171 dfc1      		rcall Load_Rows
                  		CLR_LOOP:
-000118 9513      			inc r17
-000119 9301      			st Z+,r16
-00011a 3118      			cpi r17, 24
-00011b f7e1      			brne CLR_LOOP
+000172 9513      			inc r17
+000173 930d      			st X+,r16
+000174 3118      			cpi r17, 24
+000175 f7e1      			brne CLR_LOOP
+000176 2700      		clr r16
+000177 9300 0326 		sts ON_OFF, r16
+                 
+                 	CLEAR_MEM_BACKUP:
+000179 2700      		clr r16
+00017a 2711      		clr r17
+00017b dfba      		rcall Load_Rows_Protect
+                 		CLR_LOOP_BACKUP:
+00017c 9513      			inc r17
+00017d 9309      			st Y+,r16
+00017e 3118      			cpi r17, 24
+00017f f7e1      			brne CLR_LOOP_BACKUP
                  
                  
-00011c 2700      		clr r16
-00011d 9300 0326 		sts ON_OFF, r16
+000180 2700      		clr r16
+000181 9300 0326 		sts ON_OFF, r16
                  
 
 
@@ -1452,37 +1621,37 @@ counted separately from r26..r31 here.
 "ATmega16A" register use summary:
 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 r5 :   0 r6 :   0 r7 :   0 
 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 r13:   0 r14:   0 r15:   0 
-r16: 118 r17:  34 r18:  15 r19:  10 r20:   0 r21:   0 r22:   0 r23:   1 
-r24:   2 r25:   0 r26:   5 r27:   1 r28:   0 r29:   0 r30:   9 r31:   7 
-x  :   7 y  :   0 z  :   4 
-Registers used: 12 out of 35 (34.3%)
+r16: 149 r17:  37 r18:  21 r19:  10 r20:   0 r21:   0 r22:   0 r23:   1 
+r24:   2 r25:   0 r26:   9 r27:   5 r28:   6 r29:   5 r30:   8 r31:   6 
+x  :  14 y  :   7 z  :   3 
+Registers used: 15 out of 35 (42.9%)
 
 "ATmega16A" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   0 add   :   7 adiw  :   0 and   :   0 
+.lds  :   0 .sts  :   0 adc   :   0 add   :   8 adiw  :   0 and   :   0 
 andi  :   2 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 break :   0 breq  :   7 brge  :   0 brhc  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :  12 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :   8 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brne  :  10 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   1 cbr   :   0 
-clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :  15 cls   :   0 
-clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   1 cpc   :   0 
-cpi   :  13 cpse  :   0 dec   :   0 eor   :   1 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   4 inc   :   8 jmp   :   0 
-ld    :   6 ldd   :   0 ldi   :  33 lds   :  24 lpm   :   8 lsl   :   0 
+clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :  17 cls   :   0 
+clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   2 cpc   :   0 
+cpi   :  18 cpse  :   0 dec   :   0 eor   :   1 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   4 inc   :  10 jmp   :   0 
+ld    :  12 ldd   :   0 ldi   :  36 lds   :  25 lpm   :   8 lsl   :   0 
 lsr   :   1 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   1 or    :   1 ori   :   0 out   :  13 pop   :  10 
-push  :  10 rcall :  20 ret   :  17 reti  :   1 rjmp  :  11 rol   :   1 
+neg   :   0 nop   :   1 or    :   1 ori   :   0 out   :  13 pop   :  21 
+push  :  21 rcall :  42 ret   :  25 reti  :   1 rjmp  :  13 rol   :   1 
 ror   :   0 sbc   :   0 sbci  :   0 sbi   :   1 sbic  :   0 sbis  :   1 
 sbiw  :   1 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   1 seh   :   0 
 sei   :   1 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
-sez   :   0 sleep :   0 spm   :   0 st    :   4 std   :   0 sts   :  36 
+sez   :   0 sleep :   0 spm   :   0 st    :  11 std   :   0 sts   :  41 
 sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
 Instructions used: 33 out of 113 (29.2%)
 
 "ATmega16A" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000a7c    648     10    658   16384   4.0%
+[.cseg] 0x000000 0x000a7c    848     10    858   16384   5.2%
 [.dseg] 0x000060 0x000345      0     69     69    1024   6.7%
 [.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 
