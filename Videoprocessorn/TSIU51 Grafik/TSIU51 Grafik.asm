@@ -1,13 +1,8 @@
 .include "UART.asm"
 
-	/*
- * Display.asm
- *
- *  Created: 2020-02-21 09:47:27
- *   Author: linny471
- */ 
-.def X_POS = r19
-.def Y_POS = r20
+.equ RED = 0x02
+.equ GREEN = 0x01
+.equ BLUE = 0x00
 
 
 .org 0x00
@@ -31,7 +26,6 @@
 	ROWS: .byte 24 ;rgb, rgb, rgb...
 	INDEX: .byte 1 ;register with shifting 0
 	ROW_POS: .byte 1 ;ROW_POS*3 = next row of rgb
-	STAGE_AREA: .byte 4 ; POS_x,G,B,R
 
 	NEXT_INSTRUCTION: .byte 3 ;UART bytes
 	CURR_INS_BYTE: .byte 1 ;keeps track of bytes in instruction
@@ -40,13 +34,17 @@
 	NEW_X_CORD: .byte 1
 	NEW_Y_CORD: .byte 1
 	ON_OFF: .byte 1 ;1=ON, 0=OFF
-	COLOR: .byte 1 ; 2=red..0=blue
+	COLOR: .byte 1 ; 0=blue..2=red
+	NEW_Y_CORD_CONV: .byte 1 ;Y cord after CONVERT_CORDS call
 
 
-	OLD_X_CORD: .byte 1
-	OLD_Y_CORD: .byte 1
+	OLD_X_CORD_P1: .byte 1
+	OLD_Y_CORD_P1: .byte 1
 
+	OLD_X_CORD_P2: .byte 1
+	OLD_Y_CORD_P2: .byte 1
 
+	ROWS_PROTECT: .byte 24 ;
 
 
 .cseg
@@ -224,19 +222,23 @@ EXEC_INS:
 	cpi r16, 0x01
 	breq P2_MOVE
 
+
+
 	rjmp EXIT
+
+
 
 
 	P1_MOVE:
 	
 		OLD_P1_OFF:
-			lds r16, OLD_X_CORD
-			lds r17, OLD_Y_CORD
+			lds r16, OLD_X_CORD_P1
+			lds r17, OLD_Y_CORD_P1
 
 			sts NEW_X_CORD, r16
 			sts NEW_Y_CORD, r17
 
-			ldi r16, 0x03
+			ldi r16, RED
 			sts COLOR, r16
 			clr r16
 			sts ON_OFF, r16
@@ -248,13 +250,13 @@ EXEC_INS:
 		NEW_P1_ON:
 			lds r16, NEXT_INSTRUCTION+1
 			sts NEW_X_CORD, r16
-			sts OLD_X_CORD, r16
+			sts OLD_X_CORD_P1, r16
 
 			lds r16, NEXT_INSTRUCTION+2
 			sts NEW_Y_CORD, r16
-			sts OLD_Y_CORD, r16
+			sts OLD_Y_CORD_P1, r16
 
-			ldi r16, 0x03
+			ldi r16, RED
 			sts COLOR, r16
 			ldi r16, 0x01
 			sts ON_OFF, r16
@@ -265,18 +267,16 @@ EXEC_INS:
 	rjmp EXIT
 
 
-	
-
 
 	P2_MOVE:
-		/*OLD_P2_OFF:
-			lds r16, OLD_X_CORD
-			lds r17, OLD_Y_CORD
+		OLD_P2_OFF:
+			lds r16, OLD_X_CORD_P2
+			lds r17, OLD_Y_CORD_P2
 
 			sts NEW_X_CORD, r16
 			sts NEW_Y_CORD, r17
 
-			ldi r16, 0x03
+			ldi r16, BLUE
 			sts COLOR, r16
 			clr r16
 			sts ON_OFF, r16
@@ -287,20 +287,21 @@ EXEC_INS:
 		NEW_P2_ON:
 			lds r16, NEXT_INSTRUCTION+1
 			sts NEW_X_CORD, r16
-			sts OLD_X_CORD, r16
+			sts OLD_X_CORD_P2, r16
 
 			lds r16, NEXT_INSTRUCTION+2
 			sts NEW_Y_CORD, r16
-			sts OLD_Y_CORD, r16
+			sts OLD_Y_CORD_P2, r16
 
-			ldi r16, 0x00
+			ldi r16, BLUE
 			sts COLOR, r16
 			ldi r16, 0x01
 			sts ON_OFF, r16
 
 			rcall MEMORY_WRITE
 
-*/
+		rjmp EXIT
+
 EXIT:
 	ret
 
@@ -365,7 +366,7 @@ MEMORY_WRITE:
 		add XL, r17
 
 		ld r16, X
-		lds r17, NEW_Y_CORD
+		lds r17, NEW_Y_CORD_CONV
 
 		or r16, r17
 		st X, r16
@@ -376,7 +377,7 @@ MEMORY_WRITE:
 		add XL, r17
 
 		ld r16, X
-		lds r17, NEW_Y_CORD
+		lds r17, NEW_Y_CORD_CONV
 
 		eor r16, r17
 		st X, r16
@@ -408,7 +409,7 @@ CONVERT_CORDS:
 	add ZL, r16
 	lpm r16, Z
 
-	sts NEW_Y_CORD, r16
+	sts NEW_Y_CORD_CONV, r16
 
 	ret
 
