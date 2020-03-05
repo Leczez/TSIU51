@@ -1,9 +1,9 @@
 
-AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Mon Mar 02 11:24:30 2020
+AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Thu Mar 05 13:06:14 2020
 
 [builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include\m16Adef.inc'
-\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm(10): Including file '\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm'
-\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm(11): Including file '\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm'
+\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm(10): Including file '\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm'
+\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm(11): Including file '\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm'
                  
                  /*
                  
@@ -931,11 +931,11 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  Input_P1:
 00050a 930f      	push r16
                  
-00050b e001      	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P1_X)
+00050b e000      	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P1_Y)
 00050c dff6      	rcall Input
 00050d d00e      	rcall Check_X1
                  
-00050e e000      	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P1_Y)
+00050e e001      	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P1_X)
 00050f dff3      	rcall Input
 000510 d03f      	rcall Check_Y1
                  
@@ -946,11 +946,11 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  Input_P2:
 000513 930f      	push r16
                  
-000514 e003      	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P2_X)
+000514 e002      	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P2_Y)
 000515 dfed      	rcall Input
 000516 d01f      	rcall Check_X2
                  
-000517 e002      	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P2_Y)
+000517 e003      	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P2_X)
 000518 dfea      	rcall Input
 000519 d050      	rcall Check_Y2
                  	
@@ -1561,7 +1561,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 000761 9508      	ret
                  
                  .equ VMEM_SIZE = 64
-                 .equ DELAY_HIGH = 60 ;100 blir bra
+                 .equ DELAY_HIGH = 130 ;100 blir bra
                  .equ DELAY_LOW = 0
                  .equ BEEP_LENGTH_H = $0f
                  .equ BEEP_LENGTH_L = $00
@@ -1591,7 +1591,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  .org INT0addr
 000002 c060      	rjmp Interrupt0
                  .org INT1addr
-000004 c076      	rjmp Interrupt1
+000004 c077      	rjmp Interrupt1
                  Setup:
                  
 000005 e004      	ldi r16,HIGH(RAMEND)
@@ -1703,10 +1703,11 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 00004b bb02      	out PORTD,r16
 00004c ee00      	ldi r16,0b11100000
 00004d bb0b      	out PORTA,r16	
+                 
 00004e d4c4      	rcall Input_P2
 00004f e011      	ldi r17,$01
                  Input_done:
-000050 d043      	rcall Send_Player_Choice
+000050 d044      	rcall Send_Player_Choice
 000051 dfdf      	rcall Send_Data
 000052 911f      	pop r17
 000053 9478      	sei
@@ -1714,7 +1715,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  
                  
                  DELAY:
-000055 e39c      	ldi r25,DELAY_HIGH
+000055 e892      	ldi r25,DELAY_HIGH
 000056 e080      	ldi r24,DELAY_LOW
                  
                  DELAY2:
@@ -1732,7 +1733,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 00005e 0f11      	lsl r17
 00005f 0f11      	lsl r17
 000060 0f11      	lsl r17
-000061 1fb1      	adc XH,r17
+000061 1fa1      	adc XL,r17
 000062 9508      	ret
                  
                  //Player 1 joystick push button interrupt
@@ -1740,7 +1741,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 000063 930f      	push r16
 000064 931f      	push r17
                  
-000065 f096      	brts P1_DONE
+000065 f09e      	brts P1_DONE
 000066 9100 0060 	lds r16,P1X
 000068 9110 0061 	lds r17,P1Y
                  
@@ -1749,97 +1750,99 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  
 00006c 911c      	ld r17,X
 00006d 3011      	cpi r17,1
-00006e f049      	breq P1_DONE
+00006e f051      	breq P1_DONE
 00006f 3012      	cpi r17,2
-000070 f039      	breq P1_DONE
-000071 d037      	rcall BEEP
-000072 e001      	ldi r16,1
-000073 930c      	st X,r16
+000070 f041      	breq P1_DONE
+000071 d038      	rcall BEEP
+000072 e011      	ldi r17,1
+000073 931c      	st X,r17
 000074 e012      	ldi r17,2
-000075 d01e      	rcall Send_Player_Choice
-000076 d589      	rcall Check_for_end_of_game
-000077 9468      	set
+000075 d01f      	rcall Send_Player_Choice
+000076 dfba      	rcall Send_Data
+000077 d588      	rcall Check_for_end_of_game
+000078 9468      	set
                  P1_DONE:
                  	
-000078 911f      	pop r17
-000079 910f      	pop r16
-00007a 9518      	reti
+000079 911f      	pop r17
+00007a 910f      	pop r16
+00007b 9518      	reti
                  
                  //Player 2 joystick push button interrupt
                  Interrupt1:
-00007b 930f      	push r16
-00007c 931f      	push r17
-00007d f49e      	brtc P2_DONE
-00007e 9100 0062 	lds r16,P2X
-000080 9110 0063 	lds r17,P2Y
+00007c 930f      	push r16
+00007d 931f      	push r17
+00007e f49e      	brtc P2_DONE
+00007f 9100 0062 	lds r16,P2X
+000081 9110 0063 	lds r17,P2Y
                  	
-000082 dfd7      	rcall Load_X_Pointer
-000083 dfd9      	rcall CALCULATE_POS
+000083 dfd6      	rcall Load_X_Pointer
+000084 dfd8      	rcall CALCULATE_POS
                  
-000084 911c      	ld r17,X
-000085 3011      	cpi r17,1
-000086 f051      	breq P2_DONE
-000087 3012      	cpi r17,2
-000088 f041      	breq P2_DONE
-000089 d01f      	rcall BEEP
-00008a e012      	ldi r17,2
-00008b 930c      	st X,r16
-00008c e013      	ldi r17,3
-00008d d006      	rcall Send_Player_Choice
-00008e dfa2      	rcall Send_Data
-00008f d570      	rcall Check_for_end_of_game
-000090 94e8      	clt
+000085 911c      	ld r17,X
+000086 3011      	cpi r17,1
+000087 f051      	breq P2_DONE
+000088 3012      	cpi r17,2
+000089 f041      	breq P2_DONE
+00008a d01f      	rcall BEEP
+00008b e012      	ldi r17,2
+00008c 931c      	st X,r17
+00008d e013      	ldi r17,3
+00008e d006      	rcall Send_Player_Choice
+00008f dfa1      	rcall Send_Data
+000090 d56f      	rcall Check_for_end_of_game
+000091 94e8      	clt
                  P2_DONE:
                  	
-000091 911f      	pop r17
-000092 910f      	pop r16
-000093 9518      	reti
+000092 911f      	pop r17
+000093 910f      	pop r16
+000094 9518      	reti
                  
                  Send_Player_Choice:
-000094 9310 0065 	sts Command_Byte,r17
-000096 f04e      	brts Send_Player_2
-                 Send_Player_1:
+000095 9310 0065 	sts Command_Byte,r17
+000097 f04e      	brts Send_Player_2
                  
-000097 9110 0060 	lds r17,P1X
-000099 9310 0066 	sts Argument1_Byte,r17
-00009b 9110 0061 	lds r17,P1Y
-00009d 9310 0067 	sts Argument2_Byte,r17
-00009f c008      	rjmp Send_Done
+                 Send_Player_1:
+000098 9110 0060 	lds r17,P1X
+00009a 9310 0066 	sts Argument1_Byte,r17
+00009c 9110 0061 	lds r17,P1Y
+00009e 9310 0067 	sts Argument2_Byte,r17
+0000a0 c008      	rjmp Send_Done
+                 
                  Send_Player_2:
                  	
-0000a0 9110 0062 	lds r17,P2X
-0000a2 9310 0066 	sts Argument1_Byte,r17
-0000a4 9110 0063 	lds r17,P2Y
-0000a6 9310 0067 	sts Argument2_Byte,r17
+0000a1 9110 0062 	lds r17,P2X
+0000a3 9310 0066 	sts Argument1_Byte,r17
+0000a5 9110 0063 	lds r17,P2Y
+0000a7 9310 0067 	sts Argument2_Byte,r17
                  
                  Send_Done:
                  
-0000a8 9508      	ret
+0000a9 9508      	ret
                  
                  
                  
                  
                  BEEP:
-0000a9 930f      	push r16
-0000aa 931f      	push r17
-0000ab b71f      	in r17,SREG
+0000aa 930f      	push r16
+0000ab 931f      	push r17
+0000ac b71f      	in r17,SREG
                  
-0000ac e001      	ldi r16,0b00000001
-0000ad bb08      	out PORTB,r16
-0000ae 938f      	push r24
-0000af 939f      	push r25
-0000b0 e080      	ldi r24,BEEP_LENGTH_L
-0000b1 e09f      	ldi r25,BEEP_LENGTH_H
-0000b2 dfa4      	rcall DELAY2
-0000b3 919f      	pop r25
-0000b4 918f      	pop r24
+0000ad e001      	ldi r16,0b00000001
+0000ae bb08      	out PORTB,r16
+0000af 938f      	push r24
+0000b0 939f      	push r25
+0000b1 e080      	ldi r24,BEEP_LENGTH_L
+0000b2 e09f      	ldi r25,BEEP_LENGTH_H
+0000b3 dfa3      	rcall DELAY2
+0000b4 919f      	pop r25
+0000b5 918f      	pop r24
                  
                  BEEP_DONE:
-0000b5 e000      	ldi r16,0b00000000
-0000b6 bb08      	out PORTB,r16
-0000b7 bf1f      	out SREG,r17
-0000b8 911f      	pop r17
-0000b9 910f      	pop r16
+0000b6 e000      	ldi r16,0b00000000
+0000b7 bb08      	out PORTB,r16
+0000b8 bf1f      	out SREG,r17
+0000b9 911f      	pop r17
+0000ba 910f      	pop r16
 
 
 RESOURCE USE INFORMATION
@@ -1859,8 +1862,8 @@ counted separately from r26..r31 here.
 "ATmega16A" register use summary:
 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 r5 :   0 r6 :   0 r7 :   0 
 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 r13:   0 r14:   0 r15:   0 
-r16: 206 r17: 103 r18:  28 r19:   0 r20:   0 r21:   0 r22:   0 r23:   0 
-r24:   5 r25:   4 r26:  10 r27:  14 r28:   0 r29:   0 r30:   1 r31:   1 
+r16: 203 r17: 106 r18:  28 r19:   0 r20:   0 r21:   0 r22:   0 r23:   0 
+r24:   5 r25:   4 r26:  11 r27:  13 r28:   0 r29:   0 r30:   1 r31:   1 
 x  :  14 y  :   0 z  :   2 
 Registers used: 11 out of 35 (31.4%)
 
@@ -1878,7 +1881,7 @@ fmulsu:   0 icall :   0 ijmp  :   0 in    :   4 inc   :  22 jmp   :   0
 ld    :  11 ldd   :   0 ldi   :  54 lds   :  67 lpm   :   0 lsl   :   3 
 lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
 neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :  23 pop   :  27 
-push  :  27 rcall :  58 ret   :  22 reti  :   2 rjmp  :  47 rol   :   0 
+push  :  27 rcall :  59 ret   :  22 reti  :   2 rjmp  :  47 rol   :   0 
 ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   1 sbis  :   1 
 sbiw  :   1 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   2 sen   :   0 ser   :   0 ses   :   0 set   :   1 sev   :   0 
@@ -1889,7 +1892,7 @@ Instructions used: 33 out of 113 (29.2%)
 "ATmega16A" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000ec4   1342      0   1342   16384   8.2%
+[.cseg] 0x000000 0x000ec4   1344      0   1344   16384   8.2%
 [.dseg] 0x000060 0x0000ab      0     75     75    1024   7.3%
 [.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 

@@ -49,11 +49,11 @@ Wait:
 Input_P1:
 	push r16
 
-	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P1_X)
+	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P1_Y)
 	rcall Input
 	rcall Check_X1
 
-	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P1_Y)
+	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P1_X)
 	rcall Input
 	rcall Check_Y1
 
@@ -64,11 +64,11 @@ Input_P1:
 Input_P2:
 	push r16
 
-	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P2_X)
+	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P2_Y)
 	rcall Input
 	rcall Check_X2
 
-	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P2_Y)
+	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P2_X)
 	rcall Input
 	rcall Check_Y2
 	

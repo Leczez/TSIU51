@@ -10,7 +10,7 @@
 .include "Joystick_driver.asm"
 .include "game_logic.asm"
 .equ VMEM_SIZE = 64
-.equ DELAY_HIGH = 60 ;100 blir bra
+.equ DELAY_HIGH = 130 ;100 blir bra
 .equ DELAY_LOW = 0
 .equ BEEP_LENGTH_H = $0f
 .equ BEEP_LENGTH_L = $00
@@ -182,7 +182,7 @@ Calculate_Pos:
 	lsl r17
 	lsl r17
 	lsl r17
-	adc XH,r17
+	adc XL,r17
 	ret
 
 //Player 1 joystick push button interrupt
@@ -203,8 +203,8 @@ Interrupt0:
 	cpi r17,2
 	breq P1_DONE
 	rcall BEEP
-	ldi r16,1
-	st X,r16
+	ldi r17,1
+	st X,r17
 	ldi r17,2
 	rcall Send_Player_Choice
 	rcall Send_Data
@@ -234,7 +234,7 @@ Interrupt1:
 	breq P2_DONE
 	rcall BEEP
 	ldi r17,2
-	st X,r16
+	st X,r17
 	ldi r17,3
 	rcall Send_Player_Choice
 	rcall Send_Data
