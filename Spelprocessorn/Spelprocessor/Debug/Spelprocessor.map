@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Mon Mar 02 11:24:30 2020
+AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Thu Mar 05 10:56:19 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -706,7 +706,7 @@ CSEG Left_Diagonal_No_Win 0000075b
 CSEG Left_Diagonal_Player_2_Wins 00000759
 CSEG Left_Diagonal_Player_1_Wins 00000757
 CSEG Left_Diagonal_Done 0000075c
-EQU  DELAY_HIGH   0000003c
+EQU  DELAY_HIGH   00000082
 EQU  DELAY_LOW    00000000
 EQU  BEEP_LENGTH_H 0000000f
 EQU  BEEP_LENGTH_L 00000000
@@ -714,7 +714,7 @@ DSEG Start_Byte   00000064
 DSEG VMEM         0000006b
 CSEG Setup        00000005
 CSEG Interrupt0   00000063
-CSEG Interrupt1   0000007b
+CSEG Interrupt1   0000007c
 CSEG Hardware_Init 00000009
 CSEG Usart_Init   00000014
 CSEG SRAM_Init    0000001f
@@ -725,12 +725,12 @@ CSEG SendByte     0000002d
 CSEG Player2      0000004a
 CSEG Player1      00000043
 CSEG Input_done   00000050
-CSEG Send_Player_Choice 00000094
+CSEG Send_Player_Choice 00000095
 CSEG DELAY2       00000057
-CSEG P1_DONE      00000078
-CSEG BEEP         000000a9
-CSEG P2_DONE      00000091
-CSEG Send_Player_2 000000a0
-CSEG Send_Player_1 00000097
-CSEG Send_Done    000000a8
-CSEG BEEP_DONE    000000b5
+CSEG P1_DONE      00000079
+CSEG BEEP         000000aa
+CSEG P2_DONE      00000092
+CSEG Send_Player_2 000000a1
+CSEG Send_Player_1 00000098
+CSEG Send_Done    000000a9
+CSEG BEEP_DONE    000000b6
