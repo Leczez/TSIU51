@@ -4,6 +4,8 @@
 .equ GREEN = 0x01
 .equ BLUE = 0x00
 
+.equ GAMEDELAY_H = 100
+.equ GAMEDELAY_L = 0
 
 .org 0x00
 	rjmp START
@@ -61,28 +63,8 @@ START:
 
 	rcall INIT
 	rcall UART_INIT
+	rcall MEMORY_INIT
 
-MEMORY_INIT:
-	ldi r16, 0b11111110
-	sts INDEX, r16
-
-	clr r16
-	sts ROW_POS, r16
-		
-	CLEAR_MEM:
-		clr r16
-		clr r17
-		ldi ZH,high(ROWS)
-		ldi ZL,low(ROWS)
-		CLR_LOOP:
-			inc r17
-			st Z+,r16
-			cpi r17, 24
-			brne CLR_LOOP
-
-
-		clr r16
-		sts ON_OFF, r16
 
 /*
 		ldi r16, 0x00
@@ -96,7 +78,7 @@ MEMORY_INIT:
 		ldi r16, 0x01
 		sts ON_OFF,r16
 		rcall MEMORY_WRITE
-	*/
+*/
 
 
 ;////////////////////
@@ -106,6 +88,7 @@ MAIN:
 	rcall SEND
 	rcall INDEX_SHIFT
 	rcall CHECK_NEXT_INS
+	rcall DELAY
 	rjmp MAIN
 
 ;///////////////////////////
@@ -222,15 +205,13 @@ EXEC_INS:
 	cpi r16, 0x01
 	breq P2_MOVE
 
-
+	cpi r16, 0x04
+	;breq CLEAR_BOARD
 
 	rjmp EXIT
 
 
-
-
 	P1_MOVE:
-	
 		OLD_P1_OFF:
 			lds r16, OLD_X_CORD_P1
 			lds r17, OLD_Y_CORD_P1
@@ -301,6 +282,12 @@ EXEC_INS:
 			rcall MEMORY_WRITE
 
 		rjmp EXIT
+
+
+	CLEAR_BOARD:
+		rcall MEMORY_INIT
+		rjmp EXIT
+
 
 EXIT:
 	ret
@@ -422,6 +409,18 @@ Load_Rows:
 
 
 
+DELAY:
+	ldi r23, GAMEDELAY_L
+	ldi r24, GAMEDELAY_H
+
+	DELAY_2:
+		sbiw r24, 0x01
+		brne DELAY_2
+		ret
+
+
+
+
 INIT:
 ;//SPI initalization
 	ldi r16, 0xB0
@@ -434,3 +433,27 @@ INIT:
 
 	ret
 
+
+	MEMORY_INIT:
+	ldi r16, 0b11111110
+	sts INDEX, r16
+
+	clr r16
+	sts ROW_POS, r16
+		
+	CLEAR_MEM:
+		clr r16
+		clr r17
+		ldi ZH,high(ROWS)
+		ldi ZL,low(ROWS)
+		CLR_LOOP:
+			inc r17
+			st Z+,r16
+			cpi r17, 24
+			brne CLR_LOOP
+
+
+		clr r16
+		sts ON_OFF, r16
+
+	ret
