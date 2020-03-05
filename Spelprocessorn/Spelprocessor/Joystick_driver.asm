@@ -4,8 +4,12 @@
 .equ Channel_P2_Y = $02
 
 
-.equ Forward = 3
-.equ Backward = 0
+.equ Y_UP = 3
+.equ Y_DOWN = 0
+
+.equ X_LEFT = 0
+.equ X_RIGHT = 3
+
 .equ Neutral = 2
 
 	.macro INCSRAM	; inc byte in SRAM
@@ -49,11 +53,11 @@ Wait:
 Input_P1:
 	push r16
 
-	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P1_Y)
+	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P1_X)
 	rcall Input
 	rcall Check_X1
 
-	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P1_X)
+	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P1_Y)
 	rcall Input
 	rcall Check_Y1
 
@@ -64,11 +68,11 @@ Input_P1:
 Input_P2:
 	push r16
 
-	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P2_Y)
+	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P2_X)
 	rcall Input
 	rcall Check_X2
 
-	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P2_X)
+	ldi r16,(0<<REFS1)|(0<<REFS0)|(0<<ADLAR)|(Channel_P2_Y)
 	rcall Input
 	rcall Check_Y2
 	
@@ -79,9 +83,9 @@ Input_P2:
 Check_X1:
 	
 	//Forward X
-	cpi r16,Forward
+	cpi r16,X_LEFT
 	breq X1_INC
-	cpi r16,Backward
+	cpi r16,X_RIGHT
 	breq X1_DEC
 
 	rjmp X1_DONE
@@ -112,9 +116,9 @@ X1_DONE:
 Check_X2:
 	
 	//Forward X
-	cpi r16,Forward
+	cpi r16,X_LEFT
 	breq X2_INC
-	cpi r16,Backward
+	cpi r16,X_RIGHT
 	breq X2_DEC
 
 	rjmp X2_DONE
@@ -149,9 +153,9 @@ X2_DONE:
 
 Check_Y1:
 
-	cpi r16,Forward
+	cpi r16,Y_UP
 	breq Y1_INC
-	cpi r16,Backward
+	cpi r16,Y_DOWN
 	breq Y1_DEC
 
 	rjmp Y1_DONE
@@ -182,9 +186,9 @@ Y1_DONE:
 
 Check_Y2:
 
-	cpi r16,Forward
+	cpi r16,Y_UP
 	breq Y2_INC
-	cpi r16,Backward
+	cpi r16,Y_DOWN
 	breq Y2_DEC
 
 	rjmp Y2_DONE

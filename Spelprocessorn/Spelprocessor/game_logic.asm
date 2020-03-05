@@ -1,16 +1,14 @@
 
-
-
-
 .org $600
 
 
-
+.equ Checks_Needed_for_a_win = $03
 
 Check_for_end_of_game:
 	push r16
 	rcall Check_for_full_map
 	pop r16
+	clr r0
 	cpi r16,1 ; om banan är full
 	breq Clear_Board
 
@@ -24,6 +22,24 @@ Check_Win:
 	lds r16,Win
 	cpi r16,1
 	breq Check_Winner
+
+	
+	rcall Right_Diagonal_Check
+	lds r16,Win
+	cpi r16,1
+	breq Check_Winner
+
+	
+	rcall Left_Diagonal_Check
+	lds r16,Win
+	cpi r16,1
+	breq Check_Winner
+	
+	rcall Check_Vertical
+	lds r16,Win
+	cpi r16,1
+	breq Check_Winner
+
 
 	lds r16,Win
 	cpi r16,1
@@ -110,6 +126,9 @@ Check_Horizontal:
 	push r16
 	push r17
 	push r18
+	push r20
+	push r21
+	clr r21
 	rcall Load_X_Pointer
 	brts Horizontal_Player_2
 Horizontal_Player_1:
@@ -117,56 +136,61 @@ Horizontal_Player_1:
 	lds r17,P1Y
 	ldi r18,1
 	rcall CALCULATE_POS
-	clr r17
+	
+	lds r20,P1Y
 	rjmp Right
 Horizontal_Player_2:
 	lds r16,P2X
 	lds r17,P2Y
 	ldi r18,2
 	rcall CALCULATE_POS
-	clr r17
-	rjmp Right
+
 
 Right:
-	cpi XL,7
-	breq Left
+	cpi r16,7
+	breq Check_Left
+	inc r16
 	inc XL
-	ld r16,X
-	cp r16,r18
-	brne Left
-	inc r17
+	ld r19,X
+	cp r19,r18
+	brne Check_Left
+	inc r21
 
-	cpi r17,$03
+	cpi r21,Checks_Needed_for_a_win
 	brne Right
-	cpi r17,$03
-	breq Horizontal_Check_Done
+
+	rjmp Horizontal_Check_Done
+
+Check_Left:
 	brts Horizontal_Player_2_2
+
 Horizontal_Player1_2:
 	lds r16,P1X
 	lds r17,P1Y
+	rcall Load_X_Pointer
 	rcall CALCULATE_POS
 	rjmp Left
 
 Horizontal_Player_2_2:
-
 	lds r16,P2X
 	lds r17,P2Y
+	rcall Load_X_Pointer
 	rcall CALCULATE_POS
 Left:
-	cpi XL,0
+	cpi r16,0
 	breq Horizontal_No_Win
+	dec r16
+
 	dec XL
-	ld r16,X
-	cp r16,r18
+	ld r19,X
+	cp r19,r18
 	brne Horizontal_No_Win
-	inc r17
+	inc r21
 
-	cpi r17,$03
+	cpi r21,Checks_Needed_for_a_win
 	brne Left
-	cpi r17,$03
-	breq Horizontal_Check_Done
-	rjmp Horizontal_No_Win
-
+	rjmp Horizontal_Check_Done
+	
 Horizontal_Check_Done:
 	brts Horizontal_Player_2_Wins
 
@@ -175,7 +199,7 @@ Horizontal_Player_1_Wins:
 	rjmp Horizontal_Done
 
 Horizontal_Player_2_Wins:
-	ldi r16,$02
+	ldi r16,$01
 	rjmp Horizontal_Done
 
 Horizontal_No_Win:
@@ -183,6 +207,8 @@ Horizontal_No_Win:
 
 Horizontal_Done:
 	sts Win,r16
+	pop r21
+	pop r20
 	pop r18
 	pop r17
 	pop r16	
@@ -196,6 +222,9 @@ Check_Vertical:
 	push r16
 	push r17
 	push r18
+	push r20
+	push r21
+	clr r21
 	rcall Load_X_Pointer
 	brts Vertical_Player_2
 Vertical_Player_1:
@@ -203,56 +232,65 @@ Vertical_Player_1:
 	lds r17,P1Y
 	ldi r18,1
 	rcall CALCULATE_POS
-	clr r17
+	lds r20,P1Y
 	rjmp Up
+
 Vertical_Player_2:
 	lds r16,P2X
-	lds r17,P2Y
+	lds r20,P2Y
 	ldi r18,2
 	rcall CALCULATE_POS
-	clr r17
-	rjmp Up
+	lds r20,P2Y
 
 Up:
-	cpi XH,0
-	breq Down
-	dec XH
-	ld r16,X
-	cp r16,r18
-	brne Down
-	inc r17
+	cpi r20,0
+	breq Check_Down
+	dec r20
 
-	cpi r17,$03
+	ldi r19,8
+	sub XL,r19
+	sbc XH,r0
+	ld r19,X
+	cp r19,r18
+	brne Check_Down
+	inc r21
+
+	cpi r21,Checks_Needed_for_a_win
 	brne Up
-	cpi r17,$03
-	breq Vertical_Check_Done
-	
+	rjmp Vertical_Check_Done
+
+Check_Down:
+	brts Vertical_Player_2_2	
 Vertical_Player1_2:
 	lds r16,P1X
 	lds r17,P1Y
+	rcall Load_X_Pointer
 	rcall CALCULATE_POS
 	rjmp Down
 
 Vertical_Player_2_2:
-
 	lds r16,P2X
 	lds r17,P2Y
+	rcall Load_X_Pointer
 	rcall CALCULATE_POS
 
 Down:
-	cpi XH,7
+	cpi r17,7
 	breq Vertical_No_Win
-	inc XH
+	inc r17
+
+	ldi r16,8
+	add XL,r16
+	adc XH,r0
 	ld r16,X
 	cp r16,r18
 	brne Vertical_No_Win
-	inc r17
+	inc r21
 
-	cpi r17,$03
+	cpi r21,Checks_Needed_for_a_win
 	brne Down
-	cpi r17,$03
-	breq Vertical_Check_Done
-	rjmp Vertical_No_Win
+	rjmp Vertical_Check_Done
+	
 
 Vertical_Check_Done:
 	brts Vertical_Player_2_Wins
@@ -262,7 +300,7 @@ Vertical_Player_1_Wins:
 	rjmp Vertical_Done
 
 Vertical_Player_2_Wins:
-	ldi r16,$02
+	ldi r16,$01
 	rjmp Vertical_Done
 
 Vertical_No_Win:
@@ -270,6 +308,8 @@ Vertical_No_Win:
 
 Vertical_Done:
 	sts Win,r16
+	pop r21
+	pop r20
 	pop r18
 	pop r17
 	pop r16	
@@ -281,6 +321,10 @@ Right_Diagonal_Check:
 	push r16
 	push r17
 	push r18
+	push r20
+	push r21
+	push r22
+	clr r21
 	rcall Load_X_Pointer
 	brts Right_Diagonal_Player_2
 Right_Diagonal_Player_1:
@@ -288,58 +332,72 @@ Right_Diagonal_Player_1:
 	lds r17,P1Y
 	ldi r18,1
 	rcall CALCULATE_POS
-	clr r17
 	rjmp Up_Right
 Right_Diagonal_Player_2:
 	lds r16,P2X
 	lds r17,P2Y
 	ldi r18,2
 	rcall CALCULATE_POS
-	clr r17
+
 	rjmp Up_Right
 
 Up_Right:
-	cpi XH,0
-	breq Down_Left
-	dec XH
-	inc XL
-	ld r16,X
-	cp r16,r18
-	brne Down_Left
-	inc r17
+	cpi r17,0
+	breq Check_Down_Left
+	cpi r16,7
+	breq Check_Down_Left
+	dec r17
+	inc r16
 
-	cpi r17,$03
+	ldi r20,8
+	sub XL,r20
+	sbc XH,r0
+	inc XL
+	ld r20,X
+	cp r20,r18
+	brne Check_Down_Left
+	inc r21
+
+	cpi r21,Checks_Needed_for_a_win
 	brne Up_Right
-	cpi r17,$03
-	breq Right_Diagonal_Check_Done
+	rjmp Right_Diagonal_Check_Done
+
+Check_Down_Left:
+	brts Right_Diagonal_Player_2_2
 	
 Right_Diagonal_Player1_2:
 	lds r16,P1X
 	lds r17,P1Y
+	rcall Load_X_Pointer
 	rcall CALCULATE_POS
 	rjmp Down_Left
 
 Right_Diagonal_Player_2_2:
-
 	lds r16,P2X
 	lds r17,P2Y
+	rcall Load_X_Pointer
 	rcall CALCULATE_POS
 
 Down_Left:
-	cpi XH,7
+	cpi r17,7
 	breq Right_Diagonal_No_Win
-	inc XH
-	dec XL
-	ld r16,X
-	cp r16,r18
-	brne Right_Diagonal_No_Win
+	cpi r16,0
+	breq Right_Diagonal_No_Win
 	inc r17
+	dec r16
 
-	cpi r17,$03
+	breq Right_Diagonal_No_Win
+	ldi r20,8
+	add XL,r20
+	adc XH,r0
+	dec XL
+	ld r20,X
+	cp r20,r18
+	brne Right_Diagonal_No_Win
+	inc r21
+
+	cpi r21,Checks_Needed_for_a_win
 	brne Down_Left
-	cpi r17,$03
-	breq Right_Diagonal_Check_Done
-	rjmp Right_Diagonal_No_Win
 
 Right_Diagonal_Check_Done:
 	brts Right_Diagonal_Player_2_Wins
@@ -349,7 +407,7 @@ Right_Diagonal_Player_1_Wins:
 	rjmp Right_Diagonal_Done
 
 Right_Diagonal_Player_2_Wins:
-	ldi r16,$02
+	ldi r16,$01
 	rjmp Right_Diagonal_Done
 
 Right_Diagonal_No_Win:
@@ -357,6 +415,9 @@ Right_Diagonal_No_Win:
 
 Right_Diagonal_Done:
 	sts Win,r16
+	pop r22
+	pop r21
+	pop r20
 	pop r18
 	pop r17
 	pop r16	
@@ -368,6 +429,9 @@ Left_Diagonal_Check:
 	push r16
 	push r17
 	push r18
+	push r20
+	push r21
+	clr r21
 	rcall Load_X_Pointer
 	brts Left_Diagonal_Player_2
 Left_Diagonal_Player_1:
@@ -375,57 +439,70 @@ Left_Diagonal_Player_1:
 	lds r17,P1Y
 	ldi r18,1
 	rcall CALCULATE_POS
-	clr r17
-	rjmp Up_Right
+	rjmp Up_Left
 Left_Diagonal_Player_2:
 	lds r16,P2X
 	lds r17,P2Y
 	ldi r18,2
 	rcall CALCULATE_POS
-	clr r17
-	rjmp Up_Right
 
 Up_Left:
-	cpi XH,0
-	breq Down_Right
-	dec XH
-	inc XL
-	ld r16,X
-	cp r16,r18
-	brne Down_Right
-	inc r17
+	cpi r17,0
+	breq Check_Down_Right
+	cpi r16,0
+	breq Check_Down_Right
+	dec r17
+	dec r16
 
-	cpi r17,$03
+	ldi r20,8
+	sub XL,r20
+	sbc XH,r0
+	dec XL
+	ld r20,X
+	cp r20,r18
+	brne Check_Down_Right
+	inc r21
+
+	cpi r21,Checks_Needed_for_a_win
 	brne Up_Left
-	cpi r17,$03
-	breq Left_Diagonal_Check_Done
+	rjmp Left_Diagonal_Check_Done
+
+Check_Down_Right:
+	brts Left_Diagonal_Player_2_2
 	
 Left_Diagonal_Player1_2:
 	lds r16,P1X
 	lds r17,P1Y
+	rcall Load_X_Pointer
 	rcall CALCULATE_POS
 	rjmp Down_Right
 
 Left_Diagonal_Player_2_2:
 	lds r16,P2X
 	lds r17,P2Y
+	rcall Load_X_Pointer
 	rcall CALCULATE_POS
 
 Down_Right:
-	cpi XH,7
+	cpi r17,7
 	breq Left_Diagonal_No_Win
-	inc XH
-	dec XL
-	ld r16,X
-	cp r16,r18
-	brne Left_Diagonal_No_Win
+	cpi r16,7
+	breq Left_Diagonal_No_Win
 	inc r17
+	inc r16
 
-	cpi r17,$03
+
+	ldi r20,8
+	add XL,r20
+	adc XH,r0
+	inc XL
+	ld r20,X
+	cp r20,r18
+	brne Left_Diagonal_No_Win
+	inc r21
+
+	cpi r21,Checks_Needed_for_a_win
 	brne Down_Right
-	cpi r17,$03
-	breq Left_Diagonal_Check_Done
-	rjmp Left_Diagonal_No_Win
 
 Left_Diagonal_Check_Done:
 	brts Left_Diagonal_Player_2_Wins
@@ -443,6 +520,8 @@ Left_Diagonal_No_Win:
 
 Left_Diagonal_Done:
 	sts Win,r16
+	pop r21
+	pop r20
 	pop r18
 	pop r17
 	pop r16	

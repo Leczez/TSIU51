@@ -10,7 +10,7 @@
 .include "Joystick_driver.asm"
 .include "game_logic.asm"
 .equ VMEM_SIZE = 64
-.equ DELAY_HIGH = 130 ;100 blir bra
+.equ DELAY_HIGH = 100 ;100 blir bra
 .equ DELAY_LOW = 0
 .equ BEEP_LENGTH_H = $0f
 .equ BEEP_LENGTH_L = $00
@@ -31,6 +31,8 @@ Player1_Score: .byte 1
 Player2_Score: .byte 1
 
 Win: .byte 1 ; Player1 =  1, Player2 = 2
+
+DEBUG: .byte 5
 
 VMEM: .byte VMEM_SIZE
 
@@ -178,11 +180,15 @@ Load_X_Pointer:
 	ret
 
 Calculate_Pos:
+	push r16
+	push r17
 	add XL,r16
 	lsl r17
 	lsl r17
 	lsl r17
 	adc XL,r17
+	pop r17
+	pop r16
 	ret
 
 //Player 1 joystick push button interrupt
