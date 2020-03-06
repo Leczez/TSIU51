@@ -99,6 +99,7 @@ Check_for_full_map:
 	in ZH,SPH
 	in ZL,SPL
 	rcall Load_X_Pointer
+	clr r18
 	; 1 if the map is full, 0 if there is still space.
 Loop:
 	ld r16,X+
@@ -192,13 +193,6 @@ Left:
 	rjmp Horizontal_Check_Done
 	
 Horizontal_Check_Done:
-	brts Horizontal_Player_2_Wins
-
-Horizontal_Player_1_Wins:
-	ldi r16,$01
-	rjmp Horizontal_Done
-
-Horizontal_Player_2_Wins:
 	ldi r16,$01
 	rjmp Horizontal_Done
 
@@ -293,13 +287,6 @@ Down:
 	
 
 Vertical_Check_Done:
-	brts Vertical_Player_2_Wins
-
-Vertical_Player_1_Wins:
-	ldi r16,$01
-	rjmp Vertical_Done
-
-Vertical_Player_2_Wins:
 	ldi r16,$01
 	rjmp Vertical_Done
 
@@ -400,13 +387,6 @@ Down_Left:
 	brne Down_Left
 
 Right_Diagonal_Check_Done:
-	brts Right_Diagonal_Player_2_Wins
-
-Right_Diagonal_Player_1_Wins:
-	ldi r16,$01
-	rjmp Right_Diagonal_Done
-
-Right_Diagonal_Player_2_Wins:
 	ldi r16,$01
 	rjmp Right_Diagonal_Done
 
@@ -505,14 +485,7 @@ Down_Right:
 	brne Down_Right
 
 Left_Diagonal_Check_Done:
-	brts Left_Diagonal_Player_2_Wins
-
-Left_Diagonal_Player_1_Wins:
 	ldi r16,$01
-	rjmp Left_Diagonal_Done
-
-Left_Diagonal_Player_2_Wins:
-	ldi r16,$02
 	rjmp Left_Diagonal_Done
 
 Left_Diagonal_No_Win:

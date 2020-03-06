@@ -1,9 +1,9 @@
 
-AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Thu Mar 05 17:23:49 2020
+AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Fri Mar 06 11:43:13 2020
 
 [builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include\m16Adef.inc'
-\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm(10): Including file '\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm'
-\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm(11): Including file '\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm'
+\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm(10): Including file '\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm'
+\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm(11): Including file '\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm'
                  
                  /*
                  
@@ -1129,29 +1129,29 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 000605 f151      	breq Clear_Board
                  
                  Check_Win:
-000606 d05a      	rcall Check_Horizontal
+000606 d05b      	rcall Check_Horizontal
 000607 9100 006a 	lds r16,Win
 000609 3001      	cpi r16,1
 00060a f0c9      	breq Check_Winner
                  
-00060b d09e      	rcall Check_Vertical
+00060b d09c      	rcall Check_Vertical
 00060c 9100 006a 	lds r16,Win
 00060e 3001      	cpi r16,1
 00060f f0a1      	breq Check_Winner
                  
                  	
-000610 d0e8      	rcall Right_Diagonal_Check
+000610 d0e3      	rcall Right_Diagonal_Check
 000611 9100 006a 	lds r16,Win
 000613 3001      	cpi r16,1
 000614 f079      	breq Check_Winner
                  
                  	
-000615 d139      	rcall Left_Diagonal_Check
+000615 d131      	rcall Left_Diagonal_Check
 000616 9100 006a 	lds r16,Win
 000618 3001      	cpi r16,1
 000619 f051      	breq Check_Winner
                  	
-00061a d08f      	rcall Check_Vertical
+00061a d08d      	rcall Check_Vertical
 00061b 9100 006a 	lds r16,Win
 00061d 3001      	cpi r16,1
 00061e f029      	breq Check_Winner
@@ -1215,436 +1215,409 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 000650 b7fe      	in ZH,SPH
 000651 b7ed      	in ZL,SPL
 000652 da07      	rcall Load_X_Pointer
+000653 2722      	clr r18
                  	; 1 if the map is full, 0 if there is still space.
                  Loop:
-000653 910d      	ld r16,X+
-000654 3000      	cpi r16,0
-000655 f029      	breq Not_full
-000656 3420      	cpi r18,VMEM_SIZE
-000657 9523      	inc r18
-000658 f7d1      	brne Loop
-000659 e001      	ldi r16,1
-00065a c001      	rjmp Loop_done
+000654 910d      	ld r16,X+
+000655 3000      	cpi r16,0
+000656 f029      	breq Not_full
+000657 3420      	cpi r18,VMEM_SIZE
+000658 9523      	inc r18
+000659 f7d1      	brne Loop
+00065a e001      	ldi r16,1
+00065b c001      	rjmp Loop_done
                  Not_full:
-00065b 2700      	clr r16
+00065c 2700      	clr r16
                  Loop_done:
-00065c 9635      	adiw Z,5
-00065d 8300      	st Z,r16
-00065e 912f      	pop r18
-00065f 910f      	pop r16
+00065d 9635      	adiw Z,5
+00065e 8300      	st Z,r16
+00065f 912f      	pop r18
+000660 910f      	pop r16
                  	
-000660 9508      	ret
+000661 9508      	ret
                  
                  
                  
                  
                  Check_Horizontal:
-000661 930f      	push r16
-000662 931f      	push r17
-000663 932f      	push r18
-000664 934f      	push r20
-000665 935f      	push r21
-000666 2755      	clr r21
-000667 d9f2      	rcall Load_X_Pointer
-000668 f04e      	brts Horizontal_Player_2
+000662 930f      	push r16
+000663 931f      	push r17
+000664 932f      	push r18
+000665 934f      	push r20
+000666 935f      	push r21
+000667 2755      	clr r21
+000668 d9f1      	rcall Load_X_Pointer
+000669 f04e      	brts Horizontal_Player_2
                  Horizontal_Player_1:
-000669 9100 0060 	lds r16,P1X
-00066b 9110 0061 	lds r17,P1Y
-00066d e021      	ldi r18,1
-00066e d9ee      	rcall CALCULATE_POS
+00066a 9100 0060 	lds r16,P1X
+00066c 9110 0061 	lds r17,P1Y
+00066e e021      	ldi r18,1
+00066f d9ed      	rcall CALCULATE_POS
                  	
-00066f 9140 0061 	lds r20,P1Y
-000671 c006      	rjmp Right
+000670 9140 0061 	lds r20,P1Y
+000672 c006      	rjmp Right
                  Horizontal_Player_2:
-000672 9100 0062 	lds r16,P2X
-000674 9110 0063 	lds r17,P2Y
-000676 e022      	ldi r18,2
-000677 d9e5      	rcall CALCULATE_POS
+000673 9100 0062 	lds r16,P2X
+000675 9110 0063 	lds r17,P2Y
+000677 e022      	ldi r18,2
+000678 d9e4      	rcall CALCULATE_POS
                  
                  
                  Right:
-000678 3007      	cpi r16,7
-000679 f049      	breq Check_Left
-00067a 9503      	inc r16
-00067b 95a3      	inc XL
-00067c 913c      	ld r19,X
-00067d 1732      	cp r19,r18
-00067e f421      	brne Check_Left
-00067f 9553      	inc r21
+000679 3007      	cpi r16,7
+00067a f049      	breq Check_Left
+00067b 9503      	inc r16
+00067c 95a3      	inc XL
+00067d 913c      	ld r19,X
+00067e 1732      	cp r19,r18
+00067f f421      	brne Check_Left
+000680 9553      	inc r21
                  
-000680 3053      	cpi r21,Checks_Needed_for_a_win
-000681 f7b1      	brne Right
+000681 3053      	cpi r21,Checks_Needed_for_a_win
+000682 f7b1      	brne Right
                  
-000682 c019      	rjmp Horizontal_Check_Done
+000683 c019      	rjmp Horizontal_Check_Done
                  
                  Check_Left:
-000683 f03e      	brts Horizontal_Player_2_2
+000684 f03e      	brts Horizontal_Player_2_2
                  
                  Horizontal_Player1_2:
-000684 9100 0060 	lds r16,P1X
-000686 9110 0061 	lds r17,P1Y
-000688 d9d1      	rcall Load_X_Pointer
-000689 d9d3      	rcall CALCULATE_POS
-00068a c006      	rjmp Left
+000685 9100 0060 	lds r16,P1X
+000687 9110 0061 	lds r17,P1Y
+000689 d9d0      	rcall Load_X_Pointer
+00068a d9d2      	rcall CALCULATE_POS
+00068b c006      	rjmp Left
                  
                  Horizontal_Player_2_2:
-00068b 9100 0062 	lds r16,P2X
-00068d 9110 0063 	lds r17,P2Y
-00068f d9ca      	rcall Load_X_Pointer
-000690 d9cc      	rcall CALCULATE_POS
+00068c 9100 0062 	lds r16,P2X
+00068e 9110 0063 	lds r17,P2Y
+000690 d9c9      	rcall Load_X_Pointer
+000691 d9cb      	rcall CALCULATE_POS
                  Left:
-000691 3000      	cpi r16,0
-000692 f071      	breq Horizontal_No_Win
-000693 950a      	dec r16
+000692 3000      	cpi r16,0
+000693 f059      	breq Horizontal_No_Win
+000694 950a      	dec r16
                  
-000694 95aa      	dec XL
-000695 913c      	ld r19,X
-000696 1732      	cp r19,r18
-000697 f449      	brne Horizontal_No_Win
-000698 9553      	inc r21
+000695 95aa      	dec XL
+000696 913c      	ld r19,X
+000697 1732      	cp r19,r18
+000698 f431      	brne Horizontal_No_Win
+000699 9553      	inc r21
                  
-000699 3053      	cpi r21,Checks_Needed_for_a_win
-00069a f7b1      	brne Left
-00069b c000      	rjmp Horizontal_Check_Done
+00069a 3053      	cpi r21,Checks_Needed_for_a_win
+00069b f7b1      	brne Left
+00069c c000      	rjmp Horizontal_Check_Done
                  	
                  Horizontal_Check_Done:
-00069c f016      	brts Horizontal_Player_2_Wins
-                 
-                 Horizontal_Player_1_Wins:
 00069d e001      	ldi r16,$01
-00069e c003      	rjmp Horizontal_Done
-                 
-                 Horizontal_Player_2_Wins:
-00069f e001      	ldi r16,$01
-0006a0 c001      	rjmp Horizontal_Done
+00069e c001      	rjmp Horizontal_Done
                  
                  Horizontal_No_Win:
-0006a1 2700      	clr r16
+00069f 2700      	clr r16
                  
                  Horizontal_Done:
-0006a2 9300 006a 	sts Win,r16
-0006a4 915f      	pop r21
-0006a5 914f      	pop r20
-0006a6 912f      	pop r18
-0006a7 911f      	pop r17
-0006a8 910f      	pop r16	
-0006a9 9508      	ret
+0006a0 9300 006a 	sts Win,r16
+0006a2 915f      	pop r21
+0006a3 914f      	pop r20
+0006a4 912f      	pop r18
+0006a5 911f      	pop r17
+0006a6 910f      	pop r16	
+0006a7 9508      	ret
                  
                  
                  
                  
                  
                  Check_Vertical:
-0006aa 930f      	push r16
-0006ab 931f      	push r17
-0006ac 932f      	push r18
-0006ad 934f      	push r20
-0006ae 935f      	push r21
-0006af 2755      	clr r21
-0006b0 d9a9      	rcall Load_X_Pointer
-0006b1 f04e      	brts Vertical_Player_2
+0006a8 930f      	push r16
+0006a9 931f      	push r17
+0006aa 932f      	push r18
+0006ab 934f      	push r20
+0006ac 935f      	push r21
+0006ad 2755      	clr r21
+0006ae d9ab      	rcall Load_X_Pointer
+0006af f04e      	brts Vertical_Player_2
                  Vertical_Player_1:
-0006b2 9100 0060 	lds r16,P1X
-0006b4 9110 0061 	lds r17,P1Y
-0006b6 e021      	ldi r18,1
-0006b7 d9a5      	rcall CALCULATE_POS
-0006b8 9140 0061 	lds r20,P1Y
-0006ba c008      	rjmp Up
+0006b0 9100 0060 	lds r16,P1X
+0006b2 9110 0061 	lds r17,P1Y
+0006b4 e021      	ldi r18,1
+0006b5 d9a7      	rcall CALCULATE_POS
+0006b6 9140 0061 	lds r20,P1Y
+0006b8 c008      	rjmp Up
                  
                  Vertical_Player_2:
-0006bb 9100 0062 	lds r16,P2X
-0006bd 9140 0063 	lds r20,P2Y
-0006bf e022      	ldi r18,2
-0006c0 d99c      	rcall CALCULATE_POS
-0006c1 9140 0063 	lds r20,P2Y
+0006b9 9100 0062 	lds r16,P2X
+0006bb 9140 0063 	lds r20,P2Y
+0006bd e022      	ldi r18,2
+0006be d99e      	rcall CALCULATE_POS
+0006bf 9140 0063 	lds r20,P2Y
                  
                  Up:
-0006c3 3040      	cpi r20,0
-0006c4 f059      	breq Check_Down
-0006c5 954a      	dec r20
+0006c1 3040      	cpi r20,0
+0006c2 f059      	breq Check_Down
+0006c3 954a      	dec r20
                  
-0006c6 e038      	ldi r19,8
-0006c7 1ba3      	sub XL,r19
-0006c8 09b0      	sbc XH,r0
-0006c9 913c      	ld r19,X
-0006ca 1732      	cp r19,r18
-0006cb f421      	brne Check_Down
-0006cc 9553      	inc r21
+0006c4 e038      	ldi r19,8
+0006c5 1ba3      	sub XL,r19
+0006c6 09b0      	sbc XH,r0
+0006c7 913c      	ld r19,X
+0006c8 1732      	cp r19,r18
+0006c9 f421      	brne Check_Down
+0006ca 9553      	inc r21
                  
-0006cd 3053      	cpi r21,Checks_Needed_for_a_win
-0006ce f7a1      	brne Up
-0006cf c01b      	rjmp Vertical_Check_Done
+0006cb 3053      	cpi r21,Checks_Needed_for_a_win
+0006cc f7a1      	brne Up
+0006cd c01b      	rjmp Vertical_Check_Done
                  
                  Check_Down:
-0006d0 f03e      	brts Vertical_Player_2_2	
+0006ce f03e      	brts Vertical_Player_2_2	
                  Vertical_Player1_2:
-0006d1 9100 0060 	lds r16,P1X
-0006d3 9110 0061 	lds r17,P1Y
-0006d5 d984      	rcall Load_X_Pointer
-0006d6 d986      	rcall CALCULATE_POS
-0006d7 c006      	rjmp Down
+0006cf 9100 0060 	lds r16,P1X
+0006d1 9110 0061 	lds r17,P1Y
+0006d3 d986      	rcall Load_X_Pointer
+0006d4 d988      	rcall CALCULATE_POS
+0006d5 c006      	rjmp Down
                  
                  Vertical_Player_2_2:
-0006d8 9100 0062 	lds r16,P2X
-0006da 9110 0063 	lds r17,P2Y
-0006dc d97d      	rcall Load_X_Pointer
-0006dd d97f      	rcall CALCULATE_POS
+0006d6 9100 0062 	lds r16,P2X
+0006d8 9110 0063 	lds r17,P2Y
+0006da d97f      	rcall Load_X_Pointer
+0006db d981      	rcall CALCULATE_POS
                  
                  Down:
-0006de 3017      	cpi r17,7
-0006df f081      	breq Vertical_No_Win
-0006e0 9513      	inc r17
+0006dc 3017      	cpi r17,7
+0006dd f069      	breq Vertical_No_Win
+0006de 9513      	inc r17
                  
-0006e1 e008      	ldi r16,8
-0006e2 0fa0      	add XL,r16
-0006e3 1db0      	adc XH,r0
-0006e4 910c      	ld r16,X
-0006e5 1702      	cp r16,r18
-0006e6 f449      	brne Vertical_No_Win
-0006e7 9553      	inc r21
+0006df e008      	ldi r16,8
+0006e0 0fa0      	add XL,r16
+0006e1 1db0      	adc XH,r0
+0006e2 910c      	ld r16,X
+0006e3 1702      	cp r16,r18
+0006e4 f431      	brne Vertical_No_Win
+0006e5 9553      	inc r21
                  
-0006e8 3053      	cpi r21,Checks_Needed_for_a_win
-0006e9 f7a1      	brne Down
-0006ea c000      	rjmp Vertical_Check_Done
+0006e6 3053      	cpi r21,Checks_Needed_for_a_win
+0006e7 f7a1      	brne Down
+0006e8 c000      	rjmp Vertical_Check_Done
                  	
                  
                  Vertical_Check_Done:
-0006eb f016      	brts Vertical_Player_2_Wins
-                 
-                 Vertical_Player_1_Wins:
-0006ec e001      	ldi r16,$01
-0006ed c003      	rjmp Vertical_Done
-                 
-                 Vertical_Player_2_Wins:
-0006ee e001      	ldi r16,$01
-0006ef c001      	rjmp Vertical_Done
+0006e9 e001      	ldi r16,$01
+0006ea c001      	rjmp Vertical_Done
                  
                  Vertical_No_Win:
-0006f0 2700      	clr r16
+0006eb 2700      	clr r16
                  
                  Vertical_Done:
-0006f1 9300 006a 	sts Win,r16
-0006f3 915f      	pop r21
-0006f4 914f      	pop r20
-0006f5 912f      	pop r18
-0006f6 911f      	pop r17
-0006f7 910f      	pop r16	
-0006f8 9508      	ret
+0006ec 9300 006a 	sts Win,r16
+0006ee 915f      	pop r21
+0006ef 914f      	pop r20
+0006f0 912f      	pop r18
+0006f1 911f      	pop r17
+0006f2 910f      	pop r16	
+0006f3 9508      	ret
                  
                  
                  
                  Right_Diagonal_Check:
-0006f9 930f      	push r16
-0006fa 931f      	push r17
-0006fb 932f      	push r18
-0006fc 934f      	push r20
-0006fd 935f      	push r21
-0006fe 936f      	push r22
-0006ff 2755      	clr r21
-000700 d959      	rcall Load_X_Pointer
-000701 f03e      	brts Right_Diagonal_Player_2
+0006f4 930f      	push r16
+0006f5 931f      	push r17
+0006f6 932f      	push r18
+0006f7 934f      	push r20
+0006f8 935f      	push r21
+0006f9 936f      	push r22
+0006fa 2755      	clr r21
+0006fb d95e      	rcall Load_X_Pointer
+0006fc f03e      	brts Right_Diagonal_Player_2
                  Right_Diagonal_Player_1:
-000702 9100 0060 	lds r16,P1X
-000704 9110 0061 	lds r17,P1Y
-000706 e021      	ldi r18,1
-000707 d955      	rcall CALCULATE_POS
-000708 c007      	rjmp Up_Right
+0006fd 9100 0060 	lds r16,P1X
+0006ff 9110 0061 	lds r17,P1Y
+000701 e021      	ldi r18,1
+000702 d95a      	rcall CALCULATE_POS
+000703 c007      	rjmp Up_Right
                  Right_Diagonal_Player_2:
-000709 9100 0062 	lds r16,P2X
-00070b 9110 0063 	lds r17,P2Y
-00070d e022      	ldi r18,2
-00070e d94e      	rcall CALCULATE_POS
+000704 9100 0062 	lds r16,P2X
+000706 9110 0063 	lds r17,P2Y
+000708 e022      	ldi r18,2
+000709 d953      	rcall CALCULATE_POS
                  
-00070f c000      	rjmp Up_Right
+00070a c000      	rjmp Up_Right
                  
                  Up_Right:
-000710 3010      	cpi r17,0
-000711 f079      	breq Check_Down_Left
-000712 3007      	cpi r16,7
-000713 f069      	breq Check_Down_Left
-000714 951a      	dec r17
-000715 9503      	inc r16
+00070b 3010      	cpi r17,0
+00070c f079      	breq Check_Down_Left
+00070d 3007      	cpi r16,7
+00070e f069      	breq Check_Down_Left
+00070f 951a      	dec r17
+000710 9503      	inc r16
                  
-000716 e048      	ldi r20,8
-000717 1ba4      	sub XL,r20
-000718 09b0      	sbc XH,r0
-000719 95a3      	inc XL
-00071a 914c      	ld r20,X
-00071b 1742      	cp r20,r18
-00071c f421      	brne Check_Down_Left
-00071d 9553      	inc r21
+000711 e048      	ldi r20,8
+000712 1ba4      	sub XL,r20
+000713 09b0      	sbc XH,r0
+000714 95a3      	inc XL
+000715 914c      	ld r20,X
+000716 1742      	cp r20,r18
+000717 f421      	brne Check_Down_Left
+000718 9553      	inc r21
                  
-00071e 3053      	cpi r21,Checks_Needed_for_a_win
-00071f f781      	brne Up_Right
-000720 c01f      	rjmp Right_Diagonal_Check_Done
+000719 3053      	cpi r21,Checks_Needed_for_a_win
+00071a f781      	brne Up_Right
+00071b c01f      	rjmp Right_Diagonal_Check_Done
                  
                  Check_Down_Left:
-000721 f03e      	brts Right_Diagonal_Player_2_2
+00071c f03e      	brts Right_Diagonal_Player_2_2
                  	
                  Right_Diagonal_Player1_2:
-000722 9100 0060 	lds r16,P1X
-000724 9110 0061 	lds r17,P1Y
-000726 d933      	rcall Load_X_Pointer
-000727 d935      	rcall CALCULATE_POS
-000728 c006      	rjmp Down_Left
+00071d 9100 0060 	lds r16,P1X
+00071f 9110 0061 	lds r17,P1Y
+000721 d938      	rcall Load_X_Pointer
+000722 d93a      	rcall CALCULATE_POS
+000723 c006      	rjmp Down_Left
                  
                  Right_Diagonal_Player_2_2:
-000729 9100 0062 	lds r16,P2X
-00072b 9110 0063 	lds r17,P2Y
-00072d d92c      	rcall Load_X_Pointer
-00072e d92e      	rcall CALCULATE_POS
+000724 9100 0062 	lds r16,P2X
+000726 9110 0063 	lds r17,P2Y
+000728 d931      	rcall Load_X_Pointer
+000729 d933      	rcall CALCULATE_POS
                  
                  Down_Left:
-00072f 3017      	cpi r17,7
-000730 f0a1      	breq Right_Diagonal_No_Win
-000731 3000      	cpi r16,0
-000732 f091      	breq Right_Diagonal_No_Win
-000733 9513      	inc r17
-000734 950a      	dec r16
+00072a 3017      	cpi r17,7
+00072b f089      	breq Right_Diagonal_No_Win
+00072c 3000      	cpi r16,0
+00072d f079      	breq Right_Diagonal_No_Win
+00072e 9513      	inc r17
+00072f 950a      	dec r16
                  
-000735 f079      	breq Right_Diagonal_No_Win
-000736 e048      	ldi r20,8
-000737 0fa4      	add XL,r20
-000738 1db0      	adc XH,r0
-000739 95aa      	dec XL
-00073a 914c      	ld r20,X
-00073b 1742      	cp r20,r18
-00073c f441      	brne Right_Diagonal_No_Win
-00073d 9553      	inc r21
+000730 f061      	breq Right_Diagonal_No_Win
+000731 e048      	ldi r20,8
+000732 0fa4      	add XL,r20
+000733 1db0      	adc XH,r0
+000734 95aa      	dec XL
+000735 914c      	ld r20,X
+000736 1742      	cp r20,r18
+000737 f429      	brne Right_Diagonal_No_Win
+000738 9553      	inc r21
                  
-00073e 3053      	cpi r21,Checks_Needed_for_a_win
-00073f f779      	brne Down_Left
+000739 3053      	cpi r21,Checks_Needed_for_a_win
+00073a f779      	brne Down_Left
                  
                  Right_Diagonal_Check_Done:
-000740 f016      	brts Right_Diagonal_Player_2_Wins
-                 
-                 Right_Diagonal_Player_1_Wins:
-000741 e001      	ldi r16,$01
-000742 c003      	rjmp Right_Diagonal_Done
-                 
-                 Right_Diagonal_Player_2_Wins:
-000743 e001      	ldi r16,$01
-000744 c001      	rjmp Right_Diagonal_Done
+00073b e001      	ldi r16,$01
+00073c c001      	rjmp Right_Diagonal_Done
                  
                  Right_Diagonal_No_Win:
-000745 2700      	clr r16
+00073d 2700      	clr r16
                  
                  Right_Diagonal_Done:
-000746 9300 006a 	sts Win,r16
-000748 916f      	pop r22
-000749 915f      	pop r21
-00074a 914f      	pop r20
-00074b 912f      	pop r18
-00074c 911f      	pop r17
-00074d 910f      	pop r16	
-00074e 9508      	ret
+00073e 9300 006a 	sts Win,r16
+000740 916f      	pop r22
+000741 915f      	pop r21
+000742 914f      	pop r20
+000743 912f      	pop r18
+000744 911f      	pop r17
+000745 910f      	pop r16	
+000746 9508      	ret
                  
                  
                  
                  Left_Diagonal_Check:
-00074f 930f      	push r16
-000750 931f      	push r17
-000751 932f      	push r18
-000752 934f      	push r20
-000753 935f      	push r21
-000754 2755      	clr r21
-000755 d904      	rcall Load_X_Pointer
-000756 f03e      	brts Left_Diagonal_Player_2
+000747 930f      	push r16
+000748 931f      	push r17
+000749 932f      	push r18
+00074a 934f      	push r20
+00074b 935f      	push r21
+00074c 2755      	clr r21
+00074d d90c      	rcall Load_X_Pointer
+00074e f03e      	brts Left_Diagonal_Player_2
                  Left_Diagonal_Player_1:
-000757 9100 0060 	lds r16,P1X
-000759 9110 0061 	lds r17,P1Y
-00075b e021      	ldi r18,1
-00075c d900      	rcall CALCULATE_POS
-00075d c006      	rjmp Up_Left
+00074f 9100 0060 	lds r16,P1X
+000751 9110 0061 	lds r17,P1Y
+000753 e021      	ldi r18,1
+000754 d908      	rcall CALCULATE_POS
+000755 c006      	rjmp Up_Left
                  Left_Diagonal_Player_2:
-00075e 9100 0062 	lds r16,P2X
-000760 9110 0063 	lds r17,P2Y
-000762 e022      	ldi r18,2
-000763 d8f9      	rcall CALCULATE_POS
+000756 9100 0062 	lds r16,P2X
+000758 9110 0063 	lds r17,P2Y
+00075a e022      	ldi r18,2
+00075b d901      	rcall CALCULATE_POS
                  
                  Up_Left:
-000764 3010      	cpi r17,0
-000765 f079      	breq Check_Down_Right
-000766 3000      	cpi r16,0
-000767 f069      	breq Check_Down_Right
-000768 951a      	dec r17
-000769 950a      	dec r16
+00075c 3010      	cpi r17,0
+00075d f079      	breq Check_Down_Right
+00075e 3000      	cpi r16,0
+00075f f069      	breq Check_Down_Right
+000760 951a      	dec r17
+000761 950a      	dec r16
                  
-00076a e048      	ldi r20,8
-00076b 1ba4      	sub XL,r20
-00076c 09b0      	sbc XH,r0
-00076d 95aa      	dec XL
-00076e 914c      	ld r20,X
-00076f 1742      	cp r20,r18
-000770 f421      	brne Check_Down_Right
-000771 9553      	inc r21
+000762 e048      	ldi r20,8
+000763 1ba4      	sub XL,r20
+000764 09b0      	sbc XH,r0
+000765 95aa      	dec XL
+000766 914c      	ld r20,X
+000767 1742      	cp r20,r18
+000768 f421      	brne Check_Down_Right
+000769 9553      	inc r21
                  
-000772 3053      	cpi r21,Checks_Needed_for_a_win
-000773 f781      	brne Up_Left
-000774 c01e      	rjmp Left_Diagonal_Check_Done
+00076a 3053      	cpi r21,Checks_Needed_for_a_win
+00076b f781      	brne Up_Left
+00076c c01e      	rjmp Left_Diagonal_Check_Done
                  
                  Check_Down_Right:
-000775 f03e      	brts Left_Diagonal_Player_2_2
+00076d f03e      	brts Left_Diagonal_Player_2_2
                  	
                  Left_Diagonal_Player1_2:
-000776 9100 0060 	lds r16,P1X
-000778 9110 0061 	lds r17,P1Y
-00077a d8df      	rcall Load_X_Pointer
-00077b d8e1      	rcall CALCULATE_POS
-00077c c006      	rjmp Down_Right
+00076e 9100 0060 	lds r16,P1X
+000770 9110 0061 	lds r17,P1Y
+000772 d8e7      	rcall Load_X_Pointer
+000773 d8e9      	rcall CALCULATE_POS
+000774 c006      	rjmp Down_Right
                  
                  Left_Diagonal_Player_2_2:
-00077d 9100 0062 	lds r16,P2X
-00077f 9110 0063 	lds r17,P2Y
-000781 d8d8      	rcall Load_X_Pointer
-000782 d8da      	rcall CALCULATE_POS
+000775 9100 0062 	lds r16,P2X
+000777 9110 0063 	lds r17,P2Y
+000779 d8e0      	rcall Load_X_Pointer
+00077a d8e2      	rcall CALCULATE_POS
                  
                  Down_Right:
-000783 3017      	cpi r17,7
-000784 f099      	breq Left_Diagonal_No_Win
-000785 3007      	cpi r16,7
-000786 f089      	breq Left_Diagonal_No_Win
-000787 9513      	inc r17
-000788 9503      	inc r16
+00077b 3017      	cpi r17,7
+00077c f081      	breq Left_Diagonal_No_Win
+00077d 3007      	cpi r16,7
+00077e f071      	breq Left_Diagonal_No_Win
+00077f 9513      	inc r17
+000780 9503      	inc r16
                  
                  
-000789 e048      	ldi r20,8
-00078a 0fa4      	add XL,r20
-00078b 1db0      	adc XH,r0
-00078c 95a3      	inc XL
-00078d 914c      	ld r20,X
-00078e 1742      	cp r20,r18
-00078f f441      	brne Left_Diagonal_No_Win
-000790 9553      	inc r21
+000781 e048      	ldi r20,8
+000782 0fa4      	add XL,r20
+000783 1db0      	adc XH,r0
+000784 95a3      	inc XL
+000785 914c      	ld r20,X
+000786 1742      	cp r20,r18
+000787 f429      	brne Left_Diagonal_No_Win
+000788 9553      	inc r21
                  
-000791 3053      	cpi r21,Checks_Needed_for_a_win
-000792 f781      	brne Down_Right
+000789 3053      	cpi r21,Checks_Needed_for_a_win
+00078a f781      	brne Down_Right
                  
                  Left_Diagonal_Check_Done:
-000793 f016      	brts Left_Diagonal_Player_2_Wins
-                 
-                 Left_Diagonal_Player_1_Wins:
-000794 e001      	ldi r16,$01
-000795 c003      	rjmp Left_Diagonal_Done
-                 
-                 Left_Diagonal_Player_2_Wins:
-000796 e002      	ldi r16,$02
-000797 c001      	rjmp Left_Diagonal_Done
+00078b e001      	ldi r16,$01
+00078c c001      	rjmp Left_Diagonal_Done
                  
                  Left_Diagonal_No_Win:
-000798 2700      	clr r16
+00078d 2700      	clr r16
                  
                  Left_Diagonal_Done:
-000799 9300 006a 	sts Win,r16
-00079b 915f      	pop r21
-00079c 914f      	pop r20
-00079d 912f      	pop r18
-00079e 911f      	pop r17
-00079f 910f      	pop r16	
-0007a0 9508      	ret
+00078e 9300 006a 	sts Win,r16
+000790 915f      	pop r21
+000791 914f      	pop r20
+000792 912f      	pop r18
+000793 911f      	pop r17
+000794 910f      	pop r16	
+000795 9508      	ret
                  
                  .equ VMEM_SIZE = 64
-                 .equ DELAY_HIGH = 100 ;100 blir bra
+                 .equ DELAY_HIGH = 200 ;100 blir bra
                  .equ DELAY_LOW = 0
                  .equ BEEP_LENGTH_H = $0f
                  .equ BEEP_LENGTH_L = $00
@@ -1800,7 +1773,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  
                  
                  DELAY:
-000055 e694      	ldi r25,DELAY_HIGH
+000055 ec98      	ldi r25,DELAY_HIGH
 000056 e080      	ldi r24,DELAY_LOW
                  
                  DELAY2:
@@ -1951,7 +1924,7 @@ counted separately from r26..r31 here.
 "ATmega16A" register use summary:
 r0 :   7 r1 :   0 r2 :   0 r3 :   0 r4 :   0 r5 :   0 r6 :   0 r7 :   0 
 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 r13:   0 r14:   0 r15:   0 
-r16: 211 r17:  85 r18:  28 r19:   8 r20:  30 r21:  28 r22:   2 r23:   0 
+r16: 207 r17:  85 r18:  29 r19:   8 r20:  30 r21:  28 r22:   2 r23:   0 
 r24:   5 r25:   4 r26:  15 r27:   7 r28:   0 r29:   0 r30:   1 r31:   1 
 x  :  14 y  :   0 z  :   2 
 Registers used: 16 out of 35 (45.7%)
@@ -1961,16 +1934,16 @@ Registers used: 16 out of 35 (45.7%)
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
 brcc  :   0 brcs  :   0 break :   0 breq  :  41 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :  19 brpl  :   0 brsh  :   0 brtc  :   1 brts  :  16 brvc  :   0 
+brne  :  19 brpl  :   0 brsh  :   0 brtc  :   1 brts  :  12 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   0 cbr   :   0 
-clc   :   0 clh   :   0 cli   :   1 cln   :   0 clr   :  14 cls   :   0 
+clc   :   0 clh   :   0 cli   :   1 cln   :   0 clr   :  15 cls   :   0 
 clt   :   1 clv   :   0 clz   :   0 com   :   0 cp    :   8 cpc   :   0 
 cpi   :  50 cpse  :   0 dec   :  13 eor   :   0 fmul  :   0 fmuls :   0 
 fmulsu:   0 icall :   0 ijmp  :   0 in    :   4 inc   :  25 jmp   :   0 
-ld    :  11 ldd   :   0 ldi   :  60 lds   :  73 lpm   :   0 lsl   :   3 
+ld    :  11 ldd   :   0 ldi   :  56 lds   :  73 lpm   :   0 lsl   :   3 
 lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
 neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :  23 pop   :  38 
-push  :  38 rcall :  70 ret   :  22 reti  :   2 rjmp  :  46 rol   :   0 
+push  :  38 rcall :  70 ret   :  22 reti  :   2 rjmp  :  42 rol   :   0 
 ror   :   0 sbc   :   3 sbci  :   0 sbi   :   0 sbic  :   1 sbis  :   1 
 sbiw  :   1 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   2 sen   :   0 ser   :   0 ses   :   0 set   :   1 sev   :   0 
@@ -1981,7 +1954,7 @@ Instructions used: 35 out of 113 (31.0%)
 "ATmega16A" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000f42   1478      0   1478   16384   9.0%
+[.cseg] 0x000000 0x000f2c   1456      0   1456   16384   8.9%
 [.dseg] 0x000060 0x0000b0      0     80     80    1024   7.8%
 [.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 

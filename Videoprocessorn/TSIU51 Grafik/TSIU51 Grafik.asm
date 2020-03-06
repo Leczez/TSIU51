@@ -32,6 +32,8 @@
 	NEXT_INSTRUCTION: .byte 3 ;UART bytes
 	CURR_INS_BYTE: .byte 1 ;keeps track of bytes in instruction
 
+	OLD_X_CORD: .byte 1
+	OLD_Y_CORD: .byte 1
 
 	NEW_X_CORD: .byte 1
 	NEW_Y_CORD: .byte 1
@@ -39,18 +41,11 @@
 	COLOR: .byte 1 ; 0=blue..2=red
 	NEW_Y_CORD_CONV: .byte 1 ;Y cord after CONVERT_CORDS call
 
-
-	OLD_X_CORD_P1: .byte 1
-	OLD_Y_CORD_P1: .byte 1
-
-	OLD_X_CORD_P2: .byte 1
-	OLD_Y_CORD_P2: .byte 1
-
 	ROWS_PROTECT: .byte 24 ;rgb, rgb, rgb...
 
 
 .cseg
-LOOKUP: .db 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x00
+LOOKUP: .db 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x00 ;For converting y-pos value for DAmatrix use
 
 
 
@@ -66,22 +61,7 @@ START:
 	rcall MEMORY_INIT
 
 
-/*
-		ldi r16, 0x00
-		sts NEW_X_CORD, r16
-
-		ldi r16, 0x00
-		sts NEW_Y_CORD, r16
-
-		ldi r16, 0x00
-		sts COLOR, r16
-		ldi r16, 0x01
-		sts ON_OFF,r16
-		rcall MEMORY_WRITE
-*/
-
-
-;////////////////////
+;///////////////////////////
 
 MAIN:
 	rcall MEMORY_READ
@@ -124,7 +104,6 @@ SEND_LOOP:
 
 
 
-
 MEMORY_READ:
 ;//Reads ROWS in sram and stores in right order in SEND_BYTE
 	rcall Load_Rows
@@ -148,23 +127,12 @@ MEMORY_READ:
 			ld r18, X
 			sts SEND_BYTE+2, r18	
 	
-
-	;rcall NEXT_POS ;increases register by three
 	ldi r17,0x03
 	add r16,r17
 	sts ROW_POS, r16
 
 	ret
 
-
-NEXT_POS:
-	clr r17
-	NEXT_POS_LOOP:
-		inc r16
-		inc r17
-		cpi r17, 0x03
-		brne NEXT_POS_LOOP
-	ret
 
 
 INDEX_SHIFT:
@@ -187,9 +155,7 @@ CHECK_NEXT_INS:
 	brne NO_VALID_INSTRUCT
 	
 	EXECUTE_INSTRUCTION:
-	rcall EXEC_INS
-
-
+		rcall EXEC_INS
 
 	NO_VALID_INSTRUCT:
 		ret
@@ -225,115 +191,102 @@ EXEC_INS:
 		rcall P2_MOVE_FUNC
 		rjmp EXIT
 
-	P2_PLACE:
-		rcall P2_PLACE_FUNC
-		rjmp EXIT
-
 	P1_PLACE:
 		rcall P1_PLACE_FUNC
 		rjmp EXIT
 
-	CLEAR_BOARD:
-		rcall MEMORY_INIT
+	P2_PLACE:
+		rcall P2_PLACE_FUNC
 		rjmp EXIT
 
-
-
-
+	CLEAR_BOARD:
+		rcall MEMORY_INIT
+		rcall SHOW_SCORE
+		rjmp EXIT
 
 EXIT:
 	ret
 
+
+
 P1_MOVE_FUNC:
 	OLD_P1_OFF:
-	/*
-		lds r16, OLD_X_CORD_P1
-		lds r17, OLD_Y_CORD_P1
-
-		sts NEW_X_CORD, r16
-		sts NEW_Y_CORD, r17
-
-		ldi r16, RED
-		sts COLOR, r16
-		clr r16
-		sts ON_OFF, r16
-		*/
-
-		rcall MEMORY_WRITE
+		;rcall MEMORY_WRITE
 		rcall RESTORE_ROW
-			
 
 
 	NEW_P1_ON:
 		rcall STORE_ROW
 		lds r16, NEXT_INSTRUCTION+1
 		sts NEW_X_CORD, r16
-		sts OLD_X_CORD_P1, r16
+		sts OLD_X_CORD, r16
 
 		lds r16, NEXT_INSTRUCTION+2
 		sts NEW_Y_CORD, r16
-		sts OLD_Y_CORD_P1, r16
+		sts OLD_Y_CORD, r16
 
-		ldi r16, RED
+		ldi r16, GREEN
 		sts COLOR, r16
 		ldi r16, 0x01
 		sts ON_OFF, r16
-
 		rcall MEMORY_WRITE
 
 
-ret
+	ret
 
 
 
 P2_MOVE_FUNC:
 	OLD_P2_OFF:
-	/*
-		lds r16, OLD_X_CORD_P2
-		lds r17, OLD_Y_CORD_P2
-
-		sts NEW_X_CORD, r16
-		sts NEW_Y_CORD, r17
-
-		ldi r16, BLUE
-		sts COLOR, r16
-		clr r16
-		sts ON_OFF, r16
-	*/
-
-		rcall MEMORY_WRITE
+		;rcall MEMORY_WRITE
 		rcall RESTORE_ROW	
-			
+		
+
 		
 	NEW_P2_ON:
-		rcall STORE_ROW
+		;rcall STORE_ROW
 		lds r16, NEXT_INSTRUCTION+1
 		sts NEW_X_CORD, r16
-		sts OLD_X_CORD_P2, r16
+		sts OLD_X_CORD, r16
 
 		lds r16, NEXT_INSTRUCTION+2
 		sts NEW_Y_CORD, r16
-		sts OLD_Y_CORD_P2, r16
+		sts OLD_Y_CORD, r16
 
-		ldi r16, BLUE
+		rcall STORE_ROW
+
+		ldi r16, GREEN
 		sts COLOR, r16
 		ldi r16, 0x01
 		sts ON_OFF, r16
-
-	
 		rcall MEMORY_WRITE
 
+		ldi r16, RED
+		sts COLOR, r16
+		ldi r16, 0x00
+		sts ON_OFF, r16
+		rcall MEMORY_WRITE
+
+		ldi r16, BLUE
+		sts COLOR, r16
+		ldi r16, 0x00
+		sts ON_OFF, r16
+		rcall MEMORY_WRITE
+
+
+
 	ret
+
 
 			
 P2_PLACE_FUNC:
+		rcall RESTORE_ROW
+
 		lds r16, NEXT_INSTRUCTION+1
 		sts NEW_X_CORD, r16
-		sts OLD_X_CORD_P1, r16
 
 		lds r16, NEXT_INSTRUCTION+2
 		sts NEW_Y_CORD, r16
-		sts OLD_Y_CORD_P1, r16
 
 		ldi r16, BLUE
 		sts COLOR, r16
@@ -341,20 +294,20 @@ P2_PLACE_FUNC:
 		sts ON_OFF, r16
 
 		rcall MEMORY_WRITE
-
 		rcall STORE_ROW
 
 	ret
 		
 	
+
 P1_PLACE_FUNC:
+		rcall RESTORE_ROW
+
 		lds r16, NEXT_INSTRUCTION+1
 		sts NEW_X_CORD, r16
-		sts OLD_X_CORD_P1, r16
 
 		lds r16, NEXT_INSTRUCTION+2
 		sts NEW_Y_CORD, r16
-		sts OLD_Y_CORD_P1, r16
 
 		ldi r16, RED
 		sts COLOR, r16
@@ -362,13 +315,25 @@ P1_PLACE_FUNC:
 		sts ON_OFF, r16
 
 		rcall MEMORY_WRITE
-
 		rcall STORE_ROW
 
 	ret
 		
 
+SHOW_SCORE:
+	lds r16, NEXT_INSTRUCTION+1
+	lds r17, NEXT_INSTRUCTION+2
+	clr r18
+	SHIFT_HIGH:
+		rol r17
+		inc r18
+		cpi r18, 0x05
+		brne SHIFT_HIGH
 
+	or r16, r17
+	out PORTA, r16
+
+	ret
 
 
 
@@ -384,12 +349,15 @@ LOAD_DATA:
 	ret
 
 PULL_LATCH:
+;//Update display after byte shifting done
 	sbi PORTB, 4 
 	nop
 	lpm
 	lpm
 	cbi PORTB, 4
 	ret
+
+
 
 Calculate_Position:
 	push r18
@@ -471,6 +439,9 @@ MEMORY_WRITE:
 		ld r16, X
 		lds r17, NEW_Y_CORD_CONV
 
+		rcall OFF_CHECK
+		brcc Memory_Write_Done
+
 		eor r16, r17
 		st X, r16
 
@@ -504,6 +475,25 @@ CONVERT_CORDS:
 	sts NEW_Y_CORD_CONV, r16
 
 	ret
+
+
+OFF_CHECK:
+	push r16
+	push r17
+
+	lds r17, NEW_Y_CORD
+
+	SHIFT_TO_CARRY:
+		ror r16
+		cpi r17, 0x00
+		dec r17
+		brne SHIFT_TO_CARRY
+
+	pop r17
+	pop r16
+	ret
+		
+	
 
 	
 Load_Rows:
@@ -579,6 +569,7 @@ STORE_ROW:
 	ret
 
 
+
 INIT:
 ;//SPI initalization
 	ldi r16, 0xB0
@@ -587,17 +578,20 @@ INIT:
 	ldi r16,(1<<SPE | 1<<MSTR | 0<<SPIE | 0<<SPR0)
 	out SPCR, r16
 
-
+	ldi r16, 0xff
+	out DDRA, r16
 
 	ret
 
 
-	MEMORY_INIT:
+
+MEMORY_INIT:
 	ldi r16, 0b11111110
 	sts INDEX, r16
 
 	clr r16
 	sts ROW_POS, r16
+	sts ON_OFF, r16
 		
 	CLEAR_MEM:
 		clr r16
@@ -608,8 +602,6 @@ INIT:
 			st X+,r16
 			cpi r17, 24
 			brne CLR_LOOP
-		clr r16
-		sts ON_OFF, r16
 
 	CLEAR_MEM_BACKUP:
 		clr r16
@@ -620,9 +612,5 @@ INIT:
 			st Y+,r16
 			cpi r17, 24
 			brne CLR_LOOP_BACKUP
-
-
-		clr r16
-		sts ON_OFF, r16
 
 	ret
