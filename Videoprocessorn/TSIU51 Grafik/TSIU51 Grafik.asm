@@ -4,7 +4,7 @@
 .equ GREEN = 0x01
 .equ BLUE = 0x00
 
-.equ GAMEDELAY_H = 50
+.equ GAMEDELAY_H = 10
 .equ GAMEDELAY_L = 0
 
 .org 0x00
@@ -41,7 +41,7 @@
 	COLOR: .byte 1 ; 0=blue..2=red
 	NEW_Y_CORD_CONV: .byte 1 ;Y cord after CONVERT_CORDS call
 
-	ROWS_PROTECT: .byte 24 ;rgb, rgb, rgb...
+	ROWS_BACKUP: .byte 24 ;rgb, rgb, rgb...
 
 
 .cseg
@@ -211,8 +211,8 @@ EXIT:
 
 P1_MOVE_FUNC:
 	OLD_P1_OFF:
-		;rcall MEMORY_WRITE
 		rcall RESTORE_ROW
+
 
 
 	NEW_P1_ON:
@@ -225,55 +225,47 @@ P1_MOVE_FUNC:
 		sts NEW_Y_CORD, r16
 		sts OLD_Y_CORD, r16
 
-		ldi r16, GREEN
+		ldi r16, RED
 		sts COLOR, r16
 		ldi r16, 0x01
 		sts ON_OFF, r16
 		rcall MEMORY_WRITE
 
-
+		ldi r16, BLUE
+		sts COLOR, r16
+		ldi r16, 0x01
+		sts ON_OFF, r16
+		rcall MEMORY_WRITE
 	ret
 
 
 
 P2_MOVE_FUNC:
 	OLD_P2_OFF:
-		;rcall MEMORY_WRITE
 		rcall RESTORE_ROW	
 		
 
 		
 	NEW_P2_ON:
-		;rcall STORE_ROW
 		lds r16, NEXT_INSTRUCTION+1
 		sts NEW_X_CORD, r16
-		sts OLD_X_CORD, r16
 
 		lds r16, NEXT_INSTRUCTION+2
 		sts NEW_Y_CORD, r16
-		sts OLD_Y_CORD, r16
 
 		rcall STORE_ROW
 
-		ldi r16, GREEN
+		ldi r16, RED
 		sts COLOR, r16
 		ldi r16, 0x01
 		sts ON_OFF, r16
 		rcall MEMORY_WRITE
 
-		ldi r16, RED
-		sts COLOR, r16
-		ldi r16, 0x00
-		sts ON_OFF, r16
-		rcall MEMORY_WRITE
-
 		ldi r16, BLUE
 		sts COLOR, r16
-		ldi r16, 0x00
+		ldi r16, 0x01
 		sts ON_OFF, r16
 		rcall MEMORY_WRITE
-
-
 
 	ret
 
@@ -440,16 +432,15 @@ MEMORY_WRITE:
 		lds r17, NEW_Y_CORD_CONV
 
 		rcall OFF_CHECK
-		brcc Memory_Write_Done
+		brcc MEMORY_WRITE_DONE
 
 		eor r16, r17
 		st X, r16
 
-Memory_Write_Done:
-
-
-
+MEMORY_WRITE_DONE:
 	ret
+
+
 
 	NEXT_X_POS:
 	clr r17
@@ -473,7 +464,6 @@ CONVERT_CORDS:
 	lpm r16, Z
 
 	sts NEW_Y_CORD_CONV, r16
-
 	ret
 
 
@@ -486,9 +476,13 @@ OFF_CHECK:
 	SHIFT_TO_CARRY:
 		ror r16
 		cpi r17, 0x00
+		breq OFF_CHECK_DONE
 		dec r17
-		brne SHIFT_TO_CARRY
+		rjmp SHIFT_TO_CARRY
+		
+		
 
+OFF_CHECK_DONE:
 	pop r17
 	pop r16
 	ret
@@ -502,8 +496,8 @@ Load_Rows:
 	ret
 	
 Load_Rows_Protect:
-	ldi YH, high(ROWS_PROTECT)
-	ldi YL, low(ROWS_PROTECT)
+	ldi YH, high(ROWS_BACKUP)
+	ldi YL, low(ROWS_BACKUP)
 	ret
 
 
@@ -544,7 +538,7 @@ RESTORE_ROW:
 
 
 STORE_ROW:
-;//WRITES TO ROWS_PROTECT
+;//WRITES TO ROWS_BACKUP
 	push XH
 	push XL
 	push YH
