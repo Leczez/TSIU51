@@ -68,7 +68,7 @@ MAIN:
 	rcall SEND
 	rcall INDEX_SHIFT
 	rcall CHECK_NEXT_INS
-	rcall DELAY
+	;rcall DELAY
 	rjmp MAIN
 
 ;///////////////////////////
@@ -316,11 +316,9 @@ SHOW_SCORE:
 	lds r16, NEXT_INSTRUCTION+1
 	lds r17, NEXT_INSTRUCTION+2
 	clr r18
-	SHIFT_HIGH:
-		rol r17
-		inc r18
-		cpi r18, 0x05
-		brne SHIFT_HIGH
+
+	;uwu whats not this
+	swap r17
 
 	or r16, r17
 	out PORTA, r16
@@ -574,6 +572,10 @@ INIT:
 
 	ldi r16, 0xff
 	out DDRA, r16
+
+	clr r16
+	out PORTA,r16
+
 
 	ret
 

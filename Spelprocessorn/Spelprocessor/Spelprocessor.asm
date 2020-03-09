@@ -10,7 +10,7 @@
 .include "Joystick_driver.asm"
 .include "game_logic.asm"
 .equ VMEM_SIZE = 64
-.equ DELAY_HIGH = 200 ;100 blir bra
+.equ DELAY_HIGH = 150 ;100 blir bra
 .equ DELAY_LOW = 0
 .equ BEEP_LENGTH_H = $0f
 .equ BEEP_LENGTH_L = $00

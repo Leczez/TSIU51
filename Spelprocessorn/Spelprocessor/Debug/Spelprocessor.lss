@@ -1,9 +1,9 @@
 
-AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Fri Mar 06 11:43:13 2020
+AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Mon Mar 09 10:16:26 2020
 
 [builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include\m16Adef.inc'
-\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm(10): Including file '\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm'
-\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm(11): Including file '\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm'
+\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm(10): Including file '\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm'
+\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm(11): Including file '\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\game_logic.asm'
                  
                  /*
                  
@@ -1617,7 +1617,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 
 000795 9508      	ret
                  
                  .equ VMEM_SIZE = 64
-                 .equ DELAY_HIGH = 200 ;100 blir bra
+                 .equ DELAY_HIGH = 150 ;100 blir bra
                  .equ DELAY_LOW = 0
                  .equ BEEP_LENGTH_H = $0f
                  .equ BEEP_LENGTH_L = $00
@@ -1773,7 +1773,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 
                  
                  
                  DELAY:
-000055 ec98      	ldi r25,DELAY_HIGH
+000055 e996      	ldi r25,DELAY_HIGH
 000056 e080      	ldi r24,DELAY_LOW
                  
                  DELAY2:

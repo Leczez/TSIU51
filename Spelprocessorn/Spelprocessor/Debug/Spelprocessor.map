@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.57  \\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Fri Mar 06 11:43:13 2020
+AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Mon Mar 09 10:16:26 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -705,7 +705,7 @@ CSEG Left_Diagonal_Player1_2 0000076e
 CSEG Down_Right   0000077b
 CSEG Left_Diagonal_No_Win 0000078d
 CSEG Left_Diagonal_Done 0000078e
-EQU  DELAY_HIGH   000000c8
+EQU  DELAY_HIGH   00000096
 EQU  DELAY_LOW    00000000
 EQU  BEEP_LENGTH_H 0000000f
 EQU  BEEP_LENGTH_L 00000000

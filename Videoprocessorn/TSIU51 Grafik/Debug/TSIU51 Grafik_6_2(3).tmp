@@ -1,18 +1,18 @@
 <ASSEMBLER_INFO>
  <VERSION>2.1.57</VERSION>
  <DEVICE>"ATmega16A"</DEVICE>
- <WORKING_DIR>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\Debug</WORKING_DIR>
+ <WORKING_DIR>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\Debug</WORKING_DIR>
  <INCLUDE_PATH>
   <DIR>C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include</DIR>
   <DIR></DIR>
  </INCLUDE_PATH>
- <SOURCE_FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</SOURCE_FILE>
+ <SOURCE_FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</SOURCE_FILE>
  <INCLUDED_FILES>
   <FILE>C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include\m16Adef.inc</FILE>
-  <FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE>
+  <FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE>
  </INCLUDED_FILES>
  <OBJECT_FILES>
-  <FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\Debug/TSIU51 Grafik_6_2(3).obj</FILE>
+  <FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\Debug/TSIU51 Grafik_6_2(3).obj</FILE>
  </OBJECT_FILES>
  <HEX_FILES>
   <FILE>TSIU51 Grafik_6_2(3).hex</FILE>
@@ -22,93 +22,92 @@
   <FILE>TSIU51 Grafik_6_2(3).lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <UART_INIT><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE><LINE>4</LINE></UART_INIT>
-  <CURR_INS_BYTE><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>33</LINE></CURR_INS_BYTE>
-  <RECEIVE><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE><LINE>34</LINE></RECEIVE>
-  <READ><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE><LINE>49</LINE></READ>
-  <NO_ERROR><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE><LINE>60</LINE></NO_ERROR>
-  <DATA_RECEIVED><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE><LINE>89</LINE></DATA_RECEIVED>
-  <STORE><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE><LINE>65</LINE></STORE>
-  <NO_RESET><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE><LINE>75</LINE></NO_RESET>
-  <STORE_INSTRUCT><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE><LINE>79</LINE></STORE_INSTRUCT>
-  <NEXT_INSTRUCTION><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>32</LINE></NEXT_INSTRUCTION>
-  <START><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>52</LINE></START>
-  <SEND_BYTE><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>24</LINE></SEND_BYTE>
-  <SEND_BUFF><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>25</LINE></SEND_BUFF>
-  <LOOP><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>26</LINE></LOOP>
-  <ROWS><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>28</LINE></ROWS>
-  <INDEX><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>29</LINE></INDEX>
-  <ROW_POS><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>30</LINE></ROW_POS>
-  <OLD_X_CORD><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>35</LINE></OLD_X_CORD>
-  <OLD_Y_CORD><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>36</LINE></OLD_Y_CORD>
-  <NEW_X_CORD><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>38</LINE></NEW_X_CORD>
-  <NEW_Y_CORD><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>39</LINE></NEW_Y_CORD>
-  <ON_OFF><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>40</LINE></ON_OFF>
-  <COLOR><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>41</LINE></COLOR>
-  <NEW_Y_CORD_CONV><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>42</LINE></NEW_Y_CORD_CONV>
-  <ROWS_BACKUP><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>44</LINE></ROWS_BACKUP>
-  <LOOKUP><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>48</LINE></LOOKUP>
-  <INIT><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>567</LINE></INIT>
-  <MEMORY_INIT><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>582</LINE></MEMORY_INIT>
-  <MAIN><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>66</LINE></MAIN>
-  <MEMORY_READ><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>107</LINE></MEMORY_READ>
-  <SEND><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>77</LINE></SEND>
-  <INDEX_SHIFT><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>138</LINE></INDEX_SHIFT>
-  <CHECK_NEXT_INS><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>152</LINE></CHECK_NEXT_INS>
-  <DELAY><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>504</LINE></DELAY>
-  <SEND_LOOP><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>82</LINE></SEND_LOOP>
-  <RESET_PTR><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>96</LINE></RESET_PTR>
-  <LOAD_DATA><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>332</LINE></LOAD_DATA>
-  <WAIT><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>90</LINE></WAIT>
-  <PULL_LATCH><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>343</LINE></PULL_LATCH>
-  <Load_Rows><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>493</LINE></Load_Rows>
-  <ADD_POS><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>116</LINE></ADD_POS>
-  <NOT_END><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>120</LINE></NOT_END>
-  <NO_SET_CARRY><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>143</LINE></NO_SET_CARRY>
-  <NO_VALID_INSTRUCT><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>160</LINE></NO_VALID_INSTRUCT>
-  <EXECUTE_INSTRUCTION><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>157</LINE></EXECUTE_INSTRUCTION>
-  <EXEC_INS><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>164</LINE></EXEC_INS>
-  <INS_TYPE_CHECK><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>165</LINE></INS_TYPE_CHECK>
-  <P1_MOVE><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>186</LINE></P1_MOVE>
-  <P2_MOVE><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>190</LINE></P2_MOVE>
-  <P1_PLACE><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>194</LINE></P1_PLACE>
-  <P2_PLACE><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>198</LINE></P2_PLACE>
-  <CLEAR_BOARD><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>202</LINE></CLEAR_BOARD>
-  <EXIT><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>207</LINE></EXIT>
-  <P1_MOVE_FUNC><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>212</LINE></P1_MOVE_FUNC>
-  <P2_MOVE_FUNC><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>243</LINE></P2_MOVE_FUNC>
-  <P1_PLACE_FUNC><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>295</LINE></P1_PLACE_FUNC>
-  <P2_PLACE_FUNC><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>274</LINE></P2_PLACE_FUNC>
-  <SHOW_SCORE><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>315</LINE></SHOW_SCORE>
-  <OLD_P1_OFF><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>213</LINE></OLD_P1_OFF>
-  <RESTORE_ROW><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>514</LINE></RESTORE_ROW>
-  <NEW_P1_ON><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>218</LINE></NEW_P1_ON>
-  <STORE_ROW><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>540</LINE></STORE_ROW>
-  <MEMORY_WRITE><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>403</LINE></MEMORY_WRITE>
-  <OLD_P2_OFF><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>244</LINE></OLD_P2_OFF>
-  <NEW_P2_ON><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>249</LINE></NEW_P2_ON>
-  <SHIFT_HIGH><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>319</LINE></SHIFT_HIGH>
-  <Calculate_Position><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>354</LINE></Calculate_Position>
-  <Calc_Done><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>369</LINE></Calc_Done>
-  <Calc_Loop><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>363</LINE></Calc_Loop>
-  <Calculate_Backup_Position><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>377</LINE></Calculate_Backup_Position>
-  <Calc_Backup_Loop><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>386</LINE></Calc_Backup_Loop>
-  <Calc_Backup_Done><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>392</LINE></Calc_Backup_Done>
-  <CONVERT_CORDS><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>457</LINE></CONVERT_CORDS>
-  <ON_OFF_CHECK><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>411</LINE></ON_OFF_CHECK>
-  <TURN_OFF><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>427</LINE></TURN_OFF>
-  <TURN_ON><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>416</LINE></TURN_ON>
-  <Memory_Write_Done><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>440</LINE></Memory_Write_Done>
-  <OFF_CHECK><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>470</LINE></OFF_CHECK>
-  <NEXT_X_POS><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>445</LINE></NEXT_X_POS>
-  <NEXT_X_POS_LOOP><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>448</LINE></NEXT_X_POS_LOOP>
-  <SHIFT_TO_CARRY><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>476</LINE></SHIFT_TO_CARRY>
-  <OFF_CHECK_DONE><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>485</LINE></OFF_CHECK_DONE>
-  <Load_Rows_Protect><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>498</LINE></Load_Rows_Protect>
-  <DELAY_2><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>508</LINE></DELAY_2>
-  <CLEAR_MEM><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>590</LINE></CLEAR_MEM>
-  <CLR_LOOP><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>594</LINE></CLR_LOOP>
-  <CLEAR_MEM_BACKUP><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>600</LINE></CLEAR_MEM_BACKUP>
-  <CLR_LOOP_BACKUP><FILE>\\ad.liu.se\home\linny471\Documents\Atmel Studio\6.2\TSIU51 Grafik\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>604</LINE></CLR_LOOP_BACKUP>
+  <UART_INIT><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE><LINE>4</LINE></UART_INIT>
+  <CURR_INS_BYTE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>33</LINE></CURR_INS_BYTE>
+  <RECEIVE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE><LINE>34</LINE></RECEIVE>
+  <READ><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE><LINE>48</LINE></READ>
+  <NO_ERROR><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE><LINE>59</LINE></NO_ERROR>
+  <DATA_RECEIVED><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE><LINE>88</LINE></DATA_RECEIVED>
+  <STORE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE><LINE>64</LINE></STORE>
+  <NO_RESET><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE><LINE>74</LINE></NO_RESET>
+  <STORE_INSTRUCT><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\UART.asm</FILE><LINE>78</LINE></STORE_INSTRUCT>
+  <NEXT_INSTRUCTION><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>32</LINE></NEXT_INSTRUCTION>
+  <START><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>52</LINE></START>
+  <SEND_BYTE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>24</LINE></SEND_BYTE>
+  <SEND_BUFF><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>25</LINE></SEND_BUFF>
+  <LOOP><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>26</LINE></LOOP>
+  <ROWS><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>28</LINE></ROWS>
+  <INDEX><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>29</LINE></INDEX>
+  <ROW_POS><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>30</LINE></ROW_POS>
+  <OLD_X_CORD><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>35</LINE></OLD_X_CORD>
+  <OLD_Y_CORD><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>36</LINE></OLD_Y_CORD>
+  <NEW_X_CORD><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>38</LINE></NEW_X_CORD>
+  <NEW_Y_CORD><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>39</LINE></NEW_Y_CORD>
+  <ON_OFF><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>40</LINE></ON_OFF>
+  <COLOR><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>41</LINE></COLOR>
+  <NEW_Y_CORD_CONV><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>42</LINE></NEW_Y_CORD_CONV>
+  <ROWS_BACKUP><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>44</LINE></ROWS_BACKUP>
+  <LOOKUP><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>48</LINE></LOOKUP>
+  <INIT><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>565</LINE></INIT>
+  <MEMORY_INIT><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>584</LINE></MEMORY_INIT>
+  <MAIN><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>66</LINE></MAIN>
+  <MEMORY_READ><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>107</LINE></MEMORY_READ>
+  <SEND><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>77</LINE></SEND>
+  <INDEX_SHIFT><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>138</LINE></INDEX_SHIFT>
+  <CHECK_NEXT_INS><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>152</LINE></CHECK_NEXT_INS>
+  <SEND_LOOP><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>82</LINE></SEND_LOOP>
+  <RESET_PTR><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>96</LINE></RESET_PTR>
+  <LOAD_DATA><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>330</LINE></LOAD_DATA>
+  <WAIT><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>90</LINE></WAIT>
+  <PULL_LATCH><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>341</LINE></PULL_LATCH>
+  <Load_Rows><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>491</LINE></Load_Rows>
+  <ADD_POS><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>116</LINE></ADD_POS>
+  <NOT_END><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>120</LINE></NOT_END>
+  <NO_SET_CARRY><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>143</LINE></NO_SET_CARRY>
+  <NO_VALID_INSTRUCT><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>160</LINE></NO_VALID_INSTRUCT>
+  <EXECUTE_INSTRUCTION><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>157</LINE></EXECUTE_INSTRUCTION>
+  <EXEC_INS><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>164</LINE></EXEC_INS>
+  <INS_TYPE_CHECK><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>165</LINE></INS_TYPE_CHECK>
+  <P1_MOVE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>186</LINE></P1_MOVE>
+  <P2_MOVE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>190</LINE></P2_MOVE>
+  <P1_PLACE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>194</LINE></P1_PLACE>
+  <P2_PLACE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>198</LINE></P2_PLACE>
+  <CLEAR_BOARD><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>202</LINE></CLEAR_BOARD>
+  <EXIT><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>207</LINE></EXIT>
+  <P1_MOVE_FUNC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>212</LINE></P1_MOVE_FUNC>
+  <P2_MOVE_FUNC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>243</LINE></P2_MOVE_FUNC>
+  <P1_PLACE_FUNC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>295</LINE></P1_PLACE_FUNC>
+  <P2_PLACE_FUNC><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>274</LINE></P2_PLACE_FUNC>
+  <SHOW_SCORE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>315</LINE></SHOW_SCORE>
+  <OLD_P1_OFF><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>213</LINE></OLD_P1_OFF>
+  <RESTORE_ROW><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>512</LINE></RESTORE_ROW>
+  <NEW_P1_ON><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>218</LINE></NEW_P1_ON>
+  <STORE_ROW><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>538</LINE></STORE_ROW>
+  <MEMORY_WRITE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>401</LINE></MEMORY_WRITE>
+  <OLD_P2_OFF><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>244</LINE></OLD_P2_OFF>
+  <NEW_P2_ON><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>249</LINE></NEW_P2_ON>
+  <Calculate_Position><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>352</LINE></Calculate_Position>
+  <Calc_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>367</LINE></Calc_Done>
+  <Calc_Loop><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>361</LINE></Calc_Loop>
+  <Calculate_Backup_Position><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>375</LINE></Calculate_Backup_Position>
+  <Calc_Backup_Loop><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>384</LINE></Calc_Backup_Loop>
+  <Calc_Backup_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>390</LINE></Calc_Backup_Done>
+  <CONVERT_CORDS><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>455</LINE></CONVERT_CORDS>
+  <ON_OFF_CHECK><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>409</LINE></ON_OFF_CHECK>
+  <TURN_OFF><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>425</LINE></TURN_OFF>
+  <TURN_ON><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>414</LINE></TURN_ON>
+  <Memory_Write_Done><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>438</LINE></Memory_Write_Done>
+  <OFF_CHECK><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>468</LINE></OFF_CHECK>
+  <NEXT_X_POS><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>443</LINE></NEXT_X_POS>
+  <NEXT_X_POS_LOOP><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>446</LINE></NEXT_X_POS_LOOP>
+  <SHIFT_TO_CARRY><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>474</LINE></SHIFT_TO_CARRY>
+  <OFF_CHECK_DONE><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>483</LINE></OFF_CHECK_DONE>
+  <Load_Rows_Protect><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>496</LINE></Load_Rows_Protect>
+  <DELAY><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>502</LINE></DELAY>
+  <DELAY_2><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>506</LINE></DELAY_2>
+  <CLEAR_MEM><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>592</LINE></CLEAR_MEM>
+  <CLR_LOOP><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>596</LINE></CLR_LOOP>
+  <CLEAR_MEM_BACKUP><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>602</LINE></CLEAR_MEM_BACKUP>
+  <CLR_LOOP_BACKUP><FILE>\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Videoprocessorn\TSIU51 Grafik\TSIU51 Grafik.asm</FILE><LINE>606</LINE></CLR_LOOP_BACKUP>
  </LABELS>
 </ASSEMBLER_INFO>

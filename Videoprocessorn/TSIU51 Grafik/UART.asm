@@ -42,8 +42,7 @@ RECEIVE:
 	push r16
 
 
-	ldi r16,0b10000000
-	out PORTA,r16
+
 
 
 READ:
@@ -88,8 +87,7 @@ STORE:
 
 DATA_RECEIVED:
 
-clr r16
-out PORTA,r16
+
 ;ALL BYTES READ, EXIT
 	pop r16
 	out SREG, r16
