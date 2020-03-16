@@ -2,7 +2,7 @@
 .org $600
 
 
-.equ Checks_Needed_for_a_win = $03
+.equ Checks_Needed_for_a_win = $04
 
 Check_for_end_of_game:
 	push r16

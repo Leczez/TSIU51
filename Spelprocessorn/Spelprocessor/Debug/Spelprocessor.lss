@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Mon Mar 09 10:16:26 2020
+AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Mon Mar 16 11:15:09 2020
 
 [builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include\m16Adef.inc'
 \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm(10): Including file '\\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Joystick_driver.asm'
@@ -1118,7 +1118,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
                  .org $600
                  
                  
-                 .equ Checks_Needed_for_a_win = $03
+                 .equ Checks_Needed_for_a_win = $04
                  
                  Check_for_end_of_game:
 000600 930f      	push r16
@@ -1273,7 +1273,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 00067f f421      	brne Check_Left
 000680 9553      	inc r21
                  
-000681 3053      	cpi r21,Checks_Needed_for_a_win
+000681 3054      	cpi r21,Checks_Needed_for_a_win
 000682 f7b1      	brne Right
                  
 000683 c019      	rjmp Horizontal_Check_Done
@@ -1304,7 +1304,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 000698 f431      	brne Horizontal_No_Win
 000699 9553      	inc r21
                  
-00069a 3053      	cpi r21,Checks_Needed_for_a_win
+00069a 3054      	cpi r21,Checks_Needed_for_a_win
 00069b f7b1      	brne Left
 00069c c000      	rjmp Horizontal_Check_Done
                  	
@@ -1365,7 +1365,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 0006c9 f421      	brne Check_Down
 0006ca 9553      	inc r21
                  
-0006cb 3053      	cpi r21,Checks_Needed_for_a_win
+0006cb 3054      	cpi r21,Checks_Needed_for_a_win
 0006cc f7a1      	brne Up
 0006cd c01b      	rjmp Vertical_Check_Done
                  
@@ -1397,7 +1397,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 0006e4 f431      	brne Vertical_No_Win
 0006e5 9553      	inc r21
                  
-0006e6 3053      	cpi r21,Checks_Needed_for_a_win
+0006e6 3054      	cpi r21,Checks_Needed_for_a_win
 0006e7 f7a1      	brne Down
 0006e8 c000      	rjmp Vertical_Check_Done
                  	
@@ -1461,7 +1461,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 000717 f421      	brne Check_Down_Left
 000718 9553      	inc r21
                  
-000719 3053      	cpi r21,Checks_Needed_for_a_win
+000719 3054      	cpi r21,Checks_Needed_for_a_win
 00071a f781      	brne Up_Right
 00071b c01f      	rjmp Right_Diagonal_Check_Done
                  
@@ -1499,7 +1499,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 000737 f429      	brne Right_Diagonal_No_Win
 000738 9553      	inc r21
                  
-000739 3053      	cpi r21,Checks_Needed_for_a_win
+000739 3054      	cpi r21,Checks_Needed_for_a_win
 00073a f779      	brne Down_Left
                  
                  Right_Diagonal_Check_Done:
@@ -1559,7 +1559,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 000768 f421      	brne Check_Down_Right
 000769 9553      	inc r21
                  
-00076a 3053      	cpi r21,Checks_Needed_for_a_win
+00076a 3054      	cpi r21,Checks_Needed_for_a_win
 00076b f781      	brne Up_Left
 00076c c01e      	rjmp Left_Diagonal_Check_Done
                  
@@ -1597,7 +1597,7 @@ AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelpr
 000787 f429      	brne Left_Diagonal_No_Win
 000788 9553      	inc r21
                  
-000789 3053      	cpi r21,Checks_Needed_for_a_win
+000789 3054      	cpi r21,Checks_Needed_for_a_win
 00078a f781      	brne Down_Right
                  
                  Left_Diagonal_Check_Done:

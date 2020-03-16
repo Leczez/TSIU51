@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Mon Mar 09 10:16:26 2020
+AVRASM ver. 2.1.57  \\ad.liu.se\home\lincl896\Desktop\Laborationer\TSIU51\Spelprocessorn\Spelprocessor\Spelprocessor.asm Mon Mar 16 11:15:09 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -638,7 +638,7 @@ CSEG Y2_INC       0000056f
 CSEG Y2_DEC       00000579
 CSEG Y2_DONE      00000583
 DSEG P2Y          00000063
-EQU  Checks_Needed_for_a_win 00000003
+EQU  Checks_Needed_for_a_win 00000004
 CSEG Check_for_end_of_game 00000600
 CSEG Check_for_full_map 0000064e
 CSEG Clear_Board  00000630
