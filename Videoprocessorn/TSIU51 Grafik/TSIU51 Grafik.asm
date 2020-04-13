@@ -4,15 +4,8 @@
 .equ GREEN = 0x01
 .equ BLUE = 0x00
 
-.equ GAMEDELAY_H = 10
-.equ GAMEDELAY_L = 0
-
 .org 0x00
 	rjmp START
-/*
-.org 0x014
-	rjmp LOAD_DATA 
-*/
 
 .org 0x016
 	rjmp RECEIVE
@@ -68,7 +61,6 @@ MAIN:
 	rcall SEND
 	rcall INDEX_SHIFT
 	rcall CHECK_NEXT_INS
-	;rcall DELAY
 	rjmp MAIN
 
 ;///////////////////////////
@@ -136,6 +128,7 @@ MEMORY_READ:
 
 
 INDEX_SHIFT:
+;Shifts the zero-bit in INDEX
 	lds r16, INDEX
 	cpi r16, 0x7f
 	breq NO_SET_CARRY
@@ -150,6 +143,7 @@ INDEX_SHIFT:
 
 
 CHECK_NEXT_INS:
+;Check if a full, 3 byte, valid instruction has been read. If so, execute intruction
 	lds r16, CURR_INS_BYTE
 	cpi r16, 0x03
 	brne NO_VALID_INSTRUCT
@@ -210,6 +204,7 @@ EXIT:
 
 
 P1_MOVE_FUNC:
+;Moves player 1 marker
 	OLD_P1_OFF:
 		rcall RESTORE_ROW
 
@@ -241,6 +236,7 @@ P1_MOVE_FUNC:
 
 
 P2_MOVE_FUNC:
+;Moves player 2 marker
 	OLD_P2_OFF:
 		rcall RESTORE_ROW	
 		
@@ -272,6 +268,7 @@ P2_MOVE_FUNC:
 
 			
 P2_PLACE_FUNC:
+;Place player 2 marker
 		rcall RESTORE_ROW
 
 		lds r16, NEXT_INSTRUCTION+1
@@ -293,6 +290,7 @@ P2_PLACE_FUNC:
 	
 
 P1_PLACE_FUNC:
+;Place player 1 marker
 		rcall RESTORE_ROW
 
 		lds r16, NEXT_INSTRUCTION+1
@@ -313,13 +311,11 @@ P1_PLACE_FUNC:
 		
 
 SHOW_SCORE:
+;Sends new player scores to 7-segments
 	lds r16, NEXT_INSTRUCTION+1
 	lds r17, NEXT_INSTRUCTION+2
 	clr r18
-
-	;uwu whats not this
 	swap r17
-
 	or r16, r17
 	out PORTA, r16
 
@@ -350,6 +346,7 @@ PULL_LATCH:
 
 
 Calculate_Position:
+;Calculates where to point in rows based on x-coordinate given
 	push r18
 	push r17
 	push r16
@@ -400,6 +397,8 @@ Calc_Backup_Done:
 
 MEMORY_WRITE:
 ;//Writes to ROWS in sram
+;Parameters: ON_OFF, COLOR and X- and Y-coordinates
+	
 	rcall CONVERT_CORDS
 
 	rcall Load_Rows
@@ -438,21 +437,10 @@ MEMORY_WRITE:
 MEMORY_WRITE_DONE:
 	ret
 
-
-
-	NEXT_X_POS:
-	clr r17
-	clr r16
-	NEXT_X_POS_LOOP:
-		inc r16
-		inc r17
-		cpi r17, 0x03
-		brne NEXT_X_POS_LOOP
-	ret
-
 	
 
 CONVERT_CORDS:
+;Converts unformatted Y-coordinate to a true bit in a byte
 	lds r16, NEW_Y_CORD
 	
 	ldi ZH, high(LOOKUP*2)
@@ -466,6 +454,7 @@ CONVERT_CORDS:
 
 
 OFF_CHECK:
+;Checks whether poistion is already lit
 	push r16
 	push r17
 
@@ -497,16 +486,6 @@ Load_Rows_Protect:
 	ldi YH, high(ROWS_BACKUP)
 	ldi YL, low(ROWS_BACKUP)
 	ret
-
-
-DELAY:
-	ldi r23, GAMEDELAY_L
-	ldi r24, GAMEDELAY_H
-
-	DELAY_2:
-		sbiw r24, 0x01
-		brne DELAY_2
-		ret
 
 
 RESTORE_ROW:
@@ -582,6 +561,7 @@ INIT:
 
 
 MEMORY_INIT:
+;Memory initialization
 	ldi r16, 0b11111110
 	sts INDEX, r16
 
