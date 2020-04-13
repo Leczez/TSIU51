@@ -74,7 +74,6 @@ STORE:
 	NO_RESET:
 	cpi r18, 0xff
 	breq DATA_RECEIVED
-	;hacking noises
 	STORE_INSTRUCT:
 		ldi ZH, high(NEXT_INSTRUCTION)
 		ldi ZL, low(NEXT_INSTRUCTION)
